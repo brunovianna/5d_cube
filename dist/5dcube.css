@@ -15,9 +15,25 @@ html, body {
 
 }
 
+@font-face {
+	font-family: gohtam;
+	src: url(fonts/Gotham-Black.otf);
+ }
+ 
+ @font-face {
+	font-family: gotham;
+	src: url(fonts/Gotham-Bold.otf);
+	font-weight: bold;
+ }
+ 
+ * {
+	font-family: gotham;
+ }
+
 div.help_footer {
     bottom: 20px;
 	left: 20px;
 	position: absolute;
-	color: yellow;
+	color:  #f9c41e;
+	font-family: gotham;
 }
