@@ -344,7 +344,7 @@ var texture = loader.load( cat);
 
 
 //const red_material = new THREE.MeshBasicMaterial( { color: 0xaaaa00 } );
-const cat_material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, opacity: 0.5 } );
+const cat_material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, opacity: 1, side:THREE.DoubleSide } );
  
 //const meshphong_material = new THREE.MeshPhongMaterial({color, map: texture});
 
@@ -415,12 +415,12 @@ const projected_uvs = [
 
 
 const projected_normals = [ //just to test
-    0,0,1,
-    0,0,1,
-    0,0,1,
-    0,0,1,
-    0,0,1,
-    0,0,1    
+    0,0,-1,
+    0,0,-1,
+    0,0,-1,
+    0,0,-1,
+    0,0,-1,
+    0,0,-1    
 ];
 
 for (const penteract_faces_vertices of penteract_faces) {
@@ -465,7 +465,7 @@ for (const penteract_faces_vertices of penteract_faces) {
         'position',
         new THREE.BufferAttribute(new Float32Array(positions), positionNumComponents));
 
-    //temp_geometry.computeVertexNormals(); // please compute from the face direction i hope this works
+    temp_geometry.computeVertexNormals(); // please compute from the face direction i hope this works
 
     temp_geometry.setAttribute(
         'normal',
@@ -484,12 +484,15 @@ for (const penteract_faces_vertices of penteract_faces) {
 
     projected_faces_meshes.push(temp_face);
 
-   scene.add(temp_face);
+    scene.add(temp_face);
+
 }
 
 
+
+
 // now lets make the edges (lines)
-const line_material = new THREE.LineBasicMaterial( { color: 0xf9c41e, linewidth: 5 } );
+const line_material = new THREE.LineBasicMaterial( { color: 0xf9c41e} );
 
 var projected_lines_geometries = [];
 var projected_lines = [];
