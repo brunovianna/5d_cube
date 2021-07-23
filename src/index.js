@@ -204,6 +204,17 @@ var penteract_faces = [ //numbers represent the index of the vertices
     [28,31,30,29]
     ];
     
+const images = [
+    "reymultok.png",
+    "laocconok.png",
+    "insuperabilis.png",
+    "hobbes-leviathanok.png",
+    "hobbes-leviathanfloatingok.png",
+    "caballotroya copy.png",
+    "against2.png"
+];
+
+
 function matmulvec(mat, vec) {
     if (mat[0].length != vec.length) return null;
     var out_vec = new Array(mat.length);
@@ -338,6 +349,19 @@ var loader = new THREE.TextureLoader();
 const cat = require('./textures/cat.png') ;
 var texture = loader.load( cat);
 
+const image_textures = []
+const image_materials = []
+
+for (var i of images) {
+    const f = require('./textures/'+i);
+    const t = loader.load(f);
+    image_textures.push(t);
+    const m = new THREE.MeshBasicMaterial( { map: t, transparent: true, opacity: 1, side:THREE.DoubleSide } );
+    image_materials.push(m);
+}
+
+
+
 // texture.wrapS = THREE.RepeatWrapping;
 // texture.wrapT = THREE.RepeatWrapping;
 // texture.repeat.set( 4, 4 );
@@ -347,6 +371,8 @@ var texture = loader.load( cat);
 const cat_material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, opacity: 1, side:THREE.DoubleSide } );
  
 //const meshphong_material = new THREE.MeshPhongMaterial({color, map: texture});
+
+
 
 
 
@@ -423,6 +449,8 @@ const projected_normals = [ //just to test
     0,0,-1    
 ];
 
+var images_index = 0;
+
 for (const penteract_faces_vertices of penteract_faces) {
     var projected_obj = [];
     var temp_geometry = new THREE.BufferGeometry();
@@ -480,11 +508,17 @@ for (const penteract_faces_vertices of penteract_faces) {
 
     projected_faces_geometries.push(temp_geometry);
 
-    var temp_face =  new THREE.Mesh(temp_geometry, cat_material);
+    if (images_index < image_materials.length) {
+        var temp_face =  new THREE.Mesh(temp_geometry, image_materials[images_index]);
+        projected_faces_meshes.push(temp_face);
+        scene.add(temp_face);
+        images_index++;
+    }  else {
+        var temp_face =  new THREE.Mesh(temp_geometry, cat_material);
+        projected_faces_meshes.push(temp_face);
+        scene.add(temp_face);
+    }
 
-    projected_faces_meshes.push(temp_face);
-
-    scene.add(temp_face);
 
 }
 
