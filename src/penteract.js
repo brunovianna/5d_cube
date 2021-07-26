@@ -304,11 +304,43 @@ function rotate5dVW(angle, pt5d) {
 
 	return matmulvec(rotmat45, pt5d);
 }
-
+ 
 class Penteract  {
-    constructor () {
+    constructor (sc) {
         this.vertices = penteract_vertices;
+        this.scaler = sc;
     }
+
+    rotate (VW, WX, XY, YZ) {
+        for (const f of penteract_faces) {
+            for (const v of f) {
+                var rotated_pt = rotate5dVW(VW, this.vertices[v]);
+                rotated_pt = rotate5dWX(WX,rotated_pt);
+                rotated_pt = rotate5dXY(XY,rotated_pt);
+                this.vertices[v] = rotate5dYZ(YZ,rotated_pt);
+
+            }
+        }
+    }
+
+    get_projected_face (face_index) {
+        var projected_vertices = [];
+        const penteract_faces_vertices = penteract_faces[face_index];
+
+        for (const penteract_faces_vertex of penteract_faces_vertices) {
+            var temp_pt = stereographic_project(2, this.vertices[penteract_faces_vertex]);
+            temp_pt[0]  *= this.scaler; 
+            temp_pt[1]  *= this.scaler; 
+            temp_pt[2]  *= this.scaler; 
+            
+            projected_vertices.push ( [temp_pt[0],temp_pt[1],temp_pt[2]]); //temp_pt has 4 elements the last one is useless
+        
+        }
+        
+        return projected_vertices;
+        
+    }
+
 }
 
 

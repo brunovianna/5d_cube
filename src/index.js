@@ -14,19 +14,13 @@ const images = [
 ];
 
 
-function draw_face (points, mat) {
+function draw_face (points, mat) { 
     var face = new THREE.shape(points);
     var geometry = new THREE.ShapeGeometry( face );
     var mesh = new THREE.Mesh( geometry, mat ) ;
     scene.add( mesh );
 }
 
-var angleYZ = 0;
-var angleXY = 0;
-var angleWX = 0;
-var angleVW = 0;
-
-var zoom = 200;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -125,6 +119,9 @@ const cat_material = new THREE.MeshBasicMaterial( { map: texture, transparent: t
 var projected_faces_geometries  = [];
 var projected_faces_meshes  = [];
 
+
+var zoom = 200;
+
 var scaler = 190.0 * ( window.innerWidth / 1024) * (zoom /  window.innerWidth);
 
 const projected_uvs = [
@@ -149,31 +146,19 @@ const projected_normals = [ //just to test
 
 var images_index = 0;
 
-var angleYZ = 0;
-var angleXY = 0;
-var angleWX = 0;
-var angleVW = 0;
+const my_penteract = new PENTERACT.Penteract(scaler);
 
-const my_penteract = new PENTERACT.Penteract();
+for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_index++) {
 
-for (const penteract_faces_vertices of PENTERACT.penteract_faces) {
-    var projected_obj = [];
     var temp_geometry = new THREE.BufferGeometry();
 
-    var projected_vertices = []
-    for (const penteract_faces_vertex of penteract_faces_vertices) {
-        var temp_pt = PENTERACT.stereographic_project(2, my_penteract.vertices[penteract_faces_vertex]);
-        temp_pt[0]  *= scaler; 
-        temp_pt[1]  *= scaler; 
-        temp_pt[2]  *= scaler; 
-        
-        projected_vertices.push ( [temp_pt[0],temp_pt[1],temp_pt[2]]); //temp_pt has 4 elements the last one is useless
-    }
+    var projected_vertices = my_penteract.get_projected_face(face_index);
+
 
 
     //lets make two triangles from the faces
     const projected_vertix_pos = [ 
-        projected_vertices[0],
+        projected_vertices[0], 
         projected_vertices[1],
         projected_vertices[3],
 
@@ -280,27 +265,31 @@ controls.update();
 function animate() {
     requestAnimationFrame( animate );
 
-    // for (const f of projected_faces_meshes) {
+    // for (const f of projected_faces_meshes) { 
     //     f.rotation.y -=0.005;
     // }
 
-    angleVW -=0.5;
+    //angleYZ -=0.5; 
 
-    
+    // rotate VW, WX, XY, YZ
+    my_penteract.rotate (0,0,0,-0.05);
+    // my_penteract.get_projected_face(i); 
+    // my_penteract.get_projected_line(i);
 
     var face_index = 0;
     for (var penteract_faces_vertices of PENTERACT.penteract_faces) {
-
 
         var projected_vertices = []
 
         for (const penteract_faces_vertex of penteract_faces_vertices) {
 
-            var rotated_pt = PENTERACT.rotate5dVW(angleVW, my_penteract.vertices[penteract_faces_vertex]);
-            rotated_pt = PENTERACT.rotate5dWX(angleWX,rotated_pt);
-            rotated_pt = PENTERACT.rotate5dXY(angleXY,rotated_pt);
-            rotated_pt = PENTERACT.rotate5dYZ(angleYZ,rotated_pt);
-            var temp_pt = PENTERACT.stereographic_project(2, rotated_pt);
+            // var rotated_pt = PENTERACT.rotate5dVW(angleVW, my_penteract.vertices[penteract_faces_vertex]);
+            // rotated_pt = PENTERACT.rotate5dWX(angleWX,rotated_pt);
+            // rotated_pt = PENTERACT.rotate5dXY(angleXY,rotated_pt);
+            // rotated_pt = PENTERACT.rotate5dYZ(angleYZ,rotated_pt);
+            // var temp_pt = PENTERACT.stereographic_project(2, rotated_pt);
+
+            var temp_pt = PENTERACT.stereographic_project(2,my_penteract.vertices[penteract_faces_vertex]);
 
             temp_pt[0]  *= scaler; 
             temp_pt[1]  *= scaler; 
