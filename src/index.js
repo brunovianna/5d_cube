@@ -451,6 +451,11 @@ const projected_normals = [ //just to test
 
 var images_index = 0;
 
+var angleYZ = 0;
+var angleXY = 0;
+var angleWX = 0;
+var angleVW = 0;
+
 for (const penteract_faces_vertices of penteract_faces) {
     var projected_obj = [];
     var temp_geometry = new THREE.BufferGeometry();
@@ -575,10 +580,64 @@ controls.update();
 function animate() {
     requestAnimationFrame( animate );
 
+    // for (const f of projected_faces_meshes) {
+    //     f.rotation.y -=0.005;
+    // }
 
-    for (const f of projected_faces_meshes) {
-        f.rotation.y -=0.005;
+    angleVW -=0.5;
+
+    
+
+    var face_index = 0;
+    for (var penteract_faces_vertices of penteract_faces) {
+
+
+        var projected_vertices = []
+
+        for (const penteract_faces_vertex of penteract_faces_vertices) {
+
+            var rotated_pt = rotate5dVW(angleVW, penteract_vertices[penteract_faces_vertex]);
+            rotated_pt = rotate5dWX(angleWX,rotated_pt);
+            rotated_pt = rotate5dXY(angleXY,rotated_pt);
+            rotated_pt = rotate5dYZ(angleYZ,rotated_pt);
+            var temp_pt = stereographic_project(2, rotated_pt);
+
+            temp_pt[0]  *= scaler; 
+            temp_pt[1]  *= scaler; 
+            temp_pt[2]  *= scaler; 
+            
+            projected_vertices.push ( [temp_pt[0],temp_pt[1],temp_pt[2]]); //temp_pt has 4 elements but the last one is useless
+
+        }
+
+        //lets make two triangles from the faces
+        const projected_vertix_pos = [ 
+            projected_vertices[0],
+            projected_vertices[1],
+            projected_vertices[3],
+
+            projected_vertices[3],
+            projected_vertices[1],
+            projected_vertices[2],
+            ];
+
+        var positions = [];
+
+
+        for (const vertex of projected_vertix_pos) {
+            positions.push(...vertex);
+        }
+
+        projected_faces_meshes[face_index].geometry.setAttribute(
+            'position',
+            new THREE.BufferAttribute(new Float32Array(positions), 3));
+    
+        face_index++;
+
     }
+
+    
+
 
     for (const l of projected_lines) {
         l.rotation.y -=0.005;
