@@ -16,7 +16,7 @@ html, body {
 }
 
 @font-face {
-	font-family: gohtam;
+	font-family: ghotam;
 	src: url(fonts/Gotham-Black.otf);
  }
  
@@ -36,4 +36,6 @@ div.help_footer {
 	position: absolute;
 	color:  #f9c41e;
 	font-family: gotham;
+    font-size: 40px;
+    font-weight: 800;
 }
