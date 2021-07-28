@@ -5,8 +5,7 @@ import * as PENTERACT from './penteract.js';
 
 import * as NAVIGATION from './navigation.js';
 
-
-NAVIGATION.create_interface (document);
+NAVIGATION.create_navigation();
 
 const images = [
     "reymultok.png",
@@ -284,9 +283,6 @@ function animate() {
     my_penteract.rotate (0,0,0,-0.05);
     // my_penteract.get_projected_face(i); 
     // my_penteract.get_projected_line(i);
-
-
-   
     for ( var face_index = 0; face_index < PENTERACT.penteract_faces.length; face_index++) {
 
         var projected_vertices = my_penteract.get_projected_face(face_index);

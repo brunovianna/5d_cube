@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function toggle_questionmark() {
 
 }
@@ -41,3 +42,14 @@ function create_interface () {
 export {
     create_interface,
   };
+=======
+
+
+function create_navigation () {
+    let question_mark = document.getElementById('question_mark');
+    question_mark.onclick = function () {alert("oi")};
+
+}
+
+export {create_navigation}
+>>>>>>> html-navigation
