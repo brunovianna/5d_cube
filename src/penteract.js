@@ -241,14 +241,14 @@ function stereographic_project(d, pt) {
 }
 
 
-function rotate5dZW(angle, pt5d) {
+function rotate5dZV(angle, pt5d) {
 	var rad = Math.PI / 180.0 * angle;
 	var rotmat45 = [
-		[1, 0, 0, 0, 0],
+		[Math.cos(rad), 0, 0, 0, -Math.sin(rad)],
 		[0, 1, 0, 0, 0],
 		[0, 0, 1, 0, 0],
-		[0, 0, 0, Math.cos(rad), -Math.sin(rad)],
-		[0, 0, 0, Math.sin(rad), Math.cos(rad)],
+		[0, 0, 0, 1, 0],
+		[Math.sin(rad), 0, 0, 0, Math.cos(rad)],
 	];
 
 	return matmulvec(rotmat45, pt5d);
@@ -308,21 +308,34 @@ function rotate5dVW(angle, pt5d) {
  
 class Penteract  {
     constructor (sc) {
-        this.vertices = penteract_vertices;
+        this.vertices = penteract_vertices.slice(); //thats how  you copy an array in js
         this.scaler = sc;
     }
 
-    rotate (VW, WX, XY, YZ) {
-        for (const f of penteract_faces) {
-            for (const v of f) {
-                var rotated_pt = rotate5dVW(VW, this.vertices[v]);
-                rotated_pt = rotate5dWX(WX,rotated_pt);
-                rotated_pt = rotate5dXY(XY,rotated_pt);
-                this.vertices[v] = rotate5dYZ(YZ,rotated_pt);
+    rotate (VW, WX, XY, YZ, ZV) {
+        for (var index =0;index<penteract_vertices.length;index++) { 
 
-            }
+            var rotated_pt = rotate5dVW(VW, this.vertices[index]);
+            rotated_pt = rotate5dWX(WX,rotated_pt);
+            rotated_pt = rotate5dXY(XY,rotated_pt);
+            rotated_pt = rotate5dYZ(XY,rotated_pt);
+            this.vertices[index] = rotate5dZV(YZ,rotated_pt);
+
         }
     }
+
+    set_rotation (VW, WX, XY, YZ, ZV) {
+        for (var index =0;index<penteract_vertices.length;index++) { 
+
+            var rotated_pt = rotate5dVW(VW, penteract_vertices[index]);
+            rotated_pt = rotate5dWX(WX,rotated_pt);
+            rotated_pt = rotate5dXY(XY,rotated_pt);
+            rotated_pt = rotate5dYZ(XY,rotated_pt); 
+            this.vertices[index] = rotate5dZV(ZV,rotated_pt);
+
+        }
+    }
+
 
     get_projected_face (face_index) {
         var projected_vertices = [];
@@ -370,5 +383,5 @@ class Penteract  {
 
 
 export {penteract_vertices, penteract_lines, penteract_faces, 
-    rotate5dZW, rotate5dYZ , rotate5dXY, rotate5dWX, rotate5dVW, 
+    rotate5dZV, rotate5dYZ , rotate5dXY, rotate5dWX, rotate5dVW, 
     stereographic_project, Penteract };

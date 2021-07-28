@@ -5,7 +5,15 @@ import * as PENTERACT from './penteract.js';
 
 import * as NAVIGATION from './navigation.js';
 
+var zoom = 200;
+
+var scaler = 190.0 * ( window.innerWidth / 1024) * (zoom /  window.innerWidth);
+
+const my_penteract = new PENTERACT.Penteract(scaler);
+
 NAVIGATION.create_navigation();
+
+
 
 const images = [
     "reymultok.png",
@@ -143,9 +151,7 @@ var projected_faces_geometries  = [];
 var projected_faces_meshes  = [];
 
 
-var zoom = 200;
 
-var scaler = 190.0 * ( window.innerWidth / 1024) * (zoom /  window.innerWidth);
 
 const projected_uvs = [
     0,0,
@@ -169,7 +175,7 @@ const projected_normals = [ //just to test
 
 var images_index = 0;
 
-const my_penteract = new PENTERACT.Penteract(scaler);
+
 const positionNumComponents = 3;
 
 for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_index++) {
@@ -280,7 +286,7 @@ function animate() {
     //angleYZ -=0.5; 
 
     // rotate VW, WX, XY, YZ
-    my_penteract.rotate (0,0,0,-0.05);
+    my_penteract.set_rotation (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
     // my_penteract.get_projected_face(i); 
     // my_penteract.get_projected_line(i);
     for ( var face_index = 0; face_index < PENTERACT.penteract_faces.length; face_index++) {

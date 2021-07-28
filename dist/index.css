@@ -25,6 +25,29 @@ html, body {
 	font-family: gotham;
  }
 
+div.rotate_5d {
+    top: 20px;
+    left: 20px;
+    width: 120px;
+    height: 300px;
+    position: absolute;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto;
+    grid-template-rows: 60px;
+    
+}
+
+div.rotate_controls {
+    display: flex;
+    justify-content: center;
+    font-family: gotham;
+    font-weight: 800;
+    font-size: 40px;
+    color:  #f9c41e;
+
+}
+
 div.help_footer {
     bottom: 20px;
 	left: 20px;
@@ -34,3 +57,16 @@ div.help_footer {
     font-weight: 800;
     font-size: 40px;
 } 
+
+div.penteract_panel {
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+    
+}
