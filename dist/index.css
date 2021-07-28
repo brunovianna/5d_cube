@@ -31,11 +31,6 @@ div.help_footer {
 	position: absolute;
 	color:  #f9c41e;
 	font-family: gotham;
-<<<<<<< HEAD:dist/5dcube.css
-    font-size: 40px;
-    font-weight: 800;
-=======
     font-weight: 800;
     font-size: 40px;
->>>>>>> html-navigation:dist/index.css
-}
+} 
