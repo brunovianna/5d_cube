@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Points } from 'three';
 
 const penteract_vertices = [
 	[-1.0, -1.0, -1.0, -1.0, -1.0],
@@ -377,7 +378,55 @@ class Penteract  {
 
     }
     
-    get_project_line_between_faces (face_a, face_b) {
+    get_projected_line_between_faces (face_a, face_b) {
+
+
+
+        var middle_face_a = []
+        var middle_face_b = []
+
+        var num_points = 50;
+        var projected_points = [];
+        var steps = [];
+
+        middle_face_a[0] = (this.vertices[penteract_faces[face_a][0]][0] + this.vertices[penteract_faces[face_a][2]][0])/2;
+        middle_face_a[1] = (this.vertices[penteract_faces[face_a][0]][1] + this.vertices[penteract_faces[face_a][2]][1])/2;
+        middle_face_a[2] = (this.vertices[penteract_faces[face_a][0]][2] + this.vertices[penteract_faces[face_a][2]][2])/2;
+        middle_face_a[3] = (this.vertices[penteract_faces[face_a][0]][3] + this.vertices[penteract_faces[face_a][2]][3])/2;
+        middle_face_a[4] = (this.vertices[penteract_faces[face_a][0]][4] + this.vertices[penteract_faces[face_a][2]][4])/2;
+
+        middle_face_b[0] = (this.vertices[penteract_faces[face_b][0]][0] + this.vertices[penteract_faces[face_b][2]][0])/2;
+        middle_face_b[1] = (this.vertices[penteract_faces[face_b][0]][1] + this.vertices[penteract_faces[face_b][2]][1])/2;
+        middle_face_b[2] = (this.vertices[penteract_faces[face_b][0]][2] + this.vertices[penteract_faces[face_b][2]][2])/2;
+        middle_face_b[3] = (this.vertices[penteract_faces[face_b][0]][3] + this.vertices[penteract_faces[face_b][2]][3])/2;
+        middle_face_b[4] = (this.vertices[penteract_faces[face_b][0]][4] + this.vertices[penteract_faces[face_b][2]][4])/2;
+
+        steps[0] = (middle_face_b[0]-middle_face_a[0])/num_points;
+        steps[1] = (middle_face_b[1]-middle_face_a[1])/num_points;
+        steps[2] = (middle_face_b[2]-middle_face_a[2])/num_points;
+        steps[3] = (middle_face_b[3]-middle_face_a[3])/num_points;
+        steps[4] = (middle_face_b[4]-middle_face_a[4])/num_points;
+
+
+        for (var index=0;index<num_points;index++) {
+            var point = [
+                middle_face_a[0]+steps[0]*index,
+                middle_face_a[1]+steps[1]*index,
+                middle_face_a[2]+steps[2]*index,
+                middle_face_a[3]+steps[3]*index,
+                middle_face_a[4]+steps[4]*index
+            ]
+
+            var temp_pt = stereographic_project(2, point);
+            temp_pt[0]  *= this.scaler; 
+            temp_pt[1]  *= this.scaler; 
+            temp_pt[2]  *= this.scaler; 
+    
+            projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+
+        }
+
+        return (projected_points);
 
     }
     

@@ -45,12 +45,6 @@ const images = [
 ];
 
 
-function draw_face (points, mat) { 
-    var face = new THREE.shape(points);
-    var geometry = new THREE.ShapeGeometry( face );
-    var mesh = new THREE.Mesh( geometry, mat ) ;
-    scene.add( mesh );
-}
 
 
 const scene = new THREE.Scene();
@@ -227,6 +221,8 @@ for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_inde
 
     projected_faces_geometries.push(temp_geometry);
 
+    //reverse order just to make the textures appear on top
+    
     if (images_index < image_materials.length) {
         var temp_face =  new THREE.Mesh(temp_geometry, image_materials[images_index]);
         projected_faces_meshes.push(temp_face);
@@ -276,6 +272,30 @@ camera.position.z = 100;
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.update();
 
+//temporary line between faces test
+const face_a = 10;
+const face_b = 79;
+
+var face_line_points = new Array(50);
+face_line_points.fill(0);
+
+const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
+
+
+
+var face_line_geometry = new THREE.BufferGeometry().setFromPoints( face_line_points );
+
+// const purple_mesh_material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+// for (var index =0;index<50;index++) {
+//     var temp_geometry = new THREE.SphereGeometry(5,8,8);
+//     face_line_geometry.push(temp_geometry);
+//     const sphere = new THREE.Sphere(purple_line_material, temp_geometry);
+//     scene.add( sphere );
+// }
+
+const face_line = new THREE.Line( face_line_geometry, purple_line_material );
+scene.add(face_line);
+
 function animate() {
     requestAnimationFrame( animate );
 
@@ -313,10 +333,8 @@ function animate() {
 
         }; 
 
-
+ 
         projected_faces_meshes[face_index].geometry.attributes.position.array.set (positions);
-
-
 
         projected_faces_meshes[face_index].geometry.attributes.position.needsUpdate = true;
  
@@ -330,6 +348,10 @@ function animate() {
         
     }
 
+
+
+    face_line_geometry.setFromPoints(my_penteract.get_projected_line_between_faces(face_a,face_b));
+    face_line_geometry.needsUpdate = true;
 
     controls.update();
     renderer.render( scene, camera );
