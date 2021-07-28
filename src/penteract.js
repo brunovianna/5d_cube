@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 const penteract_vertices = [
 	[-1.0, -1.0, -1.0, -1.0, -1.0],
@@ -341,7 +342,33 @@ class Penteract  {
         
     }
 
+    get_projected_line(line_index) {
+        var projected_points = [];
+        //first vertex of the line
+        var temp_pt = stereographic_project(2, this.vertices[penteract_lines[line_index][0]]);
+        temp_pt[0]  *= this.scaler; 
+        temp_pt[1]  *= this.scaler; 
+        temp_pt[2]  *= this.scaler; 
+
+        projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+        
+        //second vertex of the line
+        temp_pt = stereographic_project(2, this.vertices[penteract_lines[line_index][1]]);
+        temp_pt[0]  *= this.scaler; 
+        temp_pt[1]  *= this.scaler; 
+        temp_pt[2]  *= this.scaler; 
+
+        projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+
+        return (projected_points);
+
+    }
+        
+    
+
 }
 
 
-export {penteract_vertices, penteract_lines, penteract_faces, rotate5dZW, rotate5dYZ , rotate5dXY, rotate5dWX, rotate5dVW, stereographic_project, Penteract };
+export {penteract_vertices, penteract_lines, penteract_faces, 
+    rotate5dZW, rotate5dYZ , rotate5dXY, rotate5dWX, rotate5dVW, 
+    stereographic_project, Penteract };

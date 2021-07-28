@@ -3,6 +3,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 import * as PENTERACT from './penteract.js';
 
+import * as NAVIGATION from './navigation.js';
+
+NAVIGATION.create_navigation();
+
 const images = [
     "reymultok.png",
     "laocconok.png",
@@ -10,7 +14,26 @@ const images = [
     "hobbes-leviathanok.png",
     "hobbes-leviathanfloatingok.png",
     "caballotroya copy.png",
-    "against2.png"
+    "against2.png",
+    "aguila2ok.png",
+    "a_man.png",
+    "aurora_ophanim.png",
+    "cabezaok.png",
+    "Circle_of_Baccio_Baldini.png",
+    "gobernmentok.png",
+    "heavenok.png",
+    "hecate_animal.png",
+    "monstruo.png",
+    "niemandok.png",
+    "papa_nachtok.png",
+    "rey_globook.png",
+    "round.png",
+    "sade.png",
+    "trifonis_neu_voldor.png",
+    "Untitled_1.png",
+    "Untitled_2.png",
+    "vetruvio.png",
+    "wildbatonok.png",
 ];
 
 
@@ -275,29 +298,9 @@ function animate() {
     my_penteract.rotate (0,0,0,-0.05);
     // my_penteract.get_projected_face(i); 
     // my_penteract.get_projected_line(i);
+    for ( var face_index = 0; face_index < PENTERACT.penteract_faces.length; face_index++) {
 
-    var face_index = 0;
-    for (var penteract_faces_vertices of PENTERACT.penteract_faces) {
-
-        var projected_vertices = []
-
-        for (const penteract_faces_vertex of penteract_faces_vertices) {
-
-            // var rotated_pt = PENTERACT.rotate5dVW(angleVW, my_penteract.vertices[penteract_faces_vertex]);
-            // rotated_pt = PENTERACT.rotate5dWX(angleWX,rotated_pt);
-            // rotated_pt = PENTERACT.rotate5dXY(angleXY,rotated_pt);
-            // rotated_pt = PENTERACT.rotate5dYZ(angleYZ,rotated_pt);
-            // var temp_pt = PENTERACT.stereographic_project(2, rotated_pt);
-
-            var temp_pt = PENTERACT.stereographic_project(2,my_penteract.vertices[penteract_faces_vertex]);
-
-            temp_pt[0]  *= scaler; 
-            temp_pt[1]  *= scaler; 
-            temp_pt[2]  *= scaler; 
-            
-            projected_vertices.push ( [temp_pt[0],temp_pt[1],temp_pt[2]]); //temp_pt has 4 elements but the last one is useless
-
-        }
+        var projected_vertices = my_penteract.get_projected_face(face_index);
 
         //lets make two triangles from the faces
         const projected_vertix_pos = [ 
@@ -313,23 +316,27 @@ function animate() {
         var positions = [];
 
 
+        let vertex_index = 0;
         for (const vertex of projected_vertix_pos) {
             positions.push(...vertex);
-        }
 
-        projected_faces_meshes[face_index].geometry.setAttribute(
-            'position',
-            new THREE.BufferAttribute(new Float32Array(positions), 3));
-    
-        face_index++;
+        }; 
 
+
+        projected_faces_meshes[face_index].geometry.attributes.position.array.set (positions);
+
+
+
+        projected_faces_meshes[face_index].geometry.attributes.position.needsUpdate = true;
+ 
     }
 
     
 
-
-    for (const l of projected_lines) {
-        l.rotation.y -=0.005;
+    for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index++) {
+        const points = my_penteract.get_projected_line(line_index);
+        projected_lines[line_index].geometry.setFromPoints( points );;
+        
     }
 
     controls.update();
