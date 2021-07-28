@@ -318,8 +318,8 @@ class Penteract  {
             var rotated_pt = rotate5dVW(VW, this.vertices[index]);
             rotated_pt = rotate5dWX(WX,rotated_pt);
             rotated_pt = rotate5dXY(XY,rotated_pt);
-            rotated_pt = rotate5dYZ(XY,rotated_pt);
-            this.vertices[index] = rotate5dZV(YZ,rotated_pt);
+            rotated_pt = rotate5dYZ(YZ,rotated_pt);
+            this.vertices[index] = rotate5dZV(ZV,rotated_pt);
 
         }
     }
@@ -330,7 +330,7 @@ class Penteract  {
             var rotated_pt = rotate5dVW(VW, penteract_vertices[index]);
             rotated_pt = rotate5dWX(WX,rotated_pt);
             rotated_pt = rotate5dXY(XY,rotated_pt);
-            rotated_pt = rotate5dYZ(XY,rotated_pt); 
+            rotated_pt = rotate5dYZ(YZ,rotated_pt); 
             this.vertices[index] = rotate5dZV(ZV,rotated_pt);
 
         }
@@ -376,7 +376,10 @@ class Penteract  {
         return (projected_points);
 
     }
-        
+    
+    get_project_line_between_faces (face_a, face_b) {
+
+    }
     
 
 }
