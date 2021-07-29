@@ -276,14 +276,17 @@ controls.update();
 const face_a = 10;
 const face_b = 79;
 
-var face_line_points = new Array(50);
-face_line_points.fill(0);
 
 const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
+my_penteract.add_projected_line_between_faces(face_a,face_b,10,0.5) ;
+
+var face_connector_geometries = []
+
+for (c in my_penteract.get_projected_connectors()) {
+    face_connector_geometries.push ( new THREE.BufferGeometry().setFromPoints( c));
+}
 
 
-
-var face_line_geometry = new THREE.BufferGeometry().setFromPoints( face_line_points );
 
 // const purple_mesh_material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 // for (var index =0;index<50;index++) {
@@ -293,8 +296,8 @@ var face_line_geometry = new THREE.BufferGeometry().setFromPoints( face_line_poi
 //     scene.add( sphere );
 // }
 
-const face_line = new THREE.Line( face_line_geometry, purple_line_material );
-scene.add(face_line);
+// const face_line = new THREE.Line( face_line_geometry, purple_line_material );
+// scene.add(face_line);
 
 function animate() {
     requestAnimationFrame( animate );
@@ -306,7 +309,7 @@ function animate() {
     //angleYZ -=0.5; 
 
     // rotate VW, WX, XY, YZ
-    my_penteract.set_rotation (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
+    my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
     // my_penteract.get_projected_face(i); 
     // my_penteract.get_projected_line(i);
     for ( var face_index = 0; face_index < PENTERACT.penteract_faces.length; face_index++) {
@@ -350,8 +353,7 @@ function animate() {
 
 
 
-    face_line_geometry.setFromPoints(my_penteract.get_projected_line_between_faces(face_a,face_b));
-    face_line_geometry.needsUpdate = true;
+    // face_line_geometry.needsUpdate = true;
 
     controls.update();
     renderer.render( scene, camera );

@@ -311,6 +311,7 @@ class Penteract  {
     constructor (sc) {
         this.vertices = penteract_vertices.slice(); //thats how  you copy an array in js
         this.scaler = sc;
+        this.faces_connectors = [];
     }
 
     rotate (VW, WX, XY, YZ, ZV) {
@@ -378,15 +379,14 @@ class Penteract  {
 
     }
     
-    get_projected_line_between_faces (face_a, face_b) {
+    add_projected_line_between_faces (face_a, face_b, num_points, jaggedness) {
 
-
+        //jaggedness 0 (not jagged) to 1 (a lot)
 
         var middle_face_a = []
         var middle_face_b = []
 
-        var num_points = 50;
-        var projected_points = [];
+        var connector_points = [];
         var steps = [];
 
         middle_face_a[0] = (this.vertices[penteract_faces[face_a][0]][0] + this.vertices[penteract_faces[face_a][2]][0])/2;
@@ -410,26 +410,44 @@ class Penteract  {
 
         for (var index=0;index<num_points;index++) {
             var point = [
-                middle_face_a[0]+steps[0]*index,
-                middle_face_a[1]+steps[1]*index,
-                middle_face_a[2]+steps[2]*index,
-                middle_face_a[3]+steps[3]*index,
-                middle_face_a[4]+steps[4]*index
+                middle_face_a[0]+steps[0]*index+jaggedness*this.scaler*Math.random(),
+                middle_face_a[1]+steps[1]*index+jaggedness*this.scaler*Math.random(),
+                middle_face_a[2]+steps[2]*index+jaggedness*this.scaler*Math.random(),
+                middle_face_a[3]+steps[3]*index+jaggedness*this.scaler*Math.random(),
+                middle_face_a[4]+steps[4]*index+jaggedness*this.scaler*Math.random()
             ]
 
-            var temp_pt = stereographic_project(2, point);
-            temp_pt[0]  *= this.scaler; 
-            temp_pt[1]  *= this.scaler; 
-            temp_pt[2]  *= this.scaler; 
-    
-            projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+            connector_points.push(point);
 
         }
 
-        return (projected_points);
+        this.faces_connectors.push (connector_points);
 
     }
     
+
+    get_projected_connectors () {
+        var projected_connectors = [];
+
+        for (c in this.connectors){
+
+            var projected_points = [];
+
+            for (point in c){
+
+                var temp_pt = stereographic_project(2, point);
+                temp_pt[0]  *= this.scaler; 
+                temp_pt[1]  *= this.scaler; 
+                temp_pt[2]  *= this.scaler; 
+
+                projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+            }
+
+            projected_connectors.push(projected_points);
+        }
+
+        return (projected_connectors);
+    }
 
 }
 

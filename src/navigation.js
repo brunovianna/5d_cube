@@ -11,36 +11,41 @@ class Rotation5D {
 }
 
 let r5d = new Rotation5D(0.25);
-var rotate_timer;
+// var rotate_timer;
 const rotate_info = { amount: 0, axis: ""};
 
 function lets_rotate () {
-    rotate_timer=setInterval(function(){
+    // rotate_timer=setInterval(function(){
         switch (rotate_info.axis) {
             case "v":
-                r5d.v += r5d.step * rotate_info.amount;
+                r5d.v = r5d.step * rotate_info.amount;
                 break;
             case "w":
-                r5d.w += r5d.step * rotate_info.amount;
+                r5d.w = r5d.step * rotate_info.amount;
                 break;
             case "x":
-                r5d.x += r5d.step * rotate_info.amount;
+                r5d.x = r5d.step * rotate_info.amount;
                 break;
             case "y":
-                r5d.y += r5d.step * rotate_info.amount;
+                r5d.y = r5d.step * rotate_info.amount;
                 break;
             case "z":
-                r5d.z += r5d.step * rotate_info.amount;
+                r5d.z = r5d.step * rotate_info.amount;
                 break;
                                     
             default:
                 break;
         }
-   }, 25); // the above code is executed every 25 ms
+//    }, 25); // the above code is executed every 25 ms
 }
 
 function global_mouse_up () {
-    if (rotate_timer) clearInterval(rotate_timer);
+    // if (rotate_timer) clearInterval(rotate_timer);
+    r5d.v = 0;
+    r5d.w = 0;
+    r5d.x = 0;
+    r5d.y = 0;
+    r5d.z = 0;
 }
 
 function create_navigation () {
@@ -89,16 +94,6 @@ function create_navigation () {
         lets_rotate();
     }, false);
 
-    // document.getElementById("vminus").onclick = function() {r5d.v -= r5d.step}
-    // document.getElementById("vplus").onclick = function() {r5d.v += r5d.step}
-    document.getElementById("wminus").onclick = function() {r5d.w -= r5d.step}
-    document.getElementById("wplus").onclick = function() {r5d.w += r5d.step}
-    document.getElementById("xminus").onclick = function() {r5d.x -= r5d.step}
-    document.getElementById("xplus").onclick = function() {r5d.x += r5d.step}
-    document.getElementById("yminus").onclick = function() {r5d.y -= r5d.step}
-    document.getElementById("yplus").onclick = function() {r5d.y += r5d.step}
-    document.getElementById("zminus").onclick = function() {r5d.z -= r5d.step}
-    document.getElementById("zplus").onclick = function() {r5d.z += r5d.step}
 
     // footer left panel
     let penteract_panel_img = document.getElementById("penteract_panel_img");
