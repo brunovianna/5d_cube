@@ -316,6 +316,15 @@ class Penteract  {
 
     rotate (VW, WX, XY, YZ, ZV) {
 
+        for (var v in this.vertices) {
+            var rotated_pt = rotate5dVW(VW, this.vertices[v]);
+            rotated_pt = rotate5dWX(WX,rotated_pt);
+            rotated_pt = rotate5dXY(XY,rotated_pt);
+            rotated_pt = rotate5dYZ(YZ,rotated_pt);
+            this.vertices[v] = rotate5dZV(ZV,rotated_pt);
+        }
+
+
         this.vertices.forEach(function (vertix,index, array) {
             var rotated_pt = rotate5dVW(VW, vertix);
             rotated_pt = rotate5dWX(WX,rotated_pt);
@@ -324,19 +333,9 @@ class Penteract  {
             array[index] = rotate5dZV(ZV,rotated_pt);
         });
 
-        // for (var index =0;index<this.vertices.length;index++) { 
-        //     var rotated_pt = rotate5dVW(VW, this.vertices[index]);
-        //     rotated_pt = rotate5dWX(WX,rotated_pt);
-        //     rotated_pt = rotate5dXY(XY,rotated_pt);
-        //     rotated_pt = rotate5dYZ(YZ,rotated_pt);
-        //     this.vertices[index] = rotate5dZV(ZV,rotated_pt);
 
-        // }
-
-
-
-        for (var i=0;i<this.connectors.length; i++) {
-            for (var j=0;j<this.connectors[i].length; j++) {
+        for (var i in this.connectors) {
+            for (var j in this.connectors[i]) {
                 var rotated_pt = rotate5dVW(VW, this.connectors[i][j]);
                 rotated_pt = rotate5dWX(WX,rotated_pt);
                 rotated_pt = rotate5dXY(XY,rotated_pt);

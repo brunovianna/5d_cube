@@ -280,17 +280,32 @@ const face_b = 79;
 const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
 my_penteract.add_projected_line_between_faces(face_a,face_b,10,0.5) ;
 
-var face_connector_geometries = []
+var connector_geometries = []
 var connectors = []
 
 
 for (var c of my_penteract.get_projected_connectors()) {
     const g = new THREE.BufferGeometry().setFromPoints( c);
-    face_connector_geometries.push ( g );
+    connector_geometries.push ( g );
     const connector = new THREE.Line( g, purple_line_material );
     connectors.push(connector);
     scene.add(connector);
 
+}
+
+var cylinders = []
+const cylinder_material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+
+var p_connectors = my_penteract.get_projected_connectors();
+
+for (var c of p_connectors) {
+    for (var p of c){
+        const g = new THREE.CylinderGeometry( 5, 5, 10, 6 );
+        const cylinder = new THREE.Mesh( g, cylinder_material );
+        cylinder.geometry.translate (p.x,p.y,p.z);
+        cylinders.push(cylinder);
+        scene.add(cylinder);
+    }
 }
 
 
@@ -362,7 +377,7 @@ function animate() {
 
     for (var index=0; index< connector_array.length; index++) {
         connectors[index].geometry.setFromPoints(connector_array[index]);
-        //face_connector_geometries[index].needsUpdate = true;
+        //connector_geometries[index].needsUpdate = true;
 
     }
 
