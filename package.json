@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "webpack  --config webpack.prod.js",
     "watch": "webpack --watch",
-    "start": "webpack serve --open chromium"
+    "start": "webpack serve --config webpack.dev.js --open chromium"
   },
   "keywords": [],
   "author": "",
