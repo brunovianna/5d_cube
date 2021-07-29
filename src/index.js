@@ -281,9 +281,16 @@ const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
 my_penteract.add_projected_line_between_faces(face_a,face_b,10,0.5) ;
 
 var face_connector_geometries = []
+var connectors = []
 
-for (c in my_penteract.get_projected_connectors()) {
-    face_connector_geometries.push ( new THREE.BufferGeometry().setFromPoints( c));
+
+for (var c of my_penteract.get_projected_connectors()) {
+    const g = new THREE.BufferGeometry().setFromPoints( c);
+    face_connector_geometries.push ( g );
+    const connector = new THREE.Line( g, purple_line_material );
+    connectors.push(connector);
+    scene.add(connector);
+
 }
 
 
@@ -351,7 +358,13 @@ function animate() {
         
     }
 
+    const connector_array = my_penteract.get_projected_connectors();
 
+    for (var index=0; index< connector_array.length; index++) {
+        connectors[index].geometry.setFromPoints(connector_array[index]);
+        //face_connector_geometries[index].needsUpdate = true;
+
+    }
 
     // face_line_geometry.needsUpdate = true;
 

@@ -311,19 +311,40 @@ class Penteract  {
     constructor (sc) {
         this.vertices = penteract_vertices.slice(); //thats how  you copy an array in js
         this.scaler = sc;
-        this.faces_connectors = [];
+        this.connectors = [];
     }
 
     rotate (VW, WX, XY, YZ, ZV) {
-        for (var index =0;index<penteract_vertices.length;index++) { 
 
-            var rotated_pt = rotate5dVW(VW, this.vertices[index]);
+        this.vertices.forEach(function (vertix,index, array) {
+            var rotated_pt = rotate5dVW(VW, vertix);
             rotated_pt = rotate5dWX(WX,rotated_pt);
             rotated_pt = rotate5dXY(XY,rotated_pt);
             rotated_pt = rotate5dYZ(YZ,rotated_pt);
-            this.vertices[index] = rotate5dZV(ZV,rotated_pt);
+            array[index] = rotate5dZV(ZV,rotated_pt);
+        });
 
+        // for (var index =0;index<this.vertices.length;index++) { 
+        //     var rotated_pt = rotate5dVW(VW, this.vertices[index]);
+        //     rotated_pt = rotate5dWX(WX,rotated_pt);
+        //     rotated_pt = rotate5dXY(XY,rotated_pt);
+        //     rotated_pt = rotate5dYZ(YZ,rotated_pt);
+        //     this.vertices[index] = rotate5dZV(ZV,rotated_pt);
+
+        // }
+
+
+
+        for (var i=0;i<this.connectors.length; i++) {
+            for (var j=0;j<this.connectors[i].length; j++) {
+                var rotated_pt = rotate5dVW(VW, this.connectors[i][j]);
+                rotated_pt = rotate5dWX(WX,rotated_pt);
+                rotated_pt = rotate5dXY(XY,rotated_pt);
+                rotated_pt = rotate5dYZ(YZ,rotated_pt);
+                this.connectors[i][j] = rotate5dZV(ZV,rotated_pt);
+            }
         }
+
     }
 
     set_rotation (VW, WX, XY, YZ, ZV) {
@@ -421,7 +442,7 @@ class Penteract  {
 
         }
 
-        this.faces_connectors.push (connector_points);
+        this.connectors.push (connector_points);
 
     }
     
@@ -429,11 +450,11 @@ class Penteract  {
     get_projected_connectors () {
         var projected_connectors = [];
 
-        for (c in this.connectors){
+        for (var c of this.connectors){
 
             var projected_points = [];
 
-            for (point in c){
+            for (var point of c){
 
                 var temp_pt = stereographic_project(2, point);
                 temp_pt[0]  *= this.scaler; 
