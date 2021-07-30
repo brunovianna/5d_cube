@@ -11,13 +11,15 @@
 	<!-- navigation/interactivity and urls are defined in the navigation.js file-->
 	<body>
 		<div class="rotate_5d">
-			<div class="rotate_controls">5D</div>
+			<div class="rotate_controls" id="5d_click">5D</div>
 			<div class="rotate_controls"> </div>
-			<div class="rotate_controls"><span id="vminus">-</span> V <span id="vplus">+</span></div>
-			<div class="rotate_controls"><span id="wminus">-</span> W <span id="wplus">+</span></div>
-			<div class="rotate_controls"><span id="xminus">-</span> X <span id="xplus">+</span></div>
-			<div class="rotate_controls"><span id="yminus">-</span> Y <span id="yplus">+</span></div>
-			<div class="rotate_controls"><span id="zminus">-</span> Z <span id="zplus">+</span></div>
+			<div id="toggable_rotate_controls" class="invisible">
+				<div class="rotate_controls"><span id="vminus">-</span> V <span id="vplus">+</span></div>
+				<div class="rotate_controls"><span id="wminus">-</span> W <span id="wplus">+</span></div>
+				<div class="rotate_controls"><span id="xminus">-</span> X <span id="xplus">+</span></div>
+				<div class="rotate_controls"><span id="yminus">-</span> Y <span id="yplus">+</span></div>
+				<div class="rotate_controls"><span id="zminus">-</span> Z <span id="zplus">+</span></div>
+			</div>	
 		</div>
 		<div class="help_footer">
 			<span id="question_mark">?</span>
@@ -33,10 +35,22 @@
 			<span id="quotes">"</span>
 
 		</div>
-		<div class="penteract_panel" id="penteract_panel">
-			<img id="penteract_panel_img">
+
+		<div class="equal_panel" id="equal_panel">
+			<img id="equal_panel_img">
 		</div>
 
+		<div class="plus_panel" id="plus_panel">
+			<img id="plus_panel_img">
+		</div>
+
+		<div class="minus_panel" id="minus_panel">
+			<img id="minus_panel_img">
+		</div>
+
+		<div class="ampersand_panel" id="ampersand_panel">
+			<img id="ampersand_panel_img">
+		</div>
 
 	</body>
 	<script src="main.js">

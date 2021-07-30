@@ -56,7 +56,7 @@ function key_rotation(event) {
             rotate_info.amount = -1; rotate_info.axis = "v"; 
             break;
         case 'q':
-            rotate_info.amount = 1; rotate_info.axis = "v"; 
+            rotate_info.amount = 11; rotate_info.axis = "v"; 
             break;
         case '2':
             rotate_info.amount = 1; rotate_info.axis = "w"; 
@@ -89,6 +89,14 @@ function key_rotation(event) {
     lets_rotate();
 }
 
+function toggle_visibility (el) {
+    if (el.style.visibility === 'hidden') {
+        el.style.visibility = 'visible';
+    } else {
+        el.style.visibility = 'hidden';
+    }
+}
+
 function create_navigation () {
 
     window.addEventListener("keydown", key_rotation);
@@ -97,84 +105,108 @@ function create_navigation () {
     document.body.addEventListener("mouseup", global_stop_rotation, true);
 
     // 5d rotate controls
+
+    document.getElementById("5d_click").addEventListener("mouseup", function() {
+
+        var toggable_5d = document.getElementById("toggable_rotate_controls");
+        if (toggable_5d.style.visibility === 'visible') {
+
+            toggable_5d.style.visibility = 'hidden';
+        } else {
+            toggable_5d.style.visibility = 'visible';
+        }
+    });
+
+
     document.getElementById("vminus").addEventListener("mousedown", function() {
         rotate_info.amount = 1; rotate_info.axis = "v"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("vplus").addEventListener("mousedown", function() {
         rotate_info.amount = -1; rotate_info.axis = "v"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("wminus").addEventListener("mousedown", function() {
         rotate_info.amount = -1; rotate_info.axis = "w"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("wplus").addEventListener("mousedown", function() {
         rotate_info.amount = 1; rotate_info.axis = "w"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("xminus").addEventListener("mousedown", function() {
         rotate_info.amount = -1; rotate_info.axis = "x"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("xplus").addEventListener("mousedown", function() {
         rotate_info.amount = 1; rotate_info.axis = "x"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("yminus").addEventListener("mousedown", function() {
         rotate_info.amount = -1; rotate_info.axis = "y"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("yplus").addEventListener("mousedown", function() {
         rotate_info.amount = 1; rotate_info.axis = "y"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("zminus").addEventListener("mousedown", function() {
         rotate_info.amount = -1; rotate_info.axis = "z"; 
         lets_rotate();
-    }, false);
+    }, true);
     document.getElementById("zplus").addEventListener("mousedown", function() {
         rotate_info.amount = 1; rotate_info.axis = "z"; 
         lets_rotate();
-    }, false);
+    }, true);
 
 
 
 
     // footer left panel
-    let penteract_panel_img = document.getElementById("penteract_panel_img");
-    penteract_panel_img.src = require('./assets/equal_chart.png') ;
     let penteract_panel =  document.getElementById("penteract_panel");
-    penteract_panel.onclick = function( ) {penteract_panel.style.visibility="hidden"; };
 
 
     let question_mark = document.getElementById('question_mark');
     question_mark.onclick = function () {
+    
           };
 
     let equal_sign = document.getElementById('equal_sign');
+    let equal_panel = document.getElementById('equal_panel');
+    equal_panel.style.visibility="hidden";  
     equal_sign.onclick = function () {
-        penteract_panel_img.src = require('./assets/equal_chart.png') ;
-        penteract_panel.style.visibility="visible";  
+        equal_panel_img.src = require('./assets/equal_chart.png') ;
+        toggle_visibility(equal_panel);
+        equal_panel.onclick = function( ) {equal_panel.style.visibility="hidden"; };
     };
 
     let plus_sign = document.getElementById('plus_sign');
+    let plus_panel = document.getElementById('plus_panel');
+    plus_panel.style.visibility="hidden";  
     plus_sign.onclick = function () {
-        penteract_panel_img.src = require('./assets/sense_scale.png') ;
-        penteract_panel.style.visibility="visible";  
+        plus_panel_img.src = require('./assets/sense_scale.png') ;
+        toggle_visibility(plus_panel);
+        plus_panel.onclick = function( ) {plus_panel.style.visibility="hidden"; };
     };
 
     let minus_sign = document.getElementById('minus_sign');
+    let minus_panel = document.getElementById('minus_panel');
+    minus_panel.style.visibility="hidden";  
     minus_sign.onclick = function () {
-        penteract_panel_img.src = require('./assets/scale.png') ;
-        penteract_panel.style.visibility="visible";  
+        minus_panel_img.src = require('./assets/scale.png') ;
+        toggle_visibility(minus_panel);
+        minus_panel.onclick = function( ) {minus_panel.style.visibility="hidden"; };
     };
 
     let ampersand = document.getElementById('ampersand');
+    let ampersand_panel = document.getElementById('ampersand_panel');
+    ampersand_panel.style.visibility="hidden";
     ampersand.onclick = function () {
-        penteract_panel_img.src = require('./assets/klein_bottle.png') ;
-        penteract_panel.style.visibility="visible";  
+        ampersand_panel_img.src = require('./assets/klein_bottle.png') ;
+        toggle_visibility(ampersand_panel);
+        ampersand_panel.onclick = function( ) {ampersand_panel.style.visibility="hidden"; };
     };
+
     let quotes = document.getElementById('quotes');
     quotes.onclick = function () {penteract_panel.style.visibility="visible";  };
 

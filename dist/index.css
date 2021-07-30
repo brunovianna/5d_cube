@@ -48,6 +48,10 @@ div.rotate_controls {
 
 }
 
+div.invisible {
+    visibility: hidden;
+}
+
 div.help_footer {
     bottom: 20px;
 	left: 20px;
@@ -58,11 +62,50 @@ div.help_footer {
     font-size: 40px;
 } 
 
-div.penteract_panel {
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
+div.equal_panel {
+    left: 10px;
+    top: 10px;
+    height: 80%;
+    width: 80%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+    
+}
+
+div.plus_panel {
+    left: 200px;
+    top: 200px;
+    height: 50%;
+    width: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+    
+}
+
+div.minus_panel {
+    left: 300px;
+    top: 100px;
+    height: 50%;
+    width: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+    
+}
+
+div.ampersand_panel {
+    left: 300px;
+    top: 100px;
+    height: 50%;
+    width: 50%;
     position: absolute;
     display: flex;
     justify-content: center;
