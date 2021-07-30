@@ -39,7 +39,7 @@ function lets_rotate () {
 //    }, 25); // the above code is executed every 25 ms
 }
 
-function global_mouse_up () {
+function global_stop_rotation () {
     // if (rotate_timer) clearInterval(rotate_timer);
     r5d.v = 0;
     r5d.w = 0;
@@ -48,9 +48,53 @@ function global_mouse_up () {
     r5d.z = 0;
 }
 
+
+function key_rotation(event) {
+    console.log(event.key);
+    switch (event.key) {
+        case '1':
+            rotate_info.amount = -1; rotate_info.axis = "v"; 
+            break;
+        case 'q':
+            rotate_info.amount = 1; rotate_info.axis = "v"; 
+            break;
+        case '2':
+            rotate_info.amount = 1; rotate_info.axis = "w"; 
+            break;
+        case 'w':
+            rotate_info.amount = -1; rotate_info.axis = "w"; 
+            break;
+        case '3':
+            rotate_info.amount = 1; rotate_info.axis = "x"; 
+            break;
+        case 'e':
+            rotate_info.amount = -1; rotate_info.axis = "x"; 
+            break;
+        case '4':
+            rotate_info.amount = 1; rotate_info.axis = "y"; 
+            break;
+        case 'r':
+            rotate_info.amount = -1; rotate_info.axis = "y"; 
+            break;
+        case '5':
+            rotate_info.amount = 1; rotate_info.axis = "z"; 
+            break;
+        case 't':
+            rotate_info.amount = -1; rotate_info.axis = "z"; 
+            break;
+                                            
+        default:
+            break;
+    }
+    lets_rotate();
+}
+
 function create_navigation () {
 
-    document.body.addEventListener("mouseup", global_mouse_up, true);
+    window.addEventListener("keydown", key_rotation);
+    window.addEventListener("keyup",    global_stop_rotation);
+
+    document.body.addEventListener("mouseup", global_stop_rotation, true);
 
     // 5d rotate controls
     document.getElementById("vminus").addEventListener("mousedown", function() {
@@ -93,6 +137,8 @@ function create_navigation () {
         rotate_info.amount = 1; rotate_info.axis = "z"; 
         lets_rotate();
     }, false);
+
+
 
 
     // footer left panel

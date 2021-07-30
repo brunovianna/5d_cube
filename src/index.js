@@ -414,8 +414,20 @@ function animate() {
 
                 var cylinder_index = Number(index*connector_array[index].length +point_index);
 
-            // cylinders[cylinder_index].position.set 
-            //     (connector_array[index][point_index].x,connector_array[index][point_index].y,connector_array[index][point_index].z);
+                cylinders[cylinder_index].children[0].geometry.dispose();
+
+                cylinder_height = c[point_index].distanceTo(c[Number(point_index)+1]);
+                const new_cyl_g = new THREE.CylinderGeometry( 1, 1, cylinder_height, 6 );
+                cylinders[cylinder_index].children[0].geometry = new_cyl_g;
+
+                cylinders[cylinder_index].position.set 
+                    (c[point_index].x,c[point_index].y,c[point_index].z);
+                cylinders[cylinder_index].lookAt(c[Number(point_index)+1].x,c[Number(point_index)+1].y,c[Number(point_index)+1].z);
+                cylinders[cylinder_index].rotateY(Math.PI/2);
+                cylinders[cylinder_index].rotateZ(Math.PI/2);
+                cylinders[cylinder_index].translateY(cylinder_height/2);
+
+
             }
         }
 
