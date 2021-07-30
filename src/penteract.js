@@ -325,14 +325,6 @@ class Penteract  {
         }
 
 
-        this.vertices.forEach(function (vertix,index, array) {
-            var rotated_pt = rotate5dVW(VW, vertix);
-            rotated_pt = rotate5dWX(WX,rotated_pt);
-            rotated_pt = rotate5dXY(XY,rotated_pt);
-            rotated_pt = rotate5dYZ(YZ,rotated_pt);
-            array[index] = rotate5dZV(ZV,rotated_pt);
-        });
-
 
         for (var i in this.connectors) {
             for (var j in this.connectors[i]) {
@@ -399,7 +391,7 @@ class Penteract  {
 
     }
     
-    add_projected_line_between_faces (face_a, face_b, num_points, jaggedness) {
+    add_connector (face_a, face_b, num_points, jaggedness) {
 
         //jaggedness 0 (not jagged) to 1 (a lot)
 
@@ -421,15 +413,25 @@ class Penteract  {
         middle_face_b[3] = (this.vertices[penteract_faces[face_b][0]][3] + this.vertices[penteract_faces[face_b][2]][3])/2;
         middle_face_b[4] = (this.vertices[penteract_faces[face_b][0]][4] + this.vertices[penteract_faces[face_b][2]][4])/2;
 
-        steps[0] = (middle_face_b[0]-middle_face_a[0])/num_points;
-        steps[1] = (middle_face_b[1]-middle_face_a[1])/num_points;
-        steps[2] = (middle_face_b[2]-middle_face_a[2])/num_points;
-        steps[3] = (middle_face_b[3]-middle_face_a[3])/num_points;
-        steps[4] = (middle_face_b[4]-middle_face_a[4])/num_points;
+        steps[0] = (middle_face_b[0]-middle_face_a[0])/(num_points-1);
+        steps[1] = (middle_face_b[1]-middle_face_a[1])/(num_points-1);
+        steps[2] = (middle_face_b[2]-middle_face_a[2])/(num_points-1);
+        steps[3] = (middle_face_b[3]-middle_face_a[3])/(num_points-1);
+        steps[4] = (middle_face_b[4]-middle_face_a[4])/(num_points-1);
 
+        //first and las point have no jaggedness
+        var point = [
+            middle_face_a[0],
+            middle_face_a[1],
+            middle_face_a[2],
+            middle_face_a[3],
+            middle_face_a[4]
+        ]
 
-        for (var index=0;index<num_points;index++) {
-            var point = [
+        connector_points.push(point);
+
+        for (var index=1;index<num_points-1;index++) { 
+            point = [
                 middle_face_a[0]+steps[0]*index+jaggedness*this.scaler*Math.random(),
                 middle_face_a[1]+steps[1]*index+jaggedness*this.scaler*Math.random(),
                 middle_face_a[2]+steps[2]*index+jaggedness*this.scaler*Math.random(),
@@ -440,6 +442,16 @@ class Penteract  {
             connector_points.push(point);
 
         }
+        
+        point = [
+            middle_face_b[0],
+            middle_face_b[1],
+            middle_face_b[2],
+            middle_face_b[3],
+            middle_face_b[4]
+        ]
+
+        connector_points.push(point);
 
         this.connectors.push (connector_points);
 
