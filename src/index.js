@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as PENTERACT from './penteract.js';
 
 import * as NAVIGATION from './navigation.js';
+import { Line } from 'three';
 
 var zoom = 200;
 
@@ -243,7 +244,6 @@ for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_inde
 // now lets make the edges (lines)
 const line_material = new THREE.LineBasicMaterial( { color: 0xf9c41e} );
 
-var projected_lines_geometries = [];
 var projected_lines = [];
 
 for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index++) {
@@ -252,7 +252,6 @@ for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index+
     const points = my_penteract.get_projected_line(line_index);
 
     const line_geometry = new THREE.BufferGeometry().setFromPoints( points );
-    projected_lines_geometries.push(line_geometry);
     const line = new THREE.Line( line_geometry, line_material );
     projected_lines.push(line);
     scene.add( line );
@@ -364,8 +363,6 @@ for (var c of p_connectors) {
 function animate() {
     requestAnimationFrame( animate );
 
-
-    
     my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
 
     
@@ -403,15 +400,21 @@ function animate() {
     
 
     for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index++) {
-        const points = my_penteract.get_projected_line(line_index);
-        projected_lines[line_index].geometry.setFromPoints( points );;        
+        const p = my_penteract.get_projected_line(line_index);
+
+        const line_geometry = new THREE.BufferGeometry().setFromPoints( p );
+        const line = new THREE.Line( line_geometry, line_material );
+        scene.remove(projected_lines[line_index]);
+        projected_lines[line_index] = null;
+        projected_lines[line_index] = line;
+        scene.add(line);
+              
     }
 
     const connector_array = my_penteract.get_projected_connectors();
 
     for (var index in connector_array) {
         var c = connector_array[index];
-        //connectors[index].geometry.setFromPoints(c);
         for (var point_index in c) {
             if (point_index < (c.length - 1))  { //last point doesn't get drawn, it is just a reference to point the last before
 
