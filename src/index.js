@@ -284,13 +284,13 @@ my_penteract.add_connector(face_a,face_b,num_segments,0.02) ;
 var connectors = []
 
 
-for (var c of my_penteract.get_projected_connectors()) {
-    const g = new THREE.BufferGeometry().setFromPoints( c);
-    const connector = new THREE.Line( g, purple_line_material );
-    connectors.push(connector);
-    scene.add(connector);
+// for (var c of my_penteract.get_projected_connectors()) {
+//     const g = new THREE.BufferGeometry().setFromPoints( c);
+//     const connector = new THREE.Line( g, purple_line_material );
+//     connectors.push(connector);
+//     scene.add(connector);
 
-}
+// }
 
 var cylinders = [];
 const cylinder_materials = [];
@@ -308,24 +308,33 @@ var p_connectors = my_penteract.get_projected_connectors();
 
 var cylinder_mesh;
 
+var point_a = new THREE.Vector3(0,0,0);
+var point_b = new THREE.Vector3(0,0,0);
+
 for (var c of p_connectors) {
     for (var point_index in c){
         if (point_index < (c.length - 1))  { //last point doesn't get drawn, it is just a reference to point the last before
-            var cylinder_height = 10;
-            cylinder_height = c[point_index].distanceTo(c[Number(point_index)+1]);
+           
+            point_a.set(c[point_index][0],c[point_index][1],c[point_index][2]);
+            point_b.set(c[Number(point_index)+1][0],c[Number(point_index)+1][1],c[Number(point_index)+1][2]);
+
+            var cylinder_height = point_a.distanceTo(point_b);
 
             const g = new THREE.CylinderGeometry( 1, 1, cylinder_height, 6 );
 
             cylinder_mesh = new THREE.Mesh( g, cylinder_materials[point_index] );
             const cylinder = new THREE.Group();
             cylinder.add(cylinder_mesh); //just so we can deal with the mesh as an object
-            cylinder.position.set (c[point_index].x,c[point_index].y,c[point_index].z);
+            cylinder.position.set (point_a.x,point_a.y,point_a.z);
             //
             // cylinder.up.set (0,0,1);
-            cylinder_height = c[point_index].distanceTo(c[Number(point_index)+1]);
-            cylinder.position.set (c[point_index].x,c[point_index].y,c[point_index].z);
+            point_a.set(c[point_index][0],c[point_index][1],c[point_index][2]);
+            point_b.set(c[Number(point_index)+1][0],c[Number(point_index)+1][1],c[Number(point_index)+1][2]);
 
-            cylinder.lookAt(c[Number(point_index)+1].x,c[Number(point_index)+1].y,c[Number(point_index)+1].z);
+            cylinder_height = point_a.distanceTo(point_b);
+            cylinder.position.set (point_a.x,point_a.y,point_a.z);
+
+            cylinder.lookAt(point_b.x,point_b.y,point_b.z);
             cylinder.rotateY(Math.PI/2);
             cylinder.rotateZ(Math.PI/2);
             //   console.log(cylinder_height);
@@ -355,16 +364,11 @@ for (var c of p_connectors) {
 function animate() {
     requestAnimationFrame( animate );
 
-    // for (const f of projected_faces_meshes) { 
-    //     f.rotation.y -=0.005;
-    // }
 
-    //angleYZ -=0.5; 
-
-    // rotate VW, WX, XY, YZ
+    
     my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
-    // my_penteract.get_projected_face(i); 
-    // my_penteract.get_projected_line(i);
+
+    
     for ( var face_index = 0; face_index < PENTERACT.penteract_faces.length; face_index++) {
 
         var projected_vertices = my_penteract.get_projected_face(face_index);
@@ -400,15 +404,14 @@ function animate() {
 
     for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index++) {
         const points = my_penteract.get_projected_line(line_index);
-        projected_lines[line_index].geometry.setFromPoints( points );;
-        
+        projected_lines[line_index].geometry.setFromPoints( points );;        
     }
 
     const connector_array = my_penteract.get_projected_connectors();
 
     for (var index in connector_array) {
         var c = connector_array[index];
-        connectors[index].geometry.setFromPoints(c);
+        //connectors[index].geometry.setFromPoints(c);
         for (var point_index in c) {
             if (point_index < (c.length - 1))  { //last point doesn't get drawn, it is just a reference to point the last before
 
@@ -416,13 +419,17 @@ function animate() {
 
                 cylinders[cylinder_index].children[0].geometry.dispose();
 
-                cylinder_height = c[point_index].distanceTo(c[Number(point_index)+1]);
+                point_a.set(c[point_index][0],c[point_index][1],c[point_index][2]);
+                point_b.set(c[Number(point_index)+1][0],c[Number(point_index)+1][1],c[Number(point_index)+1][2]);
+    
+                cylinder_height = point_a.distanceTo(point_b);
+    
+
                 const new_cyl_g = new THREE.CylinderGeometry( 1, 1, cylinder_height, 6 );
                 cylinders[cylinder_index].children[0].geometry = new_cyl_g;
 
-                cylinders[cylinder_index].position.set 
-                    (c[point_index].x,c[point_index].y,c[point_index].z);
-                cylinders[cylinder_index].lookAt(c[Number(point_index)+1].x,c[Number(point_index)+1].y,c[Number(point_index)+1].z);
+                cylinders[cylinder_index].position.set (point_a.x,point_a.y,point_a.z);
+                cylinders[cylinder_index].lookAt(point_b);
                 cylinders[cylinder_index].rotateY(Math.PI/2);
                 cylinders[cylinder_index].rotateZ(Math.PI/2);
                 cylinders[cylinder_index].translateY(cylinder_height/2);
@@ -430,11 +437,9 @@ function animate() {
 
             }
         }
-
-
     }
 
-    // face_line_geometry.needsUpdate = true;
+  
 
     controls.update();
     renderer.render( scene, camera );

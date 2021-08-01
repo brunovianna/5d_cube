@@ -50,43 +50,53 @@ function global_stop_rotation () {
 
 
 function key_rotation(event) {
-    console.log(event.key);
+    // console.log(event.key);
     switch (event.key) {
         case '1':
             rotate_info.amount = -1; rotate_info.axis = "v"; 
+            lets_rotate();
             break;
         case 'q':
-            rotate_info.amount = 11; rotate_info.axis = "v"; 
+            rotate_info.amount = 1; rotate_info.axis = "v"; 
+            lets_rotate();
             break;
         case '2':
             rotate_info.amount = 1; rotate_info.axis = "w"; 
+            lets_rotate();
             break;
         case 'w':
             rotate_info.amount = -1; rotate_info.axis = "w"; 
+            lets_rotate();
             break;
         case '3':
             rotate_info.amount = 1; rotate_info.axis = "x"; 
+            lets_rotate();
             break;
         case 'e':
             rotate_info.amount = -1; rotate_info.axis = "x"; 
+            lets_rotate();
             break;
         case '4':
             rotate_info.amount = 1; rotate_info.axis = "y"; 
+            lets_rotate();
             break;
         case 'r':
             rotate_info.amount = -1; rotate_info.axis = "y"; 
+            lets_rotate();
             break;
         case '5':
             rotate_info.amount = 1; rotate_info.axis = "z"; 
+            lets_rotate();
             break;
         case 't':
             rotate_info.amount = -1; rotate_info.axis = "z"; 
+            lets_rotate();
             break;
                                             
         default:
+            rotate_info.amount = 0;
             break;
     }
-    lets_rotate();
 }
 
 function toggle_visibility (el) {

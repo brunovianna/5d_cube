@@ -312,6 +312,10 @@ class Penteract  {
         this.vertices = penteract_vertices.slice(); //thats how  you copy an array in js
         this.scaler = sc;
         this.connectors = [];
+        this.projected_line_points = [
+         new THREE.Vector3( 0, 0, 0 ) ,
+         new THREE.Vector3( 0, 0, 0 ) 
+        ];
     }
 
     rotate (VW, WX, XY, YZ, ZV) {
@@ -370,14 +374,13 @@ class Penteract  {
     }
 
     get_projected_line(line_index) {
-        var projected_points = [];
         //first vertex of the line
         var temp_pt = stereographic_project(2, this.vertices[penteract_lines[line_index][0]]);
         temp_pt[0]  *= this.scaler; 
         temp_pt[1]  *= this.scaler; 
         temp_pt[2]  *= this.scaler; 
 
-        projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+        this.projected_line_points[0].set( temp_pt[0], temp_pt[1], temp_pt[2] ); 
         
         //second vertex of the line
         temp_pt = stereographic_project(2, this.vertices[penteract_lines[line_index][1]]);
@@ -385,9 +388,9 @@ class Penteract  {
         temp_pt[1]  *= this.scaler; 
         temp_pt[2]  *= this.scaler; 
 
-        projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+        this.projected_line_points[1].set( temp_pt[0], temp_pt[1], temp_pt[2] );
 
-        return (projected_points);
+        return (this.projected_line_points);
 
     }
     
@@ -472,7 +475,7 @@ class Penteract  {
                 temp_pt[1]  *= this.scaler; 
                 temp_pt[2]  *= this.scaler; 
 
-                projected_points.push( new THREE.Vector3( temp_pt[0], temp_pt[1], temp_pt[2] ) );
+                projected_points.push( [ temp_pt[0], temp_pt[1], temp_pt[2] ] );
             }
 
             projected_connectors.push(projected_points);
