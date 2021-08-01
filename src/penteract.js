@@ -207,7 +207,7 @@ var penteract_faces = [ //numbers represent the index of the vertices
 
 function matmulvec(mat, vec) {
     if (mat[0].length != vec.length) return null;
-    var out_vec = new Array(mat.length);
+    const out_vec = new Array(mat.length);
     for (var i = 0; i < mat.length; ++i) {
         out_vec[i] = 0;
         for (var j = 0; j < mat[i].length; ++j) {
@@ -219,7 +219,7 @@ function matmulvec(mat, vec) {
 
 
 function createProjectMat(n, m, d, pt) {
-	var mat = new Array(m);
+	const mat = new Array(m);
 	for (var i = 0; i < m; ++i) {
 		mat[i] = new Array(n);
 		for (var j = 0; j < n; ++j) {
@@ -238,6 +238,7 @@ function stereographic_project(d, pt) {
 	var target_len = pt.length - 1;
 	var projmat = createProjectMat(pt.length, target_len, d, pt);
 	var projected_pt = matmulvec(projmat, pt);
+    projmat = null;
 	return projected_pt;
 }
 
@@ -374,6 +375,7 @@ class Penteract  {
     }
 
     get_projected_line(line_index) {
+       
         //first vertex of the line
         var temp_pt = stereographic_project(2, this.vertices[penteract_lines[line_index][0]]);
         temp_pt[0]  *= this.scaler; 
@@ -389,6 +391,8 @@ class Penteract  {
         temp_pt[2]  *= this.scaler; 
 
         this.projected_line_points[1].set( temp_pt[0], temp_pt[1], temp_pt[2] );
+
+        temp_pt = null;
 
         return (this.projected_line_points);
 
