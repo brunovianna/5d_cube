@@ -108,10 +108,10 @@ var projected_faces_meshes  = [];
 const projected_uvs = [
     0,0,
     0,1,
+    1,1,
+    1,1,
     1,0,
-    1,0,
-    0,1,
-    1,1
+    0,0
 ];
 
 
@@ -132,29 +132,25 @@ const positionNumComponents = 3;
 
 for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_index++) {
 
-    var temp_geometry = new THREE.BufferGeometry();
+    var temp_geometry = new THREE.PlaneGeometry(1,1);
 
     var projected_vertices = my_penteract.get_projected_face(face_index);
 
 
 
-    //lets make two triangles from the faces
+  
     const projected_vertix_pos = [ 
+        projected_vertices[1],
         projected_vertices[0], 
-        projected_vertices[1],
-        projected_vertices[3],
-
-        projected_vertices[3],
-        projected_vertices[1],
         projected_vertices[2],
+        projected_vertices[3],
     ];
 
     var positions = [];
 
 
     for (const vertex of projected_vertix_pos) {
-        positions.push(...vertex);
-
+            positions.push(...vertex);
       }
 
 
@@ -164,18 +160,18 @@ for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_inde
         'position',
         new THREE.BufferAttribute(new Float32Array(positions), positionNumComponents));
 
-    temp_geometry.computeVertexNormals(); // please compute from the face direction i hope this works
+    // temp_geometry.computeVertexNormals(); // please compute from the face direction i hope this works
 
-    temp_geometry.setAttribute(
-        'normal',
-        new THREE.BufferAttribute(new Float32Array(projected_normals), positionNumComponents));
+    // temp_geometry.setAttribute(
+    //     'normal',
+    //     new THREE.BufferAttribute(new Float32Array(projected_normals), positionNumComponents));
 
 
 
     const uvNumComponents = 2;
-    temp_geometry.setAttribute(
-        'uv',
-        new THREE.BufferAttribute(new Float32Array(projected_uvs), uvNumComponents));
+    // temp_geometry.setAttribute(
+    //     'uv',
+    //     new THREE.BufferAttribute(new Float32Array(projected_uvs), uvNumComponents));
 
     projected_faces_geometries.push(temp_geometry);
 
@@ -327,25 +323,21 @@ function update_geometries() {
 
         var projected_vertices = my_penteract.get_projected_face(face_index);
 
-        //lets make two triangles from the faces
         const projected_vertix_pos = [ 
-            projected_vertices[0],
             projected_vertices[1],
-            projected_vertices[3],
-
-            projected_vertices[3],
-            projected_vertices[1],
+            projected_vertices[0], 
             projected_vertices[2],
-            ];
-
+            projected_vertices[3],
+        ];
+    
         var positions = [];
-
-
-        let vertex_index = 0;
+    
+    
         for (const vertex of projected_vertix_pos) {
-            positions.push(...vertex);
+                positions.push(...vertex);
+          }
 
-        }; 
+
 
  
         projected_faces_meshes[face_index].geometry.attributes.position.array.set (positions);
