@@ -78,66 +78,23 @@ for (var i of images) {
     image_materials.push(m);
 }
 
+const number_materials = [];
+var number_material_flag = false;
+
+for (var i=0;i<80;i++) {
+    var s = "0" + i;
+    s = s.substr(s.length-2);
+    const f = require('./textures/'+s+'.png');
+    const t = loader.load(f);
+    const m = new THREE.MeshBasicMaterial( { map: t, transparent: true, opacity: 1, side:THREE.DoubleSide } );
+    number_materials.push(m);
+}
 
 
-// texture.wrapS = THREE.RepeatWrapping;
-// texture.wrapT = THREE.RepeatWrapping;
-// texture.repeat.set( 4, 4 );
 
 
-//const red_material = new THREE.MeshBasicMaterial( { color: 0xaaaa00 } );
 const cat_material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, opacity: 1, side:THREE.DoubleSide } );
  
-//const meshphong_material = new THREE.MeshPhongMaterial({color, map: texture});
-
-
-
-
-
-// playing with plane geometry
-// const plane_geometry = new THREE.PlaneGeometry(1,1);
-// var face_shape = new THREE.Shape([[-1,-1],[-1,1],[1,1],[1,-1]]);
-// var shape_geometry = new THREE.ShapeGeometry( face_shape );
-
-
-
-
-// create just one of the cube faces using buffer geometry
-// const buffer_geometry = new THREE.BufferGeometry();
-// const buffer_vertices = [
-//     // front: two triangles
-//     { pos: [-1, -1,  1], norm: [ 0,  0,  1], uv: [0, 0], },
-//     { pos: [ 1, -1,  1], norm: [ 0,  0,  1], uv: [1, 0], },
-//     { pos: [-1,  1,  1], norm: [ 0,  0,  1], uv: [0, 1], },
-
-//     { pos: [-1,  1,  1], norm: [ 0,  0,  1], uv: [0, 1], },
-//     { pos: [ 1, -1,  1], norm: [ 0,  0,  1], uv: [1, 0], },
-//     { pos: [ 1,  1,  1], norm: [ 0,  0,  1], uv: [1, 1], },
-// ];
-// var positions = [];
-// var normals = [];
-// var uvs = [];
-// for (const vertex of buffer_vertices) {
-//   positions.push(...vertex.pos);
-//   normals.push(...vertex.norm);
-//   uvs.push(...vertex.uv);
-// }
-// const positionNumComponents = 3;
-// const normalNumComponents = 3;
-// const uvNumComponents = 2;
-// buffer_geometry.setAttribute(
-//     'position',
-//     new THREE.BufferAttribute(new Float32Array(positions), positionNumComponents));
-// buffer_geometry.setAttribute(
-//     'normal',
-//     new THREE.BufferAttribute(new Float32Array(normals), normalNumComponents));
-// buffer_geometry.setAttribute(
-//     'uv',
-//     new THREE.BufferAttribute(new Float32Array(uvs), uvNumComponents));
-// buffer_geometry.computeVertexNormals();
-// const face = new THREE.Mesh(buffer_geometry, cat_material);
-// face.position.z = 0;
-// scene.add(face);
 
 
 //creating projected faces geometry
@@ -455,6 +412,28 @@ function animate() {
         my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
         update_geometries();
         NAVIGATION.r5d.update_flag = false;
+    }
+
+    if (NAVIGATION.r5d.toggle_numbers===true) {
+        NAVIGATION.r5d.toggle_numbers = false;
+        if (number_material_flag===true) {
+            for (var i in projected_faces_meshes) {
+                if (i < image_materials.length) {
+                    projected_faces_meshes[i].material = image_materials[i];
+                }  else {
+                    projected_faces_meshes[i].material = cat_material;
+                }   
+                projected_faces_meshes[i].material.needsUpdate = true;       
+            }
+            number_material_flag = false;
+        } else {
+            for (var i in projected_faces_meshes) {
+                projected_faces_meshes[i].material = number_materials[i];
+                projected_faces_meshes[i].material.needsUpdate = true;
+            }
+            number_material_flag = true;
+        }
+
     }
     
 

@@ -8,6 +8,7 @@ class Rotation5D {
         this.z = 0;
         this.step = s;
         this.update_flag = false;
+        this.toggle_numbers = false;
     }
 }
 
@@ -41,13 +42,16 @@ function lets_rotate () {
 //    }, 25); // the above code is executed every 25 ms
 }
 
-function global_stop_rotation () {
+function global_stop_rotation (event) {
     // if (rotate_timer) clearInterval(rotate_timer);
     r5d.v = 0;
     r5d.w = 0;
     r5d.x = 0;
     r5d.y = 0;
     r5d.z = 0;
+    if (event.key==='0') {
+        r5d.toggle_numbers = true; 
+    }
 }
 
 
