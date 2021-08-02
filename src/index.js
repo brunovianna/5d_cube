@@ -243,7 +243,7 @@ for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_inde
 // now lets make the edges (lines)
 const line_material = new THREE.LineBasicMaterial( { color: 0xf9c41e} );
 
-var projected_lines_geometries = [];
+// var projected_lines_geometries = [];
 var projected_lines = [];
 
 for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index++) {
@@ -252,7 +252,7 @@ for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index+
     const points = my_penteract.get_projected_line(line_index);
 
     const line_geometry = new THREE.BufferGeometry().setFromPoints( points );
-    projected_lines_geometries.push(line_geometry);
+    // projected_lines_geometries.push(line_geometry);
     const line = new THREE.Line( line_geometry, line_material );
     projected_lines.push(line);
     scene.add( line );
@@ -361,14 +361,9 @@ for (var c of p_connectors) {
 // const face_line = new THREE.Line( face_line_geometry, purple_line_material );
 // scene.add(face_line);
 
-function animate() {
-    requestAnimationFrame( animate );
+function update_geometries() {
 
-
-    
-    my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
-
-    
+    //update faces
     for ( var face_index = 0; face_index < PENTERACT.penteract_faces.length; face_index++) {
 
         var projected_vertices = my_penteract.get_projected_face(face_index);
@@ -400,13 +395,20 @@ function animate() {
  
     }
 
-    
 
+    //update lines/edges
     for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index++) {
         const points = my_penteract.get_projected_line(line_index);
-        projected_lines[line_index].geometry.setFromPoints( points );;        
+        var position = [points[0].x,points[0].y,points[0].z,points[1].x,points[1].y,points[1].z ];
+        projected_lines[line_index].geometry.attributes.position.array.set (position);
+        projected_lines[line_index].geometry.attributes.position.needsUpdate = true;
+        // projected_lines[line_index].geometry.setFromPoints( points );;        
+
     }
 
+
+
+    //update connectors
     const connector_array = my_penteract.get_projected_connectors();
 
     for (var index in connector_array) {
@@ -438,6 +440,27 @@ function animate() {
             }
         }
     }
+
+
+
+}
+
+
+function animate() {
+    requestAnimationFrame( animate );
+
+
+    if (NAVIGATION.r5d.update_flag===true) {
+        my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
+        update_geometries();
+        NAVIGATION.r5d.update_flag = false;
+    }
+    
+
+    
+
+
+
 
   
 

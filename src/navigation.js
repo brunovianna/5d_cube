@@ -7,6 +7,7 @@ class Rotation5D {
         this.y = 0;
         this.z = 0;
         this.step = s;
+        this.update_flag = false;
     }
 }
 
@@ -36,6 +37,7 @@ function lets_rotate () {
             default:
                 break;
         }
+        r5d.update_flag = true;
 //    }, 25); // the above code is executed every 25 ms
 }
 
