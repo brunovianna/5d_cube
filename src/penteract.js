@@ -317,9 +317,22 @@ class Penteract  {
          new THREE.Vector3( 0, 0, 0 ) ,
          new THREE.Vector3( 0, 0, 0 ) 
         ];
+
+        //current angle in degrees
+        this.v = 270;
+        this.w = 90;
+        this.x = 270;
+        this.y = 180;
+        this.z = 180;
     }
 
     rotate (VW, WX, XY, YZ, ZV) {
+
+        this.v += VW ; 
+        this.w += WX ; 
+        this.x += XY ; 
+        this.y += YZ ; 
+        this.z += ZV ; 
 
         for (var v in this.vertices) {
             var rotated_pt = rotate5dVW(VW, this.vertices[v]);

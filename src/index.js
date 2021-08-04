@@ -396,15 +396,58 @@ function update_geometries() {
 }
 
 
+function iterate_all_rotations() {
+    if (my_penteract.z === 270) {
+        my_penteract.z = 0;
+        if (my_penteract.y === 270) {
+            my_penteract.y = 0;
+            if (my_penteract.x === 270) {
+                my_penteract.x = 0;
+                if (my_penteract.w === 270) {
+                    my_penteract.w = 0;
+                    if (my_penteract.v === 270) {
+                        my_penteract.v = 0;
+                    } else {
+                        // my_penteract.v += 90;
+                        NAVIGATION.r5d.v = 90;
+                    }
+                } else {
+                    // my_penteract.w +- 90;
+                    NAVIGATION.r5d.w = 90;
+                }
+            } else {
+                // my_penteract.x += 90;
+                NAVIGATION.r5d.x = 90;
+            }
+        } else {
+            // my_penteract.y += 90;
+            NAVIGATION.r5d.y = 90;
+        }
+    } else {
+        // my_penteract.z += 90;
+        NAVIGATION.r5d.z = 90;
+    }
+}
+
 function animate() {
     requestAnimationFrame( animate );
 
 
     if (NAVIGATION.r5d.update_flag===true) {
-        my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
         update_geometries();
+        console.log("["+my_penteract.v+", "+my_penteract.w+", "+my_penteract.x+", "+my_penteract.y+", "+my_penteract.z+"]");
         NAVIGATION.r5d.update_flag = false;
+        
     }
+
+    if (NAVIGATION.r5d.iterate_all_rotations===true) {
+        iterate_all_rotations();
+        update_geometries();
+        NAVIGATION.r5d.iterate_all_rotations = false;
+        console.log("["+my_penteract.v+", "+my_penteract.w+", "+my_penteract.x+", "+my_penteract.y+", "+my_penteract.z+"]");
+
+    }
+
 
     if (NAVIGATION.r5d.toggle_numbers===true) {
         NAVIGATION.r5d.toggle_numbers = false;

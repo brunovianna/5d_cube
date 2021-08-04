@@ -9,10 +9,11 @@ class Rotation5D {
         this.step = s;
         this.update_flag = false;
         this.toggle_numbers = false;
+        this.iterate_all_rotations = false;
     }
 }
 
-let r5d = new Rotation5D(0.25);
+let r5d = new Rotation5D(30);
 // var rotate_timer;
 const rotate_info = { amount: 0, axis: ""};
 
@@ -52,18 +53,21 @@ function global_stop_rotation (event) {
     if (event.key==='0') {
         r5d.toggle_numbers = true; 
     }
+    if (event.key===' ') {
+        r5d.iterate_all_rotations = true; 
+    }
 }
 
 
+
 function key_rotation(event) {
-    // console.log(event.key);
     switch (event.key) {
         case '1':
-            rotate_info.amount = -1; rotate_info.axis = "v"; 
+            rotate_info.amount = 1; rotate_info.axis = "v"; 
             lets_rotate();
             break;
         case 'q':
-            rotate_info.amount = 1; rotate_info.axis = "v"; 
+            rotate_info.amount = -1; rotate_info.axis = "v"; 
             lets_rotate();
             break;
         case '2':
@@ -98,6 +102,7 @@ function key_rotation(event) {
             rotate_info.amount = -1; rotate_info.axis = "z"; 
             lets_rotate();
             break;
+
                                             
         default:
             rotate_info.amount = 0;
