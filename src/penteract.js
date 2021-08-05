@@ -307,23 +307,25 @@ function rotate5dVW(angle, pt5d) {
 
 	return matmulvec(rotmat45, pt5d);
 }
- 
+
 class Penteract  {
     constructor (sc) {
-        this.vertices = penteract_vertices.slice(); //thats how  you copy an array in js
-        this.scaler = sc;
+        this.rotated_vertices = penteract_vertices.slice(); //thats how  you copy an array in js
+        this.scaler = sc; //depends on the window frame, for projections
+        this.scale = 1; // penteract geometry scale
         this.connectors = [];
+        this.rotated_connectors = [];
         this.projected_line_points = [
          new THREE.Vector3( 0, 0, 0 ) ,
          new THREE.Vector3( 0, 0, 0 ) 
         ];
 
         //current angle in degrees
-        this.v = 270;
-        this.w = 90;
-        this.x = 270;
-        this.y = 180;
-        this.z = 180;
+        this.v = 0;
+        this.w = 0;
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
     }
 
     rotate (VW, WX, XY, YZ, ZV) {
@@ -334,12 +336,12 @@ class Penteract  {
         this.y += YZ ; 
         this.z += ZV ; 
 
-        for (var v in this.vertices) {
-            var rotated_pt = rotate5dVW(VW, this.vertices[v]);
+        for (var v in this.rotated_vertices) {
+            var rotated_pt = rotate5dVW(VW, this.rotated_vertices[v]);
             rotated_pt = rotate5dWX(WX,rotated_pt);
             rotated_pt = rotate5dXY(XY,rotated_pt);
             rotated_pt = rotate5dYZ(YZ,rotated_pt);
-            this.vertices[v] = rotate5dZV(ZV,rotated_pt);
+            this.rotated_vertices[v] = rotate5dZV(ZV,rotated_pt);
         }
 
 
@@ -357,14 +359,49 @@ class Penteract  {
     }
 
     set_rotation (VW, WX, XY, YZ, ZV) {
+
+
+        this.v = VW ; 
+        this.w = WX ; 
+        this.x = XY ; 
+        this.y = YZ ; 
+        this.z = ZV ; 
+
         for (var index =0;index<penteract_vertices.length;index++) { 
 
             var rotated_pt = rotate5dVW(VW, penteract_vertices[index]);
             rotated_pt = rotate5dWX(WX,rotated_pt);
             rotated_pt = rotate5dXY(XY,rotated_pt);
             rotated_pt = rotate5dYZ(YZ,rotated_pt); 
-            this.vertices[index] = rotate5dZV(ZV,rotated_pt);
+            this.rotated_vertices[index] = rotate5dZV(ZV,rotated_pt);
 
+        }
+
+        for (var i in this.connectors) {
+            for (var j in this.connectors[i]) {
+                var rotated_pt = rotate5dVW(VW, this.connectors[i][j]);
+                rotated_pt = rotate5dWX(WX,rotated_pt);
+                rotated_pt = rotate5dXY(XY,rotated_pt);
+                rotated_pt = rotate5dYZ(YZ,rotated_pt);
+                this.rotated_connectors[i][j] = rotate5dZV(ZV,rotated_pt);
+            }
+        }
+
+    }
+
+    set_scale (new_scale) {
+        this.scale = new_scale;
+        for (var i in this.rotated_vertices) {
+            for (var j in this.rotated_vertices[i] ){
+                this.rotated_vertices[i][j] *= new_scale;
+            }
+        }
+        for (var i in this.rotated_connectors) {
+            for (var j in this.rotated_connectors[i]) {
+                for (var k in this.rotated_connectors[i][j]) {
+                    this.rotated_connectors[i][j][k] *= new_scale;
+                }
+            }
         }
     }
 
@@ -374,7 +411,7 @@ class Penteract  {
         const penteract_faces_vertices = penteract_faces[face_index];
 
         for (const penteract_faces_vertex of penteract_faces_vertices) {
-            var temp_pt = stereographic_project(2, this.vertices[penteract_faces_vertex]);
+            var temp_pt = stereographic_project(2, this.rotated_vertices[penteract_faces_vertex]);
             temp_pt[0]  *= this.scaler; 
             temp_pt[1]  *= this.scaler; 
             temp_pt[2]  *= this.scaler; 
@@ -390,7 +427,7 @@ class Penteract  {
     get_projected_line(line_index) {
        
         //first vertex of the line
-        var temp_pt = stereographic_project(2, this.vertices[penteract_lines[line_index][0]]);
+        var temp_pt = stereographic_project(2, this.rotated_vertices[penteract_lines[line_index][0]]);
         temp_pt[0]  *= this.scaler; 
         temp_pt[1]  *= this.scaler; 
         temp_pt[2]  *= this.scaler; 
@@ -398,7 +435,7 @@ class Penteract  {
         this.projected_line_points[0].set( temp_pt[0], temp_pt[1], temp_pt[2] ); 
         
         //second vertex of the line
-        temp_pt = stereographic_project(2, this.vertices[penteract_lines[line_index][1]]);
+        temp_pt = stereographic_project(2, this.rotated_vertices[penteract_lines[line_index][1]]);
         temp_pt[0]  *= this.scaler; 
         temp_pt[1]  *= this.scaler; 
         temp_pt[2]  *= this.scaler; 
@@ -413,7 +450,7 @@ class Penteract  {
     
     add_connector (face_a, face_b, num_points, jaggedness) {
 
-        //jaggedness 0 (not jagged) to 1 (a lot)
+        /// jaggedness 0 (not jagged) to 1 (a lot)
 
         var middle_face_a = []
         var middle_face_b = []
@@ -421,17 +458,17 @@ class Penteract  {
         var connector_points = [];
         var steps = [];
 
-        middle_face_a[0] = (this.vertices[penteract_faces[face_a][0]][0] + this.vertices[penteract_faces[face_a][2]][0])/2;
-        middle_face_a[1] = (this.vertices[penteract_faces[face_a][0]][1] + this.vertices[penteract_faces[face_a][2]][1])/2;
-        middle_face_a[2] = (this.vertices[penteract_faces[face_a][0]][2] + this.vertices[penteract_faces[face_a][2]][2])/2;
-        middle_face_a[3] = (this.vertices[penteract_faces[face_a][0]][3] + this.vertices[penteract_faces[face_a][2]][3])/2;
-        middle_face_a[4] = (this.vertices[penteract_faces[face_a][0]][4] + this.vertices[penteract_faces[face_a][2]][4])/2;
+        middle_face_a[0] = (penteract_vertices[penteract_faces[face_a][0]][0] + penteract_vertices[penteract_faces[face_a][2]][0])/2;
+        middle_face_a[1] = (penteract_vertices[penteract_faces[face_a][0]][1] + penteract_vertices[penteract_faces[face_a][2]][1])/2;
+        middle_face_a[2] = (penteract_vertices[penteract_faces[face_a][0]][2] + penteract_vertices[penteract_faces[face_a][2]][2])/2;
+        middle_face_a[3] = (penteract_vertices[penteract_faces[face_a][0]][3] + penteract_vertices[penteract_faces[face_a][2]][3])/2;
+        middle_face_a[4] = (penteract_vertices[penteract_faces[face_a][0]][4] + penteract_vertices[penteract_faces[face_a][2]][4])/2;
 
-        middle_face_b[0] = (this.vertices[penteract_faces[face_b][0]][0] + this.vertices[penteract_faces[face_b][2]][0])/2;
-        middle_face_b[1] = (this.vertices[penteract_faces[face_b][0]][1] + this.vertices[penteract_faces[face_b][2]][1])/2;
-        middle_face_b[2] = (this.vertices[penteract_faces[face_b][0]][2] + this.vertices[penteract_faces[face_b][2]][2])/2;
-        middle_face_b[3] = (this.vertices[penteract_faces[face_b][0]][3] + this.vertices[penteract_faces[face_b][2]][3])/2;
-        middle_face_b[4] = (this.vertices[penteract_faces[face_b][0]][4] + this.vertices[penteract_faces[face_b][2]][4])/2;
+        middle_face_b[0] = (penteract_vertices[penteract_faces[face_b][0]][0] + penteract_vertices[penteract_faces[face_b][2]][0])/2;
+        middle_face_b[1] = (penteract_vertices[penteract_faces[face_b][0]][1] + penteract_vertices[penteract_faces[face_b][2]][1])/2;
+        middle_face_b[2] = (penteract_vertices[penteract_faces[face_b][0]][2] + penteract_vertices[penteract_faces[face_b][2]][2])/2;
+        middle_face_b[3] = (penteract_vertices[penteract_faces[face_b][0]][3] + penteract_vertices[penteract_faces[face_b][2]][3])/2;
+        middle_face_b[4] = (penteract_vertices[penteract_faces[face_b][0]][4] + penteract_vertices[penteract_faces[face_b][2]][4])/2;
 
         steps[0] = (middle_face_b[0]-middle_face_a[0])/(num_points-1);
         steps[1] = (middle_face_b[1]-middle_face_a[1])/(num_points-1);
@@ -474,6 +511,7 @@ class Penteract  {
         connector_points.push(point);
 
         this.connectors.push (connector_points);
+        this.rotated_connectors.push(connector_points.slice());
 
     }
     
@@ -481,7 +519,7 @@ class Penteract  {
     get_projected_connectors () {
         var projected_connectors = [];
 
-        for (var c of this.connectors){
+        for (var c of this.rotated_connectors){
 
             var projected_points = [];
 

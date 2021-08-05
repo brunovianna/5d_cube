@@ -10,6 +10,7 @@ class Rotation5D {
         this.update_flag = false;
         this.toggle_numbers = false;
         this.iterate_all_rotations = false;
+        this.scale = 1;
     }
 }
 
@@ -21,19 +22,19 @@ function lets_rotate () {
     // rotate_timer=setInterval(function(){
         switch (rotate_info.axis) {
             case "v":
-                r5d.v = r5d.step * rotate_info.amount;
+                r5d.v += r5d.step * rotate_info.amount;
                 break;
             case "w":
-                r5d.w = r5d.step * rotate_info.amount;
+                r5d.w += r5d.step * rotate_info.amount;
                 break;
-            case "x":
-                r5d.x = r5d.step * rotate_info.amount;
+            case "x":   
+                r5d.x += r5d.step * rotate_info.amount;
                 break;
             case "y":
-                r5d.y = r5d.step * rotate_info.amount;
+                r5d.y += r5d.step * rotate_info.amount;
                 break;
             case "z":
-                r5d.z = r5d.step * rotate_info.amount;
+                r5d.z += r5d.step * rotate_info.amount;
                 break;
                                     
             default:
@@ -45,11 +46,11 @@ function lets_rotate () {
 
 function global_stop_rotation (event) {
     // if (rotate_timer) clearInterval(rotate_timer);
-    r5d.v = 0;
-    r5d.w = 0;
-    r5d.x = 0;
-    r5d.y = 0;
-    r5d.z = 0;
+    // r5d.v = 0;
+    // r5d.w = 0;
+    // r5d.x = 0;
+    // r5d.y = 0;
+    // r5d.z = 0;
     if (event.key==='0') {
         r5d.toggle_numbers = true; 
     }
@@ -67,6 +68,7 @@ function key_rotation(event) {
             lets_rotate();
             break;
         case 'q':
+        case 'Q':
             rotate_info.amount = -1; rotate_info.axis = "v"; 
             lets_rotate();
             break;
@@ -75,6 +77,7 @@ function key_rotation(event) {
             lets_rotate();
             break;
         case 'w':
+        case 'W':
             rotate_info.amount = -1; rotate_info.axis = "w"; 
             lets_rotate();
             break;
@@ -83,6 +86,7 @@ function key_rotation(event) {
             lets_rotate();
             break;
         case 'e':
+        case 'E':
             rotate_info.amount = -1; rotate_info.axis = "x"; 
             lets_rotate();
             break;
@@ -91,6 +95,7 @@ function key_rotation(event) {
             lets_rotate();
             break;
         case 'r':
+        case 'R':
             rotate_info.amount = -1; rotate_info.axis = "y"; 
             lets_rotate();
             break;
@@ -99,8 +104,17 @@ function key_rotation(event) {
             lets_rotate();
             break;
         case 't':
+        case 'T':
             rotate_info.amount = -1; rotate_info.axis = "z"; 
             lets_rotate();
+            break;
+        case '+':
+            r5d.scale += 0.2;
+            r5d.update_flag = true;
+            break;
+        case '-':
+            r5d.scale -= 0.2;
+            r5d.update_flag = true;
             break;
 
                                             

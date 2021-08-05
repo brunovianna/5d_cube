@@ -103,8 +103,6 @@ var projected_faces_geometries  = [];
 var projected_faces_meshes  = [];
 
 
-
-
 const projected_uvs = [
     0,0,
     0,1,
@@ -232,6 +230,7 @@ const num_segments = 10;
 
 const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
 my_penteract.add_connector(face_a,face_b,num_segments,0.02) ;
+my_penteract.add_connector(0,10,num_segments,0.02) ;
 
 var connectors = []
 
@@ -315,8 +314,8 @@ for (var c of p_connectors) {
 
 function update_geometries() {
 
-    my_penteract.rotate (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
-
+    my_penteract.set_rotation (NAVIGATION.r5d.v,NAVIGATION.r5d.w,NAVIGATION.r5d.x,NAVIGATION.r5d.y,NAVIGATION.r5d.z);
+    my_penteract.set_scale (NAVIGATION.r5d.scale);
     
     //update faces
     for ( var face_index = 0; face_index < PENTERACT.penteract_faces.length; face_index++) {
@@ -362,12 +361,14 @@ function update_geometries() {
     //update connectors
     const connector_array = my_penteract.get_projected_connectors();
 
+    var cylinder_index = 0;
+
     for (var index in connector_array) {
         var c = connector_array[index];
         for (var point_index in c) {
             if (point_index < (c.length - 1))  { //last point doesn't get drawn, it is just a reference to point the last before
 
-                var cylinder_index = Number(index*connector_array[index].length +point_index);
+                //var cylinder_index = parseFloat(index*connector_array[index].length) + parseFloat(point_index);
 
                 cylinders[cylinder_index].children[0].geometry.dispose();
 
@@ -386,6 +387,7 @@ function update_geometries() {
                 cylinders[cylinder_index].rotateZ(Math.PI/2);
                 cylinders[cylinder_index].translateY(cylinder_height/2);
 
+                cylinder_index++;
 
             }
         }
@@ -397,36 +399,37 @@ function update_geometries() {
 
 
 function iterate_all_rotations() {
-    if (my_penteract.z === 270) {
-        my_penteract.z = 0;
-        if (my_penteract.y === 270) {
-            my_penteract.y = 0;
-            if (my_penteract.x === 270) {
-                my_penteract.x = 0;
-                if (my_penteract.w === 270) {
-                    my_penteract.w = 0;
-                    if (my_penteract.v === 270) {
-                        my_penteract.v = 0;
+    if (NAVIGATION.r5d.z === 270) {
+        NAVIGATION.r5d.z = 0;
+        if (NAVIGATION.r5d.y === 270) {
+            NAVIGATION.r5d.y = 0;
+            if (NAVIGATION.r5d.x === 270) {
+                NAVIGATION.r5d.x = 0;
+                if (NAVIGATION.r5d.w === 270) {
+                    NAVIGATION.r5d.w = 0;
+                    if (NAVIGATION.r5d.v === 270) {
+                        NAVIGATION.r5d.v = 0;
                     } else {
                         // my_penteract.v += 90;
-                        NAVIGATION.r5d.v = 90;
+                        NAVIGATION.r5d.v += 90;
                     }
                 } else {
                     // my_penteract.w +- 90;
-                    NAVIGATION.r5d.w = 90;
+                    NAVIGATION.r5d.w += 90;
                 }
             } else {
                 // my_penteract.x += 90;
-                NAVIGATION.r5d.x = 90;
+                NAVIGATION.r5d.x += 90;
             }
         } else {
             // my_penteract.y += 90;
-            NAVIGATION.r5d.y = 90;
+            NAVIGATION.r5d.y += 90;
         }
     } else {
         // my_penteract.z += 90;
-        NAVIGATION.r5d.z = 90;
+        NAVIGATION.r5d.z += 90;
     }
+
 }
 
 function animate() {
@@ -435,8 +438,8 @@ function animate() {
 
     if (NAVIGATION.r5d.update_flag===true) {
         update_geometries();
-        console.log("["+my_penteract.v+", "+my_penteract.w+", "+my_penteract.x+", "+my_penteract.y+", "+my_penteract.z+"]");
         NAVIGATION.r5d.update_flag = false;
+        console.log("["+my_penteract.v+", "+my_penteract.w+", "+my_penteract.x+", "+my_penteract.y+", "+my_penteract.z+"] "+my_penteract.scale);
         
     }
 
