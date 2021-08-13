@@ -140,6 +140,7 @@ for (var i of images) {
     image_textures.push(t);
     const m = new THREE.MeshBasicMaterial( { map: t, transparent: true, opacity: 1, side:THREE.DoubleSide } );
     m.name = i;
+    m.color.set (0xcccccc); //a bit darker so it can be highlighted on mouseover
     image_materials.push(m);
     
 }
@@ -153,6 +154,8 @@ for (var i=0;i<80;i++) {
     const f = require('./textures/'+s+'.png');
     const t = loader.load(f);
     const m = new THREE.MeshBasicMaterial( { map: t, transparent: true, opacity: 1, side:THREE.DoubleSide } );
+    m.color.set (0xcccccc); //a bit darker so it can be highlighted on mouseover
+    m.name = i;
     number_materials.push(m);
 }
 
@@ -244,6 +247,7 @@ for (let face_index = PENTERACT.penteract_faces.length -1; face_index>=0; face_i
     //reverse order just to make the textures appear on top
     
     var temp_face =  new THREE.Mesh(temp_geometry, image_materials[images_index]);
+    temp_face.name  = images_index;
     projected_faces_meshes.push(temp_face);
     scene.add(temp_face);
     images_index++;
@@ -282,6 +286,10 @@ camera.position.z = 100;
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.update();
+
+let raycaster = new THREE.Raycaster();
+let last_pointer = new THREE.Vector2();
+let intersected;
 
 //temporary line between faces test
 const face_a = 10;
@@ -497,24 +505,24 @@ function animate() {
     requestAnimationFrame( animate );
 
 
-    if (NAVIGATION.r5d.update_flag===true) {
+    if (NAVIGATION.interface_flags.update_flag===true) {
         update_geometries();
-        NAVIGATION.r5d.update_flag = false;
+        NAVIGATION.interface_flags.update_flag = false;
         console.log("["+my_penteract.v+", "+my_penteract.w+", "+my_penteract.x+", "+my_penteract.y+", "+my_penteract.z+"] "+my_penteract.scale);
         
     }
 
-    if (NAVIGATION.r5d.iterate_all_rotations===true) {
+    if (NAVIGATION.interface_flags.iterate_all_rotations===true) {
         iterate_all_rotations();
         update_geometries();
-        NAVIGATION.r5d.iterate_all_rotations = false;
+        NAVIGATION.interface_flags.iterate_all_rotations = false;
         console.log("["+my_penteract.v+", "+my_penteract.w+", "+my_penteract.x+", "+my_penteract.y+", "+my_penteract.z+"]");
 
     }
 
 
-    if (NAVIGATION.r5d.toggle_numbers===true) {
-        NAVIGATION.r5d.toggle_numbers = false;
+    if (NAVIGATION.interface_flags.toggle_numbers===true) {
+        NAVIGATION.interface_flags.toggle_numbers = false;
         if (number_material_flag===true) {
             for (var i in projected_faces_meshes) {
                 projected_faces_meshes[i].material = image_materials[i];
@@ -531,7 +539,42 @@ function animate() {
 
     }
     
+    if (!last_pointer.equals (NAVIGATION.pointer)) {
 
+        last_pointer.copy (NAVIGATION.pointer);
+        raycaster.setFromCamera( NAVIGATION.pointer, camera );
+
+        const intersects = raycaster.intersectObjects( scene.children );
+
+
+        if ( intersects.length > 0 ) {
+
+            if (intersects[0].object.material !== line_material) {
+                
+                if ( intersected != intersects[ 0 ].object ) {
+
+                    if ( intersected ) intersected.material.color.set( 0xcccccc);
+
+                    intersected = intersects[ 0 ].object;
+                    intersected.material.color.set ( 0xffffff);
+                }
+
+            }
+
+        } else {
+
+            if ( intersected ) intersected.material.color.set (0xcccccc);
+
+            intersected = null;
+
+        }
+
+
+
+    }
+
+
+    
 
     controls.update();
     renderer.render( scene, camera );

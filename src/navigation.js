@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 class Rotation5D {
     constructor (s) {
@@ -7,14 +8,24 @@ class Rotation5D {
         this.y = 0;
         this.z = 0;
         this.step = s;
-        this.update_flag = false;
-        this.toggle_numbers = false;
-        this.iterate_all_rotations = false;
         this.scale = 1;
     }
 }
 
+class Interface_Flags {
+    constructor () {
+        this.update_flag = false;
+        this.toggle_numbers = false;
+        this.iterate_all_rotations = false;
+        this.double_click = false;
+    }
+}
+
 let r5d = new Rotation5D(5);
+let interface_flags = new Interface_Flags();
+const pointer = new THREE.Vector2();
+
+
 // var rotate_timer;
 const rotate_info = { amount: 0, axis: ""};
 
@@ -40,7 +51,7 @@ function lets_rotate () {
             default:
                 break;
         }
-        r5d.update_flag = true;
+        interface_flags.update_flag = true;
 //    }, 25); // the above code is executed every 25 ms
 }
 
@@ -52,10 +63,10 @@ function global_stop_rotation (event) {
     // r5d.y = 0;
     // r5d.z = 0;
     if (event.key==='0') {
-        r5d.toggle_numbers = true; 
+        interface_flags.toggle_numbers = true; 
     }
     if (event.key===' ') {
-        r5d.iterate_all_rotations = true; 
+        interface_flags.iterate_all_rotations = true; 
     }
 }
 
@@ -110,11 +121,11 @@ function key_rotation(event) {
             break;
         case '+':
             r5d.scale += 0.01;
-            r5d.update_flag = true;
+            interface_flags.update_flag = true;
             break;
         case '-':
             r5d.scale -= 0.01;
-            r5d.update_flag = true;
+            interface_flags.update_flag = true;
             break;
 
                                             
@@ -132,10 +143,22 @@ function toggle_visibility (el) {
     }
 }
 
+function double_click (event) {
+    interface_flags.double_click = true;
+}
+
+
+function global_movemouse (event) {
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+
 function create_navigation () {
 
     window.addEventListener("keydown", key_rotation);
     window.addEventListener("keyup",    global_stop_rotation);
+    window.addEventListener("dblclick", double_click, true);
+    window.addEventListener("mousemove", global_movemouse, true);
 
     document.body.addEventListener("mouseup", global_stop_rotation, true);
 
@@ -251,4 +274,4 @@ function create_navigation () {
 
 
 
-export {create_navigation, r5d}  
+export {create_navigation, r5d, interface_flags, pointer}  
