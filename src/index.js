@@ -4,6 +4,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as PENTERACT from './penteract.js';
 
 import * as NAVIGATION from './navigation.js';
+
+import * as DATA from './data.js';
+
 import { Line } from 'three';
 
 var zoom = 200;
@@ -13,91 +16,6 @@ var scaler = 190.0 * ( window.innerWidth / 1024) * (zoom /  window.innerWidth);
 const my_penteract = new PENTERACT.Penteract(scaler);
 
 NAVIGATION.create_navigation();
-
-
-
-const images = [
-    "01shered.png", //00
-    "02ciculo.png", //1
-    "03cross.png", //2
-    "04tri.png", //3 
-    "05line.png", //4
-    "06dot.png", //5
-    "07giotto.png", //6
-    "08udridero.png", //7
-    "09hell.png", //8 
-    "10CircleofBaccioBaldini.png", //9
-    "11papanachtok.png", //10
-    "12coatlcue.png", //1
-    "13auroraophanim.png", //2
-    "14inner.png", //3 
-    "15gabriel.png", //4
-    "16trifonisneuvoldor.png", //5
-    "17almauno.png", //6
-    "18legion.png", //7
-    "19cielo.png", //8 
-    "20esfera.png", //9
-    "21masajco.png", //20
-    "22monstruo.png", //1
-    "23singingmass.png", //2
-    "24semiarchiboldo.png", //3 
-    "25man.png", //4
-    "26wicker.png", //5
-    "27nation.png", //6
-    "28cirmanr.png", //7
-    "29wildmannn.png", //8 
-    "30niemandoutis.png", //9
-    "31niemand.png", //30
-    "32hauser.png", //1
-    "33matervivac.png", //2
-    "34aspens.png", //3 
-    "35hormiguerac.png", //4
-    "36dragon.png", //5
-    "37fungi.png", //6
-    "38eelcatfish.png", //7
-    "39cordiseps.png", //8 
-    "40pepino.png", //9
-    "41microfosil.png", //40
-    "42endling.png", //1
-    "43higado.png", //2
-    "44fungi.png", //3 
-    "45spheram3.png", //4
-    "46cincod.png", //5
-    "47mandelbroot.png", //6
-    "48sunflower.png", //7
-    "49helicoid2.png", //8 
-    "50hyperbolicspace.png", //9
-    "51internet.png", //50
-    "52hiperbole.png", //1
-    "53doblez.png", //2
-    "54bezoar2.png", //3 
-    "55metatorion.png", //4
-    "56onfalo.png", //5
-    "57romawolf.png", //6
-    "58daemon.png", //7
-    "59familytree.png", //8 
-    "60nasos.png", //9
-    "61flygia.png", //60
-    "62pneuma.png", //1
-    "63hercules.png", //2
-    "64sade.png", //3  
-    "65monoespejo.png", //4
-    "66narciso.png", //5
-    "67vitruvio.png", //6
-    "68perpecteur.png", //7
-    "69hobbes-leviathan.png", //8 
-    "70against2.png", //9
-    "71flemishstate.png", //70
-    "72lsolo.png", //1
-    "73colossobn.png", //2
-    "74caballotroya.png", //3 
-    "75reyone.png", //4
-    "76stomach.png", //5
-    "77laocconok.png", //6
-    "78reymultok.png", //7
-    "79laocconup.png", //8 
-    "80laooconpriest.png", //9
-];
 
 
 
@@ -127,7 +45,7 @@ var texture = loader.load( cat);
 const image_textures = []
 const image_materials = []
 
-for (var i of images) {
+for (var i of DATA.images) {
     var t = '';
     var f = '';
     if (i==="") {
@@ -557,6 +475,12 @@ function animate() {
 
                     intersected = intersects[ 0 ].object;
                     intersected.material.color.set ( 0xffffff);
+
+                    var image_number = Number(intersected.name);
+
+                    document.getElementById("card_box").style.visibility = "visible";
+                    document.getElementById("card_title").innerHTML = DATA.cards[image_number].title;
+                    document.getElementById("card_content").innerHTML = DATA.cards[image_number].text;
                 }
 
             }
@@ -565,6 +489,8 @@ function animate() {
 
             if ( intersected ) intersected.material.color.set (0xcccccc);
 
+
+            document.getElementById("card_box").style.visibility = "hidden";
             intersected = null;
 
         }

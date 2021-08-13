@@ -113,3 +113,42 @@ div.ampersand_panel {
     visibility: hidden;
     
 }
+
+div.card_box {
+    position: fixed;
+    left: 65%;
+    top: 0;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+    /* border: 2px solid green; */
+    opacity: 0.9;
+    visibility:hidden;
+
+}
+
+div.card_box_title {
+
+    background-color: gray;
+    padding: 10px;
+    font-family: gotham;
+    font-weight: 800;
+    font-size: 24px;
+    color:  #dddddd;
+
+    /* border: 2px solid red; */
+}
+
+div.card_box_content {
+
+    background-color: gray;
+    padding: 10px;
+    font-family: gotham;
+    font-weight: 400;
+    font-size: 16px;
+    color:  #dddddd;
+   /* border: 2px solid red; */
+}
