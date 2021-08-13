@@ -14,7 +14,7 @@ class Rotation5D {
     }
 }
 
-let r5d = new Rotation5D(30);
+let r5d = new Rotation5D(5);
 // var rotate_timer;
 const rotate_info = { amount: 0, axis: ""};
 
@@ -109,11 +109,11 @@ function key_rotation(event) {
             lets_rotate();
             break;
         case '+':
-            r5d.scale += 0.2;
+            r5d.scale += 0.01;
             r5d.update_flag = true;
             break;
         case '-':
-            r5d.scale -= 0.2;
+            r5d.scale -= 0.01;
             r5d.update_flag = true;
             break;
 

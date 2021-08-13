@@ -17,32 +17,86 @@ NAVIGATION.create_navigation();
 
 
 const images = [
-    "reymultok.png",
-    "laocconok.png",
-    "insuperabilis.png",
-    "hobbes-leviathanok.png",
-    "hobbes-leviathanfloatingok.png",
-    "caballotroya copy.png",
-    "against2.png",
-    "aguila2ok.png",
-    "a_man.png",
-    "aurora_ophanim.png",
-    "cabezaok.png",
-    "Circle_of_Baccio_Baldini.png",
-    "gobernmentok.png",
-    "heavenok.png",
-    "hecate_animal.png",
-    "monstruo.png",
-    "niemandok.png",
-    "papa_nachtok.png",
-    "rey_globook.png",
-    "round.png",
-    "sade.png",
-    "trifonis_neu_voldor.png",
-    "Untitled_1.png",
-    "Untitled_2.png",
-    "vetruvio.png",
-    "wildbatonok.png",
+    "01shered.png", //00
+    "02ciculo.png", //1
+    "03cross.png", //2
+    "04tri.png", //3 
+    "05line.png", //4
+    "06dot.png", //5
+    "07giotto.png", //6
+    "08udridero.png", //7
+    "09hell.png", //8 
+    "10CircleofBaccioBaldini.png", //9
+    "11papanachtok.png", //10
+    "12coatlcue.png", //1
+    "13auroraophanim.png", //2
+    "14inner.png", //3 
+    "15gabriel.png", //4
+    "16trifonisneuvoldor.png", //5
+    "17almauno.png", //6
+    "18legion.png", //7
+    "19cielo.png", //8 
+    "20esfera.png", //9
+    "21masajco.png", //20
+    "22monstruo.png", //1
+    "23singingmass.png", //2
+    "24semiarchiboldo.png", //3 
+    "25man.png", //4
+    "26wicker.png", //5
+    "27nation.png", //6
+    "28cirmanr.png", //7
+    "29wildmannn.png", //8 
+    "30niemandoutis.png", //9
+    "31niemand.png", //30
+    "32hauser.png", //1
+    "33matervivac.png", //2
+    "34aspens.png", //3 
+    "35hormiguerac.png", //4
+    "36dragon.png", //5
+    "37fungi.png", //6
+    "38eelcatfish.png", //7
+    "39cordiseps.png", //8 
+    "40pepino.png", //9
+    "41microfosil.png", //40
+    "42endling.png", //1
+    "43higado.png", //2
+    "44fungi.png", //3 
+    "45spheram3.png", //4
+    "46cincod.png", //5
+    "47mandelbroot.png", //6
+    "48sunflower.png", //7
+    "49helicoid2.png", //8 
+    "50hyperbolicspace.png", //9
+    "51internet.png", //50
+    "52hiperbole.png", //1
+    "53doblez.png", //2
+    "54bezoar2.png", //3 
+    "55metatorion.png", //4
+    "56onfalo.png", //5
+    "57romawolf.png", //6
+    "58daemon.png", //7
+    "59familytree.png", //8 
+    "60nasos.png", //9
+    "61flygia.png", //60
+    "62pneuma.png", //1
+    "63hercules.png", //2
+    "64sade.png", //3  
+    "65monoespejo.png", //4
+    "66narciso.png", //5
+    "67vitruvio.png", //6
+    "68perpecteur.png", //7
+    "69hobbes-leviathan.png", //8 
+    "70against2.png", //9
+    "71flemishstate.png", //70
+    "72lsolo.png", //1
+    "73colossobn.png", //2
+    "74caballotroya.png", //3 
+    "75reyone.png", //4
+    "76stomach.png", //5
+    "77laocconok.png", //6
+    "78reymultok.png", //7
+    "79laocconup.png", //8 
+    "80laooconpriest.png", //9
 ];
 
 
@@ -54,6 +108,9 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
+window.addEventListener('resize', function () {
+    renderer.setSize( window.innerWidth, window.innerHeight );
+});
 
 
 //drawing a test cube
@@ -71,11 +128,20 @@ const image_textures = []
 const image_materials = []
 
 for (var i of images) {
-    const f = require('./textures/'+i);
-    const t = loader.load(f);
+    var t = '';
+    var f = '';
+    if (i==="") {
+        t = texture;
+    } else {
+        f = require('./textures/'+i);
+        t = loader.load(f);
+    }
+    t.name = i;
     image_textures.push(t);
     const m = new THREE.MeshBasicMaterial( { map: t, transparent: true, opacity: 1, side:THREE.DoubleSide } );
+    m.name = i;
     image_materials.push(m);
+    
 }
 
 const number_materials = [];
@@ -128,7 +194,9 @@ var images_index = 0;
 
 const positionNumComponents = 3;
 
-for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_index++) {
+// we go in reverse because the first faces are "hidden" in the penteract
+
+for (let face_index = PENTERACT.penteract_faces.length -1; face_index>=0; face_index--) {
 
     var temp_geometry = new THREE.PlaneGeometry(1,1);
 
@@ -175,17 +243,10 @@ for (let face_index=0; face_index < PENTERACT.penteract_faces.length ; face_inde
 
     //reverse order just to make the textures appear on top
     
-    if (images_index < image_materials.length) {
-        var temp_face =  new THREE.Mesh(temp_geometry, image_materials[images_index]);
-        projected_faces_meshes.push(temp_face);
-        scene.add(temp_face);
-        images_index++;
-    }  else {
-        var temp_face =  new THREE.Mesh(temp_geometry, cat_material);
-        projected_faces_meshes.push(temp_face);
-        scene.add(temp_face);
-    }
-
+    var temp_face =  new THREE.Mesh(temp_geometry, image_materials[images_index]);
+    projected_faces_meshes.push(temp_face);
+    scene.add(temp_face);
+    images_index++;
 
 }
 
@@ -456,12 +517,8 @@ function animate() {
         NAVIGATION.r5d.toggle_numbers = false;
         if (number_material_flag===true) {
             for (var i in projected_faces_meshes) {
-                if (i < image_materials.length) {
-                    projected_faces_meshes[i].material = image_materials[i];
-                }  else {
-                    projected_faces_meshes[i].material = cat_material;
-                }   
-                projected_faces_meshes[i].material.needsUpdate = true;       
+                projected_faces_meshes[i].material = image_materials[i];
+                projected_faces_meshes[i].material.needsUpdate = true;
             }
             number_material_flag = false;
         } else {
@@ -475,14 +532,18 @@ function animate() {
     }
     
 
-    
-
-
-
-
-  
 
     controls.update();
     renderer.render( scene, camera );
 }
+
+
+//initial position
+NAVIGATION.r5d.w = -180.0;
+NAVIGATION.r5d.x = -155.0;
+NAVIGATION.r5d.y = 60.0;
+NAVIGATION.r5d.z = 60.0;
+NAVIGATION.r5d.scale = 0.83;
+update_geometries();
+
 animate();
