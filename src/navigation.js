@@ -277,19 +277,12 @@ function create_navigation () {
 }
 
 //lines
-function draw_line() {
+function draw_line(ctx, from_x, from_y, to_x, to_y, line_color) {
     
 
-    if (!canvas.getContext) {
-        return;
-    }
-    const ctx = canvas.getContext('2d');
-    ctx.width  = window.screen.width;
-    ctx.height = window.screen.height;
-
     // set line stroke and line width
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 5;
+    ctx.strokeStyle = line_color;
+    ctx.lineWidth = 2;
     
 
     // draw a red line
@@ -300,6 +293,6 @@ function draw_line() {
 
 }
 
- draw_line();
+//  draw_line();
 
-export {create_navigation, r5d, interface_flags, pointer}  
+export {create_navigation, r5d, interface_flags, pointer, draw_line}  
