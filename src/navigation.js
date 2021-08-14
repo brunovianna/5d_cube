@@ -294,5 +294,11 @@ function draw_line(ctx, from_x, from_y, to_x, to_y, line_color) {
 }
 
 //  draw_line();
-
-export {create_navigation, r5d, interface_flags, pointer, draw_line}  
+function get_element_center (element_id) {
+        var e = document.getElementById(element_id);
+        let box = e.getBoundingClientRect();
+    
+        return [((box.left + box.right)/2), ((box.top + box.bottom)/2)];
+    }
+    
+export {create_navigation, r5d, interface_flags, pointer, draw_line, get_element_center}  

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+//import { OrbitControls } from './OrbitControls.js';
 
 import * as PENTERACT from './penteract.js';
 
@@ -17,14 +18,18 @@ const my_penteract = new PENTERACT.Penteract(scaler);
 
 NAVIGATION.create_navigation();
 
-const canvas_div = document.getElementById('canvas_div');
-const canvas = document.getElementById('canvas');
+// const canvas_div = document.getElementById('canvas_div');
+// const canvas = document.getElementById('canvas');
 
-canvas_div.style.position = "absolute";
-canvas_div.style.width  = window.innerWidth;
-canvas_div.style.height = window.innerHeight ;
+// canvas_div.style.position = "fixed";
+// canvas_div.style.width  = window.innerWidth;
+// canvas_div.style.height = window.innerHeight ;
+// // canvas_div.style.pointerEvents = "none";
+
+// canvas.position = "fixed";
 // canvas.width  = window.innerWidth;
-// canvas.height = window.innerHeight ;
+// canvas.height = window.innerHeight;
+// // canvas.style.pointerEvents = "none";
 
 
 const scene = new THREE.Scene();
@@ -33,7 +38,7 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer();
 
 const renderer_div = document.getElementById('renderer_div');
-renderer_div.style.position = "absolute";
+renderer_div.style.position = "fixed";
 renderer_div.style.width  = window.innerWidth;
 renderer_div.style.height = window.innerHeight ;
 
@@ -43,13 +48,18 @@ renderer_div.appendChild( renderer.domElement );
 //document.body.appendChild( renderer.domElement );
 
 window.addEventListener('resize', function () {
-    canvas.style.width = window.innerWidth;
-    canvas.style.height = window.innerHeight;
+    // canvas.width  = window.innerWidth;
+    // canvas.height = window.innerHeight ;
     renderer.setSize( window.innerWidth, window.innerHeight );
 });
 
+// const [fromx, fromy] = NAVIGATION.get_element_center('question_mark');
+// const [tox, toy] = NAVIGATION.get_element_center('instructions_box');
 
-NAVIGATION.draw_line( canvas.getContext('2d'), 10,10,200,200,'yellow');
+
+// NAVIGATION.draw_line( canvas.getContext('2d'), fromx,fromy,tox,toy,'yellow');
+// //NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,286,338,'yellow');
+// NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,150,100,'yellow');
 
 
 // function onResize(element, callback) {
