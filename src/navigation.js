@@ -276,29 +276,29 @@ function create_navigation () {
 
 }
 
-//lines
-function draw_line(ctx, from_x, from_y, to_x, to_y, line_color) {
+// //lines
+// function draw_line(ctx, from_x, from_y, to_x, to_y, line_color) {
     
 
-    // set line stroke and line width
-    ctx.strokeStyle = line_color;
-    ctx.lineWidth = 2;
+//     // set line stroke and line width
+//     ctx.strokeStyle = line_color;
+//     ctx.lineWidth = 2;
     
 
-    // draw a red line
-    ctx.beginPath();
-    ctx.moveTo(from_x, from_y);
-    ctx.lineTo(to_x, to_y);
-    ctx.stroke();
+//     // draw a red line
+//     ctx.beginPath();
+//     ctx.moveTo(from_x, from_y);
+//     ctx.lineTo(to_x, to_y);
+//     ctx.stroke();
 
-}
+// }
 
-//  draw_line();
-function get_element_center (element_id) {
-        var e = document.getElementById(element_id);
-        let box = e.getBoundingClientRect();
+// //  draw_line();
+// function get_element_center (element_id) {
+//         var e = document.getElementById(element_id);
+//         let box = e.getBoundingClientRect();
     
-        return [((box.left + box.right)/2), ((box.top + box.bottom)/2)];
-    }
+//         return [((box.left + box.right)/2), ((box.top + box.bottom)/2)];
+//     }
     
 export {create_navigation, r5d, interface_flags, pointer, draw_line, get_element_center}  

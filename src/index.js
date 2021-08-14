@@ -18,18 +18,18 @@ const my_penteract = new PENTERACT.Penteract(scaler);
 
 NAVIGATION.create_navigation();
 
-const canvas_div = document.getElementById('canvas_div');
-const canvas = document.getElementById('canvas');
+// const canvas_div = document.getElementById('canvas_div');
+// const canvas = document.getElementById('canvas');
 
-canvas_div.style.position = "fixed";
-canvas_div.style.width  = window.innerWidth;
-canvas_div.style.height = window.innerHeight ;
+// canvas_div.style.position = "fixed";
+// canvas_div.style.width  = window.innerWidth;
+// canvas_div.style.height = window.innerHeight ;
 // canvas_div.style.pointerEvents = "none";
 
-canvas.position = "fixed";
-canvas.width  = window.innerWidth;
-canvas.height = window.innerHeight;
-// canvas.style.pointerEvents = "none";
+// canvas.position = "fixed";
+// canvas.width  = window.innerWidth;
+// canvas.height = window.innerHeight;
+// canvas.pointerEvents = "none";
 
 
 const scene = new THREE.Scene();
@@ -48,40 +48,21 @@ renderer_div.appendChild( renderer.domElement );
 //document.body.appendChild( renderer.domElement );
 
 window.addEventListener('resize', function () {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight ;
+    // canvas.width  = window.innerWidth; 
+    // canvas.height = window.innerHeight ;
     renderer.setSize( window.innerWidth, window.innerHeight );
 }); 
 
-const [fromx, fromy] = NAVIGATION.get_element_center('question_mark');
-const [tox, toy] = NAVIGATION.get_element_center('instructions_box');
+// const [fromx, fromy] = NAVIGATION.get_element_center('question_mark');
+// const [tox, toy] = NAVIGATION.get_element_center('instructions_box');
 
 
-NAVIGATION.draw_line( canvas.getContext('2d'), fromx,fromy,tox,toy,'yellow');
-//NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,286,338,'yellow');
-NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,150,100,'yellow');
+// NAVIGATION.draw_line( canvas.getContext('2d'), fromx,fromy,tox,toy,'yellow');
+// NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,286,338,'yellow');
+// NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,150,100,'yellow');
 
 
-// function onResize(element, callback) {
-//     var height = element.clientHeight;
-//     var width  = element.clientWidth;
-    
-//     return setInterval(function() {
-//         if (element.clientHeight != height || element.clientWidth != width) {
-//           height = element.clientHeight;
-//           width  = element.clientWidth;
-//           callback();
-//         }
-//     }, 500);
-//   }
 
-
-//drawing a test cube
-
-// const geometry = new THREE.BoxGeometry();
-// const material = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
-// const cube = new THREE.Mesh( geometry, material );
-//scene.add( cube );
 
 var loader = new THREE.TextureLoader();
 const cat = require('./textures/cat.png') ;
