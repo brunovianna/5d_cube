@@ -154,6 +154,38 @@ function global_movemouse (event) {
     pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
 
+
+function update_color_schema () {
+    var index = Number((this.id.slice(6)));
+    (index % 2 === 0 ? index /=2  : index=(index+1)/2 );
+    var new_src = require('./assets/'+index+'.png') ;
+    if (color_schema_panel.style.visibility === "visible") {
+        if (new_src !== color_schema_img.src) {
+            color_schema_img.src = new_src;
+        } else {
+            toggle_visibility(color_schema_panel);
+        }
+    } else {
+        color_schema_img.src = new_src;
+        toggle_visibility(color_schema_panel);
+    }
+}
+
+function update_connector_schema () {
+    var index = (this.id.slice(10));
+    var new_src = require('./assets/'+index+'.png') ;
+    if (connector_schema_panel.style.visibility === "visible") {
+        if (new_src !== connector_schema_img.src) {
+            connector_schema_img.src = new_src;
+        } else {
+            toggle_visibility(connector_schema_panel);
+        }
+    } else {
+        connector_schema_img.src = new_src;
+        toggle_visibility(connector_schema_panel);
+    }
+}
+
 function create_navigation () {
 
     window.addEventListener("keydown", key_rotation);
@@ -221,21 +253,12 @@ function create_navigation () {
 
 
 
-    // footer left panel
-    let penteract_panel =  document.getElementById("penteract_panel");
-
-
-    let question_mark = document.getElementById('question_mark');
-    let instructions_box = document.getElementById('instructions_box');
-    let instructions_content = document.getElementById('instructions_box_content');
     question_mark.onclick = function () {
         toggle_visibility(instructions_box);
-        instructions_content.innerHTML = DATA.complete_instructions_html;
+        instructions_box_content.innerHTML = DATA.complete_instructions_html;
     };
     instructions_box.onclick = function( ) {instructions_box.style.visibility="hidden"; };
 
-    let equal_sign = document.getElementById('equal_sign');
-    let equal_panel = document.getElementById('equal_panel');
     equal_panel.style.visibility="hidden";  
     equal_sign.onclick = function () {
         equal_panel_img.src = require('./assets/equal_chart.png') ;
@@ -243,8 +266,6 @@ function create_navigation () {
     };
     equal_panel.onclick = function( ) {equal_panel.style.visibility="hidden"; };
 
-    let plus_sign = document.getElementById('plus_sign');
-    let plus_panel = document.getElementById('plus_panel');
     plus_panel.style.visibility="hidden";  
     plus_sign.onclick = function () {
         plus_panel_img.src = require('./assets/sense_scale.png') ;
@@ -252,8 +273,6 @@ function create_navigation () {
     };
     plus_panel.onclick = function( ) {plus_panel.style.visibility="hidden"; };
 
-    let minus_sign = document.getElementById('minus_sign');
-    let minus_panel = document.getElementById('minus_panel');
     minus_panel.style.visibility="hidden";  
     minus_sign.onclick = function () {
         minus_panel_img.src = require('./assets/scale.png') ;
@@ -262,8 +281,6 @@ function create_navigation () {
     };
     minus_panel.onclick = function( ) {minus_panel.style.visibility="hidden"; };
 
-    let ampersand = document.getElementById('ampersand');
-    let ampersand_panel = document.getElementById('ampersand_panel');
     ampersand_panel.style.visibility="hidden";
     ampersand.onclick = function () {
         ampersand_panel_img.src = require('./assets/klein_bottle.png') ;
@@ -271,19 +288,23 @@ function create_navigation () {
     };
     ampersand_panel.onclick = function( ) {ampersand_panel.style.visibility="hidden"; };
 
-    let quotes = document.getElementById('quotes');
-    quotes.onclick = function () {penteract_panel.style.visibility="visible";  };
+    // quotes.onclick = function () {penteract_panel.style.visibility="visible";  };
 
-    let color_schema = [];
-    for (var index =1;index<14;index++) {
-        color_schema.push(document.getElementById("color_"+index))
+
+    for (var index =1;index<15;index++) {
+        document.getElementById("color_"+index).onclick = update_color_schema;
+        
     }
 
-    let connector_schema = {
-        c: document.getElementById("connector_c"),
-        t: document.getElementById("connector_t"),
-        w: document.getElementById("connector_w"),
-    }
+    color_schema_panel.onclick = function( ) {color_schema_panel.style.visibility="hidden"; };
+    color_schema_panel.style.visibility = "hidden";
+
+    connector_c.onclick = update_connector_schema; 
+    connector_t.onclick = update_connector_schema; 
+    connector_w.onclick = update_connector_schema; 
+
+    connector_schema_panel.onclick = function( ) {connector_schema_panel.style.visibility="hidden"; };
+    connector_schema_panel.style.visibility = "hidden";
 
 
 }

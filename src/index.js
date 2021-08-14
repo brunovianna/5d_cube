@@ -227,6 +227,7 @@ for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index+
 
 
 camera.position.z = 100;
+camera.position.x = -100;
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.update();
@@ -547,11 +548,12 @@ function animate() {
 
 
 //initial position
+NAVIGATION.r5d.v = -0.0;
 NAVIGATION.r5d.w = -180.0;
-NAVIGATION.r5d.x = -155.0;
-NAVIGATION.r5d.y = 60.0;
-NAVIGATION.r5d.z = 60.0;
-NAVIGATION.r5d.scale = 0.83;
+NAVIGATION.r5d.x = -5.0;
+NAVIGATION.r5d.y = -305.0;
+NAVIGATION.r5d.z = 65.0;
+NAVIGATION.r5d.scale = 0.88;
 update_geometries();
 
 animate();

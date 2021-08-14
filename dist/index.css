@@ -156,6 +156,9 @@ div.card_box_content {
     font-weight: 400;
     font-size: 16px;
     color:  #dddddd;
+    overflow-y: auto;
+    overflow-x: hidden; 
+
    /* border: 2px solid red; */
 }
 
@@ -214,20 +217,32 @@ div.color_panel {
     gap: 5px;
 }
 
-div.color_1 { background-color:#fe0303;}
-div.color_2 { background-color: #fd5c03;}
-div.color_3 { background-color:#f3f601;}
-div.color_4 { background-color: #ac955c;}
-div.color_5 { background-color: #5a8f95;}
-div.color_6 { background-color:#7f8949 ;}
-div.color_7 { background-color: #233e94;}
-div.color_8 { background-color: #0f9008;}
-div.color_9 { background-color: #705e1f;}
-div.color_10 { background-color: #645e6e ;}
-div.color_11 { background-color: #7746da;}
-div.color_12 { background-color: #969696;}
-div.color_13 { background-color: #e57fb9; }
-div.color_14 { background-color: whitesmoke; }
+div.color_1 { background-color :#fe0303; grid-row: 1; grid-column: 1;}
+div.color_2 { background-color: #fd5c03;grid-row: 2; grid-column: 1;}
+div.color_3 { background-color:#233e94;grid-row: 1; grid-column: 2;}
+div.color_4 { background-color:#0f9008 ;grid-row: 2; grid-column: 2;}
+div.color_5 { background-color:#f3f601; grid-row: 1; grid-column: 3;}
+div.color_6 { background-color:#ac955c;grid-row: 2; grid-column: 3;}
+div.color_7 { background-color: #5a8f95;grid-row: 1; grid-column: 4;}
+div.color_8 { background-color: #7f8949;grid-row: 2; grid-column: 4;}
+div.color_9 { background-color: #705e1f;grid-row: 1; grid-column: 5;}
+div.color_10 { background-color:#645e6e;grid-row: 2; grid-column: 5;}
+div.color_11 { background-color: #7746da;grid-row: 1; grid-column: 6;}
+div.color_12 { background-color: #969696 ; grid-row: 2; grid-column: 6;}
+div.color_13 { background-color: #e57fb9;grid-row: 1; grid-column: 7;}
+div.color_14 { background-color: whitesmoke; grid-row: 2; grid-column: 7;}
+
+div.color_schema_panel {
+    top: 100px;
+    left: 50px;
+
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+}
+
 
 div.connector_panel {
     position: fixed;
@@ -245,6 +260,17 @@ div.connector_panel {
     font-size: 20px;
 }
 
+
+div.connector_schema_panel {
+    bottom: 150px;
+    left: 50px;
+
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+}
 
 
 /* canvas { 
