@@ -343,5 +343,46 @@ for (var card of card_titles_texts) {
     cards.push(c);
 }
 
-export {cards, images}
+const complete_instructions_html = "Use the mouse to manipulate the 3D projection of the cube.\
+</br>\
+</br>\
+    Use keys 1,2,3,4,5 and q, w, e, r, t, y to rotate the cube in each of its five dimensions.\
+    You can use more than one key at the same time.\
+</br>\
+</br>			\
+    Key 9   shows cube without images.\
+</br></br>\
+    Key 0  presents the numeric sequence of images displayed in all 80 squares.\
+</br></br>\
+? Symbol on screen : Access a general intro and instructions.</br>\
+= Symbol on screen : What is a dynamogram?</br>\
++ Symbol on screen : The Iconological machine.</br>\
+* Symbol on screen : Chart of dimensional projection mechanics.</br>\
+& Symbol on screen : The tensions lines on unit-multiplicity.</br>\
+“  Symbol on screen : Series ok key concepts to the dynamogram.\
+</br></br>\
+\
+There are 7 different proposed tension lines.\
+</br></br>\
+\
+Orange 1 on screen :  Political - state tension.  from Laocoon to Leviathan. (Red - Orange images)</br>\
+Orange 2 on screen:  Ideology-identity tension. From the self to the collective. (Yellow - Sand color image)</br>\
+Orange 3 on screen:  System - Particle tension. From the unit to multiplicity. (Blue pale - Light green color images)</br>\
+Orange 4 on screen:  Specie - organism tension. From organism to Genus. (Dark Blue - Green image)</br>\
+Orange 5 on screen:  Generic - Anomaly tension. From the individual to the mass. (Ochre - Grey images)</br>\
+Orange 6 on screen:  God - Hell tension. From heaven to pandemonium. (Purple - White images)</br>\
+Orange 7 on screen:  Morphological key images.  (Pink images)</br>\
+Orange 8 on screen:  Configuration fundamental vectors line.</br>\
+</br></br>\
+\
+\
+\
+There are 3 proposed reading paths of images (red stripe) from different lines of tension in specific chains of meaning or iconological migrations of forms.\
+</br></br>\
+\
+Red A on screen : Cohesion : decentred / centred</br>\
+Red B on screen : Will : diffused / concentrated</br>\
+Red C on screen : Time :  expanded / contracted";
+
+export {cards, images, complete_instructions_html}
 

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as DATA from './data.js'
 
 class Rotation5D {
     constructor (s) {
@@ -226,9 +227,10 @@ function create_navigation () {
 
     let question_mark = document.getElementById('question_mark');
     let instructions_box = document.getElementById('instructions_box');
+    let instructions_content = document.getElementById('instructions_box_content');
     question_mark.onclick = function () {
         toggle_visibility(instructions_box);
-        
+        instructions_content.innerHTML = DATA.complete_instructions_html;
     };
     instructions_box.onclick = function( ) {instructions_box.style.visibility="hidden"; };
 
@@ -272,6 +274,16 @@ function create_navigation () {
     let quotes = document.getElementById('quotes');
     quotes.onclick = function () {penteract_panel.style.visibility="visible";  };
 
+    let color_schema = [];
+    for (var index =1;index<14;index++) {
+        color_schema.push(document.getElementById("color_"+index))
+    }
+
+    let connector_schema = {
+        c: document.getElementById("connector_c"),
+        t: document.getElementById("connector_t"),
+        w: document.getElementById("connector_w"),
+    }
 
 
 }
@@ -301,4 +313,5 @@ function create_navigation () {
 //         return [((box.left + box.right)/2), ((box.top + box.bottom)/2)];
 //     }
     
-export {create_navigation, r5d, interface_flags, pointer, draw_line, get_element_center}  
+// export {create_navigation, r5d, interface_flags, pointer, draw_line, get_element_center}  
+export {create_navigation, r5d, interface_flags, pointer}  

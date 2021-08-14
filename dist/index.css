@@ -32,8 +32,8 @@ html, body {
  }
 
 div.rotate_5d {
-    top: 20px;
-    left: 20px;
+    top: 15px;
+    left: 15px;
     width: 120px;
     height: 300px;
     position: absolute;
@@ -195,9 +195,60 @@ div.instructions_box_content {
     font-family: gotham;
     font-weight: 400;
     font-size: 16px;
-    height: 400px;
+    height: 225px;
     overflow-y: auto;
     overflow-x: hidden; 
     color:  #222222;
    /* border: 2px solid red; */
 }
+
+div.color_panel {
+    position: fixed;
+    right: 25px;
+    top: 25px;
+    width: 140px;
+    height: 40px;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    gap: 5px;
+}
+
+div.color_1 { background-color:#fe0303;}
+div.color_2 { background-color: #fd5c03;}
+div.color_3 { background-color:#f3f601;}
+div.color_4 { background-color: #ac955c;}
+div.color_5 { background-color: #5a8f95;}
+div.color_6 { background-color:#7f8949 ;}
+div.color_7 { background-color: #233e94;}
+div.color_8 { background-color: #0f9008;}
+div.color_9 { background-color: #705e1f;}
+div.color_10 { background-color: #645e6e ;}
+div.color_11 { background-color: #7746da;}
+div.color_12 { background-color: #969696;}
+div.color_13 { background-color: #e57fb9; }
+div.color_14 { background-color: whitesmoke; }
+
+div.connector_panel {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 50px;
+    height: 40px;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto auto auto;
+    gap: 5px;
+    color: gray;
+    font-family: gotham;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
+/* canvas { 
+    border: 1px solid whitesmoke; 
+    position: fixed;
+}
+     */
