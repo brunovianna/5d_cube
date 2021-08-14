@@ -242,31 +242,13 @@ const face_b = 79;
 
 const num_segments = 10;
 
-const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
-my_penteract.add_connector(face_a,face_b,num_segments,0.02) ;
-my_penteract.add_connector(0,10,num_segments,0.02) ;
+// const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
+my_penteract.add_connector_2_faces(face_a,face_b,num_segments,0.02, 0.2) ;
+my_penteract.add_connector_2_faces(0,10,num_segments,0.02,0.4) ;
 
-var connectors = []
-
-
-// for (var c of my_penteract.get_projected_connectors()) {
-//     const g = new THREE.BufferGeometry().setFromPoints( c);
-//     const connector = new THREE.Line( g, purple_line_material );
-//     connectors.push(connector);
-//     scene.add(connector);
-
-// }
+my_penteract.add_connector_multi([0,75,22,40],3,0.2);
 
 var cylinders = [];
-const cylinder_materials = [];
-
-for (var n =0;n<num_segments;n++) {
-    const cylinder_material = new THREE.MeshBasicMaterial({color: 0x009900});
-    cylinder_material.color.r = 0.1 + 0.08 * n;
-    cylinder_material.color.b = 0.6 - 0.08 * n;
-    cylinder_materials.push(cylinder_material);
-
-}
 
 
 var p_connectors = my_penteract.get_projected_connectors();
@@ -276,8 +258,10 @@ var cylinder_mesh;
 var point_a = new THREE.Vector3(0,0,0);
 var point_b = new THREE.Vector3(0,0,0);
 
+
+var connector_index = 0;
 for (var c of p_connectors) {
-    for (var point_index in c){
+    for (var point_index in c) {
         if (point_index < (c.length - 1))  { //last point doesn't get drawn, it is just a reference to point the last before
            
             point_a.set(c[point_index][0],c[point_index][1],c[point_index][2]);
@@ -287,7 +271,7 @@ for (var c of p_connectors) {
 
             const g = new THREE.CylinderGeometry( 1, 1, cylinder_height, 6 );
 
-            cylinder_mesh = new THREE.Mesh( g, cylinder_materials[point_index] );
+            cylinder_mesh = new THREE.Mesh( g, my_penteract.connector_materials[connector_index][point_index] );
             const cylinder = new THREE.Group();
             cylinder.add(cylinder_mesh); //just so we can deal with the mesh as an object
             cylinder.position.set (point_a.x,point_a.y,point_a.z);
@@ -308,9 +292,11 @@ for (var c of p_connectors) {
             //cylinder.setRotationFromAxisAngle(new THREE.Vector3(1,0,0), Math.PI/2);
             cylinders.push(cylinder);
             scene.add(cylinder);
-
+            
         }
+            
     }
+    connector_index++;
 }
 
 

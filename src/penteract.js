@@ -314,6 +314,7 @@ class Penteract  {
         this.scaler = sc; //depends on the window frame, for projections
         this.scale = 1; // penteract geometry scale
         this.connectors = [];
+        this.connector_materials = [];
         this.rotated_connectors = [];
         this.projected_line_points = [
          new THREE.Vector3( 0, 0, 0 ) ,
@@ -448,7 +449,76 @@ class Penteract  {
 
     }
     
-    add_connector (face_a, face_b, num_points, jaggedness) {
+    add_connector_multi (faces, num_points, jaggedness) {
+        let face_middles = [];
+
+        var face_index = 0;
+        let face_middle = [];
+        for (var f of faces) {
+            var middle_point = []
+            middle_point[0] = (penteract_vertices[penteract_faces[f][0]][0] + penteract_vertices[penteract_faces[f][2]][0])/2;
+            middle_point[1] = (penteract_vertices[penteract_faces[f][0]][1] + penteract_vertices[penteract_faces[f][2]][1])/2;
+            middle_point[2] = (penteract_vertices[penteract_faces[f][0]][2] + penteract_vertices[penteract_faces[f][2]][2])/2;
+            middle_point[3] = (penteract_vertices[penteract_faces[f][0]][3] + penteract_vertices[penteract_faces[f][2]][3])/2;
+            middle_point[4] = (penteract_vertices[penteract_faces[f][0]][4] + penteract_vertices[penteract_faces[f][2]][4])/2;
+            face_middles.push(middle_point);
+        }
+
+        var connector_points = [];
+        var steps = [];
+
+
+
+        for (var f=0 ; f<face_middles-1 ; f++) {//must stop before
+            //first and last point have no jaggedness
+            var point = [
+                face_middles[f][0],
+                face_middles[f][1],
+                face_middles[f][2],
+                face_middles[f][3],
+                face_middles[f][4],
+            ]
+
+            connector_points.push(point);
+            
+            steps[0] = (face_middles[f+1][0]-face_middles[f][0])/(num_points-1);
+            steps[1] = (face_middles[f+1][0]-face_middles[f][0])/(num_points-1);
+            steps[2] = (face_middles[f+1][0]-face_middles[f][0])/(num_points-1);
+            steps[3] = (face_middles[f+1][0]-face_middles[f][0])/(num_points-1);
+            steps[4] = (face_middles[f+1][0]-face_middles[f][0])/(num_points-1);
+
+            for (var index=1;index<num_points-1;index++) { 
+                point = [
+                    face_middles[f][0]+steps[0]*index+jaggedness*this.scaler*Math.random(),
+                    face_middles[f][1]+steps[1]*index+jaggedness*this.scaler*Math.random(),
+                    face_middles[f][2]+steps[2]*index+jaggedness*this.scaler*Math.random(),
+                    face_middles[f][3]+steps[3]*index+jaggedness*this.scaler*Math.random(),
+                    face_middles[f][4]+steps[4]*index+jaggedness*this.scaler*Math.random()
+                ]
+    
+                connector_points.push(point);    
+            }
+
+            point = [
+                face_middles[f+1][0],
+                face_middles[f+1][1],
+                face_middles[f+1][2],
+                face_middles[f+1][3],
+                face_middles[f+1][4],
+            ]
+
+            connector_points.push(point);    
+            
+        }
+
+        this.connectors.push (connector_points);
+        this.rotated_connectors.push(connector_points.slice());
+
+
+    }
+
+
+    add_connector_2_faces (face_a, face_b, num_points, jaggedness, h) {
 
         /// jaggedness 0 (not jagged) to 1 (a lot)
 
@@ -457,6 +527,7 @@ class Penteract  {
 
         var connector_points = [];
         var steps = [];
+        var one_connector_materials = [];
 
         middle_face_a[0] = (penteract_vertices[penteract_faces[face_a][0]][0] + penteract_vertices[penteract_faces[face_a][2]][0])/2;
         middle_face_a[1] = (penteract_vertices[penteract_faces[face_a][0]][1] + penteract_vertices[penteract_faces[face_a][2]][1])/2;
@@ -476,7 +547,7 @@ class Penteract  {
         steps[3] = (middle_face_b[3]-middle_face_a[3])/(num_points-1);
         steps[4] = (middle_face_b[4]-middle_face_a[4])/(num_points-1);
 
-        //first and las point have no jaggedness
+        //first and last point have no jaggedness
         var point = [
             middle_face_a[0],
             middle_face_a[1],
@@ -487,6 +558,17 @@ class Penteract  {
 
         connector_points.push(point);
 
+        var cylinder_material = new THREE.MeshBasicMaterial();
+        var initial_color = new THREE.Color();
+        
+        initial_color.setHSL(h,0.2,0.5);
+        cylinder_material.color = initial_color;
+        one_connector_materials.push(cylinder_material);
+
+        var final_color = new THREE.Color();
+        final_color.setHSL(h,1,0.5);
+
+        var step = 1/num_points;
         for (var index=1;index<num_points-1;index++) { 
             point = [
                 middle_face_a[0]+steps[0]*index+jaggedness*this.scaler*Math.random(),
@@ -498,6 +580,10 @@ class Penteract  {
 
             connector_points.push(point);
 
+            var cylinder_material = new THREE.MeshBasicMaterial();
+            cylinder_material.color = initial_color.lerp(final_color,step*index);
+            one_connector_materials.push(cylinder_material);
+    
         }
         
         point = [
@@ -511,6 +597,7 @@ class Penteract  {
         connector_points.push(point);
 
         this.connectors.push (connector_points);
+        this.connector_materials.push(one_connector_materials);
         this.rotated_connectors.push(connector_points.slice());
 
     }
