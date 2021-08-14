@@ -23,8 +23,8 @@ const canvas = document.getElementById('canvas');
 canvas_div.style.position = "absolute";
 canvas_div.style.width  = window.innerWidth;
 canvas_div.style.height = window.innerHeight ;
-canvas.width  = window.innerWidth;
-canvas.height = window.innerHeight ;
+// canvas.width  = window.innerWidth;
+// canvas.height = window.innerHeight ;
 
 
 const scene = new THREE.Scene();
@@ -43,9 +43,14 @@ renderer_div.appendChild( renderer.domElement );
 //document.body.appendChild( renderer.domElement );
 
 window.addEventListener('resize', function () {
-    canvas.setSize( window.innerWidth, window.innerHeight );
-  //  renderer.setSize( window.innerWidth, window.innerHeight );
+    canvas.style.width = window.innerWidth;
+    canvas.style.height = window.innerHeight;
+    renderer.setSize( window.innerWidth, window.innerHeight );
 });
+
+
+NAVIGATION.draw_line( canvas.getContext('2d'), 10,10,200,200,'yellow');
+
 
 // function onResize(element, callback) {
 //     var height = element.clientHeight;
