@@ -287,8 +287,8 @@ function draw_line(ctx, from_x, from_y, to_x, to_y, line_color) {
 
     // draw a red line
     ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(300, 100);
+    ctx.moveTo(from_x, from_y);
+    ctx.lineTo(to_x, to_y);
     ctx.stroke();
 
 }

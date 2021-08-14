@@ -18,18 +18,18 @@ const my_penteract = new PENTERACT.Penteract(scaler);
 
 NAVIGATION.create_navigation();
 
-// const canvas_div = document.getElementById('canvas_div');
-// const canvas = document.getElementById('canvas');
+const canvas_div = document.getElementById('canvas_div');
+const canvas = document.getElementById('canvas');
 
-// canvas_div.style.position = "fixed";
-// canvas_div.style.width  = window.innerWidth;
-// canvas_div.style.height = window.innerHeight ;
-// // canvas_div.style.pointerEvents = "none";
+canvas_div.style.position = "fixed";
+canvas_div.style.width  = window.innerWidth;
+canvas_div.style.height = window.innerHeight ;
+// canvas_div.style.pointerEvents = "none";
 
-// canvas.position = "fixed";
-// canvas.width  = window.innerWidth;
-// canvas.height = window.innerHeight;
-// // canvas.style.pointerEvents = "none";
+canvas.position = "fixed";
+canvas.width  = window.innerWidth;
+canvas.height = window.innerHeight;
+// canvas.style.pointerEvents = "none";
 
 
 const scene = new THREE.Scene();
@@ -48,18 +48,18 @@ renderer_div.appendChild( renderer.domElement );
 //document.body.appendChild( renderer.domElement );
 
 window.addEventListener('resize', function () {
-    // canvas.width  = window.innerWidth;
-    // canvas.height = window.innerHeight ;
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight ;
     renderer.setSize( window.innerWidth, window.innerHeight );
-});
+}); 
 
-// const [fromx, fromy] = NAVIGATION.get_element_center('question_mark');
-// const [tox, toy] = NAVIGATION.get_element_center('instructions_box');
+const [fromx, fromy] = NAVIGATION.get_element_center('question_mark');
+const [tox, toy] = NAVIGATION.get_element_center('instructions_box');
 
 
-// NAVIGATION.draw_line( canvas.getContext('2d'), fromx,fromy,tox,toy,'yellow');
-// //NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,286,338,'yellow');
-// NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,150,100,'yellow');
+NAVIGATION.draw_line( canvas.getContext('2d'), fromx,fromy,tox,toy,'yellow');
+//NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,286,338,'yellow');
+NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,150,100,'yellow');
 
 
 // function onResize(element, callback) {
