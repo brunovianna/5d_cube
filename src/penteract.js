@@ -518,7 +518,7 @@ class Penteract  {
     }
 
 
-    add_connector_2_faces (face_a, face_b, num_points, jaggedness, h) {
+    add_connector_2_faces (face_a, face_b, num_points, jaggedness, connector_hue) {
 
         /// jaggedness 0 (not jagged) to 1 (a lot)
 
@@ -561,12 +561,12 @@ class Penteract  {
         var cylinder_material = new THREE.MeshBasicMaterial();
         var initial_color = new THREE.Color();
         
-        initial_color.setHSL(h,0.2,0.5);
+        initial_color.setHSL(connector_hue,0.0,0.5);
         cylinder_material.color = initial_color;
         one_connector_materials.push(cylinder_material);
 
         var final_color = new THREE.Color();
-        final_color.setHSL(h,1,0.5);
+        final_color.setHSL(connector_hue,1,0.5);
 
         var step = 1/num_points;
         for (var index=1;index<num_points-1;index++) { 
@@ -581,7 +581,7 @@ class Penteract  {
             connector_points.push(point);
 
             var cylinder_material = new THREE.MeshBasicMaterial();
-            cylinder_material.color = initial_color.lerp(final_color,step*index);
+            cylinder_material.color = initial_color.lerp(final_color,step*index).clone();
             one_connector_materials.push(cylinder_material);
     
         }

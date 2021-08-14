@@ -236,17 +236,43 @@ let raycaster = new THREE.Raycaster();
 let last_pointer = new THREE.Vector2();
 let intersected;
 
-//temporary line between faces test
-const face_a = 10;
-const face_b = 79;
 
-const num_segments = 10;
+const num_segments = 30;
+const jaggedness = 0.008;
 
 // const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
-my_penteract.add_connector_2_faces(face_a,face_b,num_segments,0.02, 0.2) ;
-my_penteract.add_connector_2_faces(0,10,num_segments,0.02,0.4) ;
+// my_penteract.add_connector_2_faces(face_a,face_b,num_segments,0.02, 0.2) ;
+// my_penteract.add_connector_2_faces(0,10,num_segments,0.02,0.4) ;
 
-my_penteract.add_connector_multi([0,75,22,40],3,0.2);
+// my_penteract.add_connector_multi([0,75,22,40],3,0.2);
+
+//c cohesion
+my_penteract.add_connector_2_faces (8,68,num_segments,jaggedness,0.3); //hell to leviathan
+my_penteract.add_connector_2_faces (68,49,num_segments,jaggedness,0.3); // leviathan to horizonplan/hyperbolic space
+my_penteract.add_connector_2_faces (49,36,num_segments,jaggedness,0.3); // horizonplan/hyperbolic space to fungi
+my_penteract.add_connector_2_faces (36,30,num_segments,jaggedness,0.3); // fungi to niemand
+my_penteract.add_connector_2_faces (30,6,num_segments,jaggedness,0.3); // niemand to miseenalarm/giotto
+my_penteract.add_connector_2_faces (6,1,num_segments,jaggedness,0.3); // miseenalarm/giotto to sphere/loop
+my_penteract.add_connector_2_faces (1,65,num_segments,jaggedness,0.3); // sphere/loop to narcisse
+
+//t time
+my_penteract.add_connector_2_faces (44,13,num_segments,jaggedness,0.6); //multishperes to metempsy
+my_penteract.add_connector_2_faces (13,33,num_segments,jaggedness,0.6); // metempsy to root/aspens
+my_penteract.add_connector_2_faces (33,58,num_segments,jaggedness,0.6); // root/aspens to familty tree/blood
+my_penteract.add_connector_2_faces (58,73,num_segments,jaggedness,0.6); // familty tree/blood to troian horse
+my_penteract.add_connector_2_faces (73,31,num_segments,jaggedness,0.6); // troian horse to hauser
+my_penteract.add_connector_2_faces (31,2,num_segments,jaggedness,0.6); // hauser to cross
+
+//w will
+my_penteract.add_connector_2_faces (47,7,num_segments,jaggedness,0); //patterns to pudridero
+my_penteract.add_connector_2_faces (7,22,num_segments,jaggedness,0); // pudridero to singing mass
+my_penteract.add_connector_2_faces (22,38,num_segments,jaggedness,0); // singing mass to cordiscerps
+my_penteract.add_connector_2_faces (38,16,num_segments,jaggedness,0); // cordiscerps to almauno
+my_penteract.add_connector_2_faces (16,67,num_segments,jaggedness,0); // a  lma una to vanishing point /percepteur
+my_penteract.add_connector_2_faces (67,74,num_segments,jaggedness,0); // vanishing point /percepteur to reyuno/kingone
+my_penteract.add_connector_2_faces (74,4,num_segments,jaggedness,0); //  reyuno/kingone to line
+
+
 
 var cylinders = [];
 
