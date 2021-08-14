@@ -269,10 +269,37 @@ div.connector_schema_panel {
     display: flex;
     justify-content: center;
     align-content: center;
+    /* visibility: hidden; */
+}
+
+div.explanation_box {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 70%;
+    height: 70%;
+    display: grid;
+    grid-template-columns: 2fr 8fr 1fr 8fr 2fr;
     visibility: hidden;
 }
 
+div.explanation_left, div.explanation_right {
+    background-color: #d3d3d3;
+    font-family: gotham;
+    font-weight: 100;
+    font-size: 12px;
+    padding: 15px;
+    overflow-y: auto;
 
+}
+
+div.arrow_left, div.arrow_right {
+    font-family: gotham;
+    font-weight: 300;
+    justify-self: center;
+    visibility: inherit;
+
+}
 /* canvas { 
     border: 1px solid whitesmoke; 
     position: fixed;

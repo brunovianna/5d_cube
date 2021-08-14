@@ -26,6 +26,7 @@ class Interface_Flags {
 let r5d = new Rotation5D(5);
 let interface_flags = new Interface_Flags();
 const pointer = new THREE.Vector2();
+let explanation_index = 0;
 
 
 // var rotate_timer;
@@ -186,6 +187,35 @@ function update_connector_schema () {
     }
 }
 
+function update_explanation() {
+    var side = this.id.slice(6);
+    if (side === "right") {
+        if (explanation_index<6) {
+            if (explanation_index === 0) {
+                arrow_left.style.visibility = "visible";
+            }  
+            if (explanation_index===5) {
+                    arrow_right.style.visibility = "hidden";
+            }
+            explanation_index++;
+        }
+        explanation_left.innerHTML = DATA.explanation_texts_html[explanation_index][0];
+        explanation_right.innerHTML = DATA.explanation_texts_html[explanation_index][1];
+    } else {
+        if (explanation_index > 0) {
+            if (explanation_index === 1) {
+                arrow_left.style.visibility = "hidden";
+            } 
+            if (explanation_index===6) {
+                arrow_right.style.visibility = "visible";
+            }
+            explanation_index--;
+        }
+        explanation_left.innerHTML = DATA.explanation_texts_html[explanation_index][0];
+        explanation_right.innerHTML = DATA.explanation_texts_html[explanation_index][1];
+    }
+}
+
 function create_navigation () {
 
     window.addEventListener("keydown", key_rotation);
@@ -257,7 +287,9 @@ function create_navigation () {
         toggle_visibility(instructions_box);
         instructions_box_content.innerHTML = DATA.complete_instructions_html;
     };
-    instructions_box.onclick = function( ) {instructions_box.style.visibility="hidden"; };
+    instructions_box.onclick = function( ) {
+        instructions_box.style.visibility="hidden"; 
+    };
 
     equal_panel.style.visibility="hidden";  
     equal_sign.onclick = function () {
@@ -288,7 +320,6 @@ function create_navigation () {
     };
     ampersand_panel.onclick = function( ) {ampersand_panel.style.visibility="hidden"; };
 
-    // quotes.onclick = function () {penteract_panel.style.visibility="visible";  };
 
 
     for (var index =1;index<15;index++) {
@@ -306,6 +337,35 @@ function create_navigation () {
     connector_schema_panel.onclick = function( ) {connector_schema_panel.style.visibility="hidden"; };
     connector_schema_panel.style.visibility = "hidden";
 
+    arrow_left.src = require('./assets/arrow_left.png') ;
+    arrow_right.src = require('./assets/arrow_right.png') ;
+    arrow_left.onclick = update_explanation;
+    arrow_right.onclick = update_explanation;
+    arrow_left.style.visibility = "hidden";
+    arrow_right.style.visibility = "hidden";
+    explanation_box.style.visibility = "hidden";
+
+    quotes.onclick = function () {
+        if (explanation_box.style.visibility==="hidden") {
+            explanation_box.style.visibility = "visible";
+            if (explanation_index===0) {
+                arrow_left.style.visibility = "hidden";
+                arrow_right.style.visibility = "visible";                
+            } else {
+                if (explanation_index===6){
+                    arrow_left.style.visibility = "visible";
+                    arrow_right.style.visibility = "hidden";                
+                }   else {
+                    arrow_left.style.visibility = "visible";
+                    arrow_right.style.visibility = "visible";
+                }
+            }
+        } else {
+            arrow_left.style.visibility = "hidden";
+            arrow_right.style.visibility = "hidden";                
+            explanation_box.style.visibility = "hidden";
+        }
+    };
 
 }
 

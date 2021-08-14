@@ -362,27 +362,265 @@ const complete_instructions_html = "Use the mouse to manipulate the 3D projectio
 “  Symbol on screen : Series ok key concepts to the dynamogram.\
 <br/><br/>\
 \
-There are 7 different proposed tension lines.\
+There are 7 different proposed tension lines, tagged with colors.\
 <br/><br/>\
 \
-Orange 1 on screen :  Political - state tension.  from Laocoon to Leviathan. (Red - Orange images)<br/>\
-Orange 2 on screen:  Ideology-identity tension. From the self to the collective. (Yellow - Sand color image)<br/>\
-Orange 3 on screen:  System - Particle tension. From the unit to multiplicity. (Blue pale - Light green color images)<br/>\
-Orange 4 on screen:  Specie - organism tension. From organism to Genus. (Dark Blue - Green image)<br/>\
-Orange 5 on screen:  Generic - Anomaly tension. From the individual to the mass. (Ochre - Grey images)<br/>\
-Orange 6 on screen:  God - Hell tension. From heaven to pandemonium. (Purple - White images)<br/>\
-Orange 7 on screen:  Morphological key images.  (Pink images)<br/>\
-Orange 8 on screen:  Configuration fundamental vectors line.<br/>\
+Red - Orange:  Political - state tension.  from Laocoon to Leviathan.<br/>\
+Yellow - Sand:  Ideology-identity tension. From the self to the collective.<br/>\
+Blue pale - Light green:  System - Particle tension. From the unit to multiplicity.<br/>\
+Dark Blue - Green:  Specie - organism tension. From organism to Genus.<br/>\
+Ochre - Grey:  Generic - Anomaly tension. From the individual to the mass.<br/>\
+Purple - White:  God - Hell tension. From heaven to pandemonium. ()<br/>\
+Pink - White:  Morphological key images. / Configuration fundamental vectors line.<br/>\
 <br/><br/>\
 \
 \
 \
-There are 3 proposed reading paths of images (red stripe) from different lines of tension in specific chains of meaning or iconological migrations of forms.\
+There are 3 proposed reading paths of images from different lines of tension in specific chains of meaning or iconological migrations of forms.\
 <br/><br/>\
 \
-Red A on screen : Cohesion : decentred / centred<br/>\
-Red B on screen : Will : diffused / concentrated<br/>\
-Red C on screen : Time :  expanded / contracted";
+Cohesion : decentred / centred<br/>\
+Time :  expanded / contracted<br/>\
+Will : diffused / concentrated";
 
-export {cards, images, complete_instructions_html}
+var explanation_texts_html = [
+    [
+        "If we want to address the problematic relation between unit and multiplicity,\
+        we bump immediately with one problem. On first glance those terms are part\
+        of the extremes of a single spectrum. How to understand correspondences\
+        since they seems to go in opposite directions but at the same time need\
+        each other to define themselves? If you what to have many one is obliged\
+        but once you have the many it behaves as a single entity. And worse , if you\
+        study in detail one is not difficult to conclude that in fact is many. Could there\
+        be a way to understand both without deniying each other?\
+        <br/>\
+        <br/>\
+        \
+        Aby Warburg developed the concept of the dynamogram. We can\
+        understand in a canonical way as being another definition of the\
+        pathosformel (or formula of pathos) which would imply a culturally charged\
+        image that migrates through forms and imagery in order to keep a specific\
+        emotional charge through time in cultures.\
+        But it is also possible to dare a more challenging proposition: an image so\
+        crossed with connections with others, so tense with ideological discourses,\
+        so charged with different forms and meaning that it starts producing other\
+        images.\
+        An image machine of other images.",
+        "A knot of forces so dense and filled with posible iconological variations that\
+        generates more representations beyond itself. A dynamogram is a ball of\
+        rubber bands tight together and unleashing some of its strings would allow\
+        not only an archeology of the image but a possible method to understand\
+        migration of the images in a non dichotomic base. Images are not objects\
+        but vectors in action."
+    ], //01
+    [
+        "How to create a dynamogram? How could it help us to understand the relation\
+        one and many?\
+        There is a path via an Ancient Greek concept:\
+        -The Perichoresis is a point where the universe began according to ancient\
+        Greeks. It is where all things are present sharing the same space and time without\
+        loosing its own characteristics.\
+        The strategy is to reach that place but from our own. This is where representation\
+        and projection plays a major roll because they are tools to visualise those\
+        mechanics. In order to access that forms we have to understand some rules of\
+        presentation and representation within dimensions.\
+        Let’s start from our native reference.\
+        In order to be have a body in three dimensions (a unit) there are three rules to\
+        follow<br/>\
+        -Unicity. No object or body can occupy the same space at the same time as any\
+        other one.<br/>\
+        -indivisibility. Each element has its own narrative line, if the body is split then is not\
+        longer one entity but many<br/>\
+        -Immobility. Representation of a point of view necessarily deforms the real to show\
+        it as representation. An image flattens the body 3d into 2d. <br/>\
+        As soon as we move\
+        our sight the trick is revealed and the projection shows is deformed nature. A\
+        world map is a good example of this, it presupposes an immobile omnipresent eye\
+        flattening the territory and its accidents. You are able to see the entirety of globe\
+        as a flat surface, something impossible in our reality.\
+        Projection is the method to access inter dimensional translations.\
+        So a higher dimension my allow us to bend this dimensional laws to reach other\
+        forms of representations. One and many can be in the same space and time. There\
+        is just one important consideration: higher dimensions are difficult to visualise since each time a\
+        dimension is observed from another it implies an applied projection or necessary toll to adjust to\
+        specific set of conditions required in between them.",
+        "For example if we would like to imagine a 4d cube we have to imagine a 3d cube with a\
+        \“smaller\” nested cube supported by each of its insides by other cubes.\
+        BUT all of them of the same size. All occupying the same space at the same time.\
+        If we could be able see this set of cubes in different moments occupying the same space (with\
+        animated sequence) it would give us a glimpse (through movement) of the actual nature of this\
+        impossible immobile object. The external cube morphs into the inner cube and the small one\
+        turns into the external one. This object moves in time allowing us different views of what\
+        happens without movement. It could be understood as a collection of snapshots of all possible\
+        connections through their vertices.\
+        Sometimes 4d is referred as \“time\” which is not accurate but only through a time process we are\
+        able to understand what is happening. Action without time.<br/>\
+        \
+        So now we have a possible endless source of energy for a visual machine. The urgent visual\
+        need to represent a 4d cube real nature and the out come of that projections into ours. It is like\
+        a matryoshka but with no clear external o internal figurine nevertheless morphing in perpetual\
+        motion.\
+        If we plan to use it as a visualizing platform machine the only limitation is its small capacity to\
+        hold images. A tesseract has only 24 faces to use as tableaux.\
+        A penteract or 5d cube has 32 vertices, 80 edges, 80 square faces, 40 cubic cells, constructed\
+        as 3 tesseracts, {4,3,3}, around each cubic ridge.\
+        A 5d cube is a 4d projected to another 4d cube supported by other 4d cube. Sometimes 5d is\
+        referred vaguely as a dimension which offers “concentration”, “intensity” or “density” since at\
+        higher dimension, the inside space gets wider holding more elements, creating an apparent\
+        effect of forms folding in themselves.<br/>\
+        This dynamogram can be then a machine to understand relations among a collections of\
+        images with different ways crossing the tension unit and multiplicity. A box in a box in box all\
+        of them the same size in the same space at the same time."
+    ],  //02
+    [
+        "From a collection of images where the unsolved tension unit-multiple, it is possible to visualise\
+        some groups immediately since they all refer to a same subject. These groups are formed and\
+        guided by a hidden attractor.<br/>\
+        -Political - state tension.<br/>\
+        from Laocoon to Leviathan<br/>\
+        Who is the one to hold power? What is the roll of the collectivity in it? Power works different\
+        within the individual? Who writes history? Our only relation to power is awe and fear? Truth is\
+        coming from outside or inside? Is it possible to control the body politic?\
+        The two classical figures of Laocoon and Hobbes ́ Leviathan open the spectrum.\
+        -Ideology-identity tension.<br/>\
+        the self to the collective.<br/>\
+        How can the individual recognises itself? Are things we see, the real world or the things we want\
+        to see? Who represent the individual in a collective narrative? Who is the one speaking in\
+        nightmares? Doppelganger? The unconscious is a thing of its own? How many me are inside\
+        me? What is the soul? The social has a soul?\
+        From the vanishing point with adapts reality to the eyes viewer to the figure of myth attempting\
+        to give meaning to a culture.\
+        -System - Particle tension.<br/>\
+        the unit to multiplicity.<br/>\
+        What is a unit? A particle is a problem of scale? Can we get rid of them?The horizon is a\
+        representation or an actual event? Are there patterns in universe or just a measurement trick?\
+        How to fold a plane? Can we choose a system? What is the relation between double and\
+        dimensions?\
+        From units to multiplicity spectrum",
+        " - Specie - organism spectrum.<br/>\
+        The organism to the Genus.<br/>\
+        A species is a divided infinite cell? An organism or organisms? Multiplicity is a biological method\
+        for meta specimens? Can an organism metabolise outside of itself? Can cells recognize an\
+        outside of the organ? What guides the will of an ant nest? What is the factor that makes a living\
+        organism to gather or split apart?<br/>\
+        From Physarum polychepalum (a one cell organism with collectivity strategies) to the metonymy\
+        of Mother Nature holding all simultaneously.\
+        - Generic - Anomaly spectrum.<br/>\
+        the individual to the mass.<br/>\
+        What would a person with no social contact be like? What is a prototype? Can someone\
+        represent nobody? Can a model have blur boundaries? What guides hordes? Where is desire of\
+        multitudes coming from? Are collective figures real? Revolutions are normative contractions of\
+        the social? Can we tell when ideology takes on the identity of the person?\
+        <br/><br/>\
+        From Kaspar Hauser to political masses.<br/>\
+        - God - Hell tension.<br/>\
+        heaven to pandemonium.<br/>\
+        A form is a method of applying power? What consequences carries to have one god and which\
+        to have many? A demonic possession is a spatial-time problem? How many souls there are?\
+        How to represent divinity or demonic forces? Multiplicity implies destruction necessarily? Can\
+        we talk of metempsychosis? What is behind the devil?<br/>\
+        From Christ holding a transparent orbis to the form of hell.<br/>\
+        Configuration fundamental vectors\
+        <br/><br/>\
+        Geometry<br/>\
+        Since this conceptual frame needs a geometrical form, 6 different ideological fundamental\
+        projections are considered.\
+        The dot, the line, the three vector gathering, the cross, the circle and the sphere.\
+        Each of them allowing a certain operation of mechanics in the real."
+    ], //03
+    [
+        "Mythological machine - Iconological Machine<br/>\
+        Furio Jesi proposes a gnosiological model\
+        to approach the real. What he calls the “Mythological machine” pro- duces narratives,\
+        and the core of which implies an inaccessible space, supposed to hide an archetypical,\
+        meta-historical vision: the myth. If demanded this machine will never give the truth, but\
+        only versions of it in the form of mythologies. The myth will remain as potential (with no\
+        real substance) and we only can use mythologies to negotiate with the world.\
+        The machine throws us automatically into a loop of infinite forms or mythological\
+        versions none of which will drive us closer to the core. In this mechanism, truth is not\
+        understood as something we can reach, but rather as an inaccessible answer that\
+        teases us with the potential existence of a definite solution. Thus, truth is an infinite\
+        series of variables of a dream, all valid, all possible.\
+        This maneuver is a double hinge since it does not only fuel our desire of getting closer to\
+        \“the one\” but also makes evident our understanding of truth and strategies to achieve\
+        it.",
+        "The western model of knowledge conceives truth as a bright shining figure. Truth\
+        offers light from a single, evident source. We can even see other things and perceive our\
+        surroundings using this energy and clarity. The closer we are to the source the more of\
+        its essence we will receive. Like moths we are attracted to the brightness of knowledge.\
+        The mythological machine proposes a different model of knowledge. It conceives truth\
+        as something secret that can never be reached directly. If we want to access the core of\
+        the real it will unfold through an interpretation or metaphor and never directly. It is not an\
+        emission of energy but a trap of possible meanings. Behind the appearance of a figure\
+        we will find always another figure (or meaning). A mask behind a mask behind a mask.\
+        Truth is a tension between figures and not a precious element.\
+        Truth appears black and obscure, a gravitational black hole which from time to time\
+        bursts fragments of solidified imagery. It is a function to be solved like an enigma. If we\
+        want to know the truth of a myth, the origin of fire by example; the machine will propose\
+        a mythology."
+    ], //04
+    [
+        "Mythologies are the group of narratives that the collective body uses to communicate\
+        within different parts of itself. Since memory is metaphoric energy, it is projected through\
+        time to other generations, and by doing so, it delineates a body with no time or space.\
+        We talk to ourselves using images, metaphors and metonymies because we are trapped\
+        in time and space; we can’t prevent or recreate conditions without falling in obvious\
+        contradictions or misinterpretations. We can only hold to the description of a process or\
+        transformation. This methodology will not describe or give precise indications, but it will\
+        provide us with warnings on how energy is distributed in different situations. \“Die toten\
+        mahnen uns\” (\“The deaths urgently warn us\”) is the epitaph on Rosa Luxembourg\’s\
+        gravestone. We talk in figures to adjust the narrative to a timeless circumstance.",
+        "In mythology all versions are welcomed since they help to give consistency to the\
+        collective narrative. There are no false or wrong mythologies only more or less intense\
+        ones regarding the flux of energy. It is knowledge in which the more varied the\
+        interpretation is the more anchor points of activation it may have.\
+        The individual is the possibility to access this polyphonic narrative in one precise point.\
+        This singular \“reading\” is limited and anchored by the unit which allows its ideological\
+        framework."
+    ], //05
+    [
+        "Nachleben<br/>\
+        Nachleben (afterlife) der Antike (of antiquity) is an idea that Aby\
+        Warburg used to underline. It is a trace of continuity between antiquity (classical Greek\
+        period) and the medieval and Renaissance culture. If sculpture and painting had\
+        reached such a refined representation of human affairs and psyche, what happens to\
+        those icons afterwards? Did culture reset its representation and start them all over again\
+        in the Middle Ages? Could we forget the forms and emotions of the pagan culture\
+        without a trace? Where did all the emotions and social intensities Aphrodite represented\
+        go?",
+        "The past never dies or closes in packages or periods. It migrates through images or\
+        forms (Bildwanderung) into the present, but modified in a phantasmagoric dimension\
+        waiting to be reactivated by historical and adequate pathos contexts. In this sense, it is\
+        misleading to even think of a Renaissance (literally: new birth) since nothing was ever\
+        gone. Warburg proposes to read the stories or mythologies of images across space and\
+        time through different cultures, morphing and negotiating appearance in each context."
+    ], //06
+    [
+        "Iconological machine<br/>\
+        I propose to read Warburg perspective as a mythological\
+        machine that will produce images in the same manner as Jesi did with mythologies. We\
+        can imagine a circular zoetrope where images flow one after another in an endless flux.\
+        f we expand the consequences of this new “mythological image machine” and place\
+        ourselves inside the carousel of versions and move along the loop of infinite images, we\
+        can discover a crucial detail: all those different images could come to life animated by\
+        the circular movement, like a mythological kinetoscope. Since each image and each\
+        narrative recalls slightly the neighbouring ones, they will automatically produce all\
+        together \“cinematic action\”. The more mysterious and obscure the myth (the more\
+        mythologies we have of a myth), the more detailed and clear a movement we will get. In\
+        fact, there is no need to have them in a perfect sequence, the only requirement is to\
+        have the endless capability to produce the next frame (version) to complete the\
+        animated sequence and make it appear.",
+        "The resulting moving image is a collective body that moves through other bodies and\
+        also inhabits many individual time frames. It lives in all images, in all spaces\
+        simultaneously but keeps all of its individual characteristics. In light of this apparatus, we\
+        can say that all bodies are photograms of the actions of the real collective body. The\
+        mass never allows itself to be photographed, since it only shows self-fragmentation. In\
+        order to fully grasp or understand it, we have to approach it in movement. There is no\
+        \“independent organ\” or even what we call \“the individual\”, only endless versions\
+        nourishing a body that lives through many generations distant in time but at once."
+    ], //07
+
+];
+
+export {cards, images, complete_instructions_html, explanation_texts_html}
 
