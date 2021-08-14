@@ -18,6 +18,7 @@ class Interface_Flags {
         this.toggle_numbers = false;
         this.iterate_all_rotations = false;
         this.double_click = false;
+        this.toggle_faces = false;
     }
 }
 
@@ -55,19 +56,18 @@ function lets_rotate () {
 //    }, 25); // the above code is executed every 25 ms
 }
 
-function global_stop_rotation (event) {
-    // if (rotate_timer) clearInterval(rotate_timer);
-    // r5d.v = 0;
-    // r5d.w = 0;
-    // r5d.x = 0;
-    // r5d.y = 0;
-    // r5d.z = 0;
+function global_key_up (event) {
+
     if (event.key==='0') {
         interface_flags.toggle_numbers = true; 
     }
     if (event.key===' ') {
         interface_flags.iterate_all_rotations = true; 
     }
+    if (event.key==='9') {
+        interface_flags.toggle_faces = true; 
+    }
+
 }
 
 
@@ -156,11 +156,11 @@ function global_movemouse (event) {
 function create_navigation () {
 
     window.addEventListener("keydown", key_rotation);
-    window.addEventListener("keyup",    global_stop_rotation);
+    window.addEventListener("keyup",    global_key_up);
     window.addEventListener("dblclick", double_click, true);
     window.addEventListener("mousemove", global_movemouse, true);
 
-    document.body.addEventListener("mouseup", global_stop_rotation, true);
+    // document.body.addEventListener("mouseup", global_stop_rotation, true);
 
     // 5d rotate controls
 
@@ -225,9 +225,12 @@ function create_navigation () {
 
 
     let question_mark = document.getElementById('question_mark');
+    let instructions_box = document.getElementById('instructions_box');
     question_mark.onclick = function () {
-    
-          };
+        toggle_visibility(instructions_box);
+        
+    };
+    instructions_box.onclick = function( ) {instructions_box.style.visibility="hidden"; };
 
     let equal_sign = document.getElementById('equal_sign');
     let equal_panel = document.getElementById('equal_panel');
@@ -235,8 +238,8 @@ function create_navigation () {
     equal_sign.onclick = function () {
         equal_panel_img.src = require('./assets/equal_chart.png') ;
         toggle_visibility(equal_panel);
-        equal_panel.onclick = function( ) {equal_panel.style.visibility="hidden"; };
     };
+    equal_panel.onclick = function( ) {equal_panel.style.visibility="hidden"; };
 
     let plus_sign = document.getElementById('plus_sign');
     let plus_panel = document.getElementById('plus_panel');
@@ -244,8 +247,8 @@ function create_navigation () {
     plus_sign.onclick = function () {
         plus_panel_img.src = require('./assets/sense_scale.png') ;
         toggle_visibility(plus_panel);
-        plus_panel.onclick = function( ) {plus_panel.style.visibility="hidden"; };
     };
+    plus_panel.onclick = function( ) {plus_panel.style.visibility="hidden"; };
 
     let minus_sign = document.getElementById('minus_sign');
     let minus_panel = document.getElementById('minus_panel');
@@ -253,8 +256,9 @@ function create_navigation () {
     minus_sign.onclick = function () {
         minus_panel_img.src = require('./assets/scale.png') ;
         toggle_visibility(minus_panel);
-        minus_panel.onclick = function( ) {minus_panel.style.visibility="hidden"; };
+        
     };
+    minus_panel.onclick = function( ) {minus_panel.style.visibility="hidden"; };
 
     let ampersand = document.getElementById('ampersand');
     let ampersand_panel = document.getElementById('ampersand_panel');
@@ -262,8 +266,8 @@ function create_navigation () {
     ampersand.onclick = function () {
         ampersand_panel_img.src = require('./assets/klein_bottle.png') ;
         toggle_visibility(ampersand_panel);
-        ampersand_panel.onclick = function( ) {ampersand_panel.style.visibility="hidden"; };
     };
+    ampersand_panel.onclick = function( ) {ampersand_panel.style.visibility="hidden"; };
 
     let quotes = document.getElementById('quotes');
     quotes.onclick = function () {penteract_panel.style.visibility="visible";  };
@@ -272,6 +276,30 @@ function create_navigation () {
 
 }
 
+//lines
+function draw_line() {
+    
 
+    if (!canvas.getContext) {
+        return;
+    }
+    const ctx = canvas.getContext('2d');
+    ctx.width  = window.screen.width;
+    ctx.height = window.screen.height;
+
+    // set line stroke and line width
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 5;
+    
+
+    // draw a red line
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(300, 100);
+    ctx.stroke();
+
+}
+
+ draw_line();
 
 export {create_navigation, r5d, interface_flags, pointer}  

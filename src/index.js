@@ -17,18 +17,48 @@ const my_penteract = new PENTERACT.Penteract(scaler);
 
 NAVIGATION.create_navigation();
 
+const canvas_div = document.getElementById('canvas_div');
+const canvas = document.getElementById('canvas');
 
+canvas_div.style.position = "absolute";
+canvas_div.style.width  = window.innerWidth;
+canvas_div.style.height = window.innerHeight ;
+canvas.width  = window.innerWidth;
+canvas.height = window.innerHeight ;
 
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const renderer = new THREE.WebGLRenderer();
+
+const renderer_div = document.getElementById('renderer_div');
+renderer_div.style.position = "absolute";
+renderer_div.style.width  = window.innerWidth;
+renderer_div.style.height = window.innerHeight ;
+
 renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+renderer_div.appendChild( renderer.domElement );
+
+//document.body.appendChild( renderer.domElement );
+
 window.addEventListener('resize', function () {
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    canvas.setSize( window.innerWidth, window.innerHeight );
+  //  renderer.setSize( window.innerWidth, window.innerHeight );
 });
+
+// function onResize(element, callback) {
+//     var height = element.clientHeight;
+//     var width  = element.clientWidth;
+    
+//     return setInterval(function() {
+//         if (element.clientHeight != height || element.clientWidth != width) {
+//           height = element.clientHeight;
+//           width  = element.clientWidth;
+//           callback();
+//         }
+//     }, 500);
+//   }
 
 
 //drawing a test cube
@@ -454,9 +484,22 @@ function animate() {
             }
             number_material_flag = true;
         }
-
     }
     
+    if (NAVIGATION.interface_flags.toggle_faces === true ) {
+        NAVIGATION.interface_flags.toggle_faces = false;
+        if (projected_faces_meshes[0].visible === true) {
+            for (var m of projected_faces_meshes) {
+                m.visible = false;
+            }
+        } else {
+            for (var m of projected_faces_meshes) {
+                m.visible = true;
+            }
+        }
+    }
+
+
     if (!last_pointer.equals (NAVIGATION.pointer)) {
 
         last_pointer.copy (NAVIGATION.pointer);
