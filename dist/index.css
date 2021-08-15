@@ -71,14 +71,20 @@ div.help_footer {
 div.equal_panel {
     left: 10px;
     top: 10px;
-    height: 80%;
-    width: 80%;
+    bottom: 10px;
+    right: 10px;
     position: absolute;
     display: flex;
     justify-content: center;
     align-content: center;
     visibility: hidden;
     
+}
+
+img.equal_panel {
+    margin: auto;
+    display: block;
+    width: 90%;
 }
 
 div.plus_panel {
@@ -234,13 +240,20 @@ div.color_14 { background-color: whitesmoke; grid-row: 2; grid-column: 7;}
 
 div.color_schema_panel {
     top: 100px;
-    left: 50px;
+    left: 10px;
+    right: 10px;
 
     position: absolute;
     display: flex;
     justify-content: center;
     align-content: center;
     visibility: hidden;
+}
+
+img.color_schema_img {
+    margin: auto;
+    display: block;
+    width: 90%;
 }
 
 
@@ -267,18 +280,25 @@ div.connector_t {
     color: yellow;
 }
 div.connector_w {
-    color: blue;
+    color:#00b1ec;
 }
 
 div.connector_schema_panel {
     bottom: 150px;
-    left: 50px;
+    left: 10px;
+    right: 10px;
 
     position: absolute;
     display: flex;
     justify-content: center;
     align-content: center;
     /* visibility: hidden; */
+}
+
+img.connector_schema_img {
+    margin: auto;
+    display: block;
+    width: 90%;
 }
 
 div.explanation_box {
