@@ -246,7 +246,16 @@ const jaggedness = 0.008;
 
 // my_penteract.add_connector_multi([0,75,22,40],3,0.2);
 
+
+var connector_faces = {}
+var connector_lists = {}
+
 //c cohesion
+
+
+
+connector_faces ["c"] =  [8,68,49,36,30,6,1,65];
+connector_lists["c"] = [0,6];
 my_penteract.add_connector_2_faces (8,68,num_segments,jaggedness,0); //hell to leviathan
 my_penteract.add_connector_2_faces (68,49,num_segments,jaggedness,0); // leviathan to horizonplan/hyperbolic space
 my_penteract.add_connector_2_faces (49,36,num_segments,jaggedness,0); // horizonplan/hyperbolic space to fungi
@@ -256,6 +265,8 @@ my_penteract.add_connector_2_faces (6,1,num_segments,jaggedness,0); // miseenala
 my_penteract.add_connector_2_faces (1,65,num_segments,jaggedness,0); // sphere/loop to narcisse
 
 //t time
+connector_faces["t"] = [44,13,33,58,73,31,2];
+connector_lists["t"] = [7,12];
 my_penteract.add_connector_2_faces (44,13,num_segments,jaggedness,0.2); //multishperes to metempsy
 my_penteract.add_connector_2_faces (13,33,num_segments,jaggedness,0.2); // metempsy to root/aspens
 my_penteract.add_connector_2_faces (33,58,num_segments,jaggedness,0.2); // root/aspens to familty tree/blood
@@ -264,13 +275,15 @@ my_penteract.add_connector_2_faces (73,31,num_segments,jaggedness,0.2); // troia
 my_penteract.add_connector_2_faces (31,2,num_segments,jaggedness,0.2); // hauser to cross
 
 //w will
-my_penteract.add_connector_2_faces (47,7,num_segments,jaggedness,0.6); //patterns to pudridero
-my_penteract.add_connector_2_faces (7,22,num_segments,jaggedness,0.6); // pudridero to singing mass
-my_penteract.add_connector_2_faces (22,38,num_segments,jaggedness,0.6); // singing mass to cordiscerps
-my_penteract.add_connector_2_faces (38,16,num_segments,jaggedness,0.6); // cordiscerps to almauno
-my_penteract.add_connector_2_faces (16,67,num_segments,jaggedness,0.6); // a  lma una to vanishing point /percepteur
-my_penteract.add_connector_2_faces (67,74,num_segments,jaggedness,0.6); // vanishing point /percepteur to reyuno/kingone
-my_penteract.add_connector_2_faces (74,4,num_segments,jaggedness,0.6); //  reyuno/kingone to line
+connector_faces["w"] = [47,7,22,38,16,67,74,4];
+connector_lists["w"] = [13,20];
+my_penteract.add_connector_2_faces (47,7,num_segments,jaggedness,0.55); //patterns to pudridero
+my_penteract.add_connector_2_faces (7,22,num_segments,jaggedness,0.55); // pudridero to singing mass
+my_penteract.add_connector_2_faces (22,38,num_segments,jaggedness,0.55); // singing mass to cordiscerps
+my_penteract.add_connector_2_faces (38,16,num_segments,jaggedness,0.55); // cordiscerps to almauno
+my_penteract.add_connector_2_faces (16,67,num_segments,jaggedness,0.55); // a  lma una to vanishing point /percepteur
+my_penteract.add_connector_2_faces (67,74,num_segments,jaggedness,0.55); // vanishing point /percepteur to reyuno/kingone
+my_penteract.add_connector_2_faces (74,4,num_segments,jaggedness,0.55); //  reyuno/kingone to line
 
 
 
@@ -420,6 +433,29 @@ function update_geometries() {
     }
 
 
+    //turn on/off connectors c t w
+    if (NAVIGATION.interface_flags.show_connectors !== "") {
+
+        //faces
+        var connectors_on = connector_faces[NAVIGATION.interface_flags.show_connectors] ;
+        for (var index =0; index<PENTERACT.penteract_faces.length; index++) {
+            if (connectors_on.includes(index)===true) {
+                projected_faces_meshes[index].visible = true;
+            } else {
+                projected_faces_meshes[index].visible = false;
+            }
+            projected_faces_meshes[index].needsUpdate = true;
+        }
+
+        //connectors
+
+
+    } else {
+        for (var f of projected_faces_meshes) {
+            f.visible = true;
+            f.needsUpdate = true;
+        }
+    }
 
 }
 

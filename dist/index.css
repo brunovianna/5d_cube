@@ -261,10 +261,10 @@ div.connector_panel {
 }
 
 div.connector_c {
-    color: yellow;
+    color: red;
 }
 div.connector_t {
-    color: red;
+    color: yellow;
 }
 div.connector_w {
     color: blue;

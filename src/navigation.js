@@ -20,6 +20,7 @@ class Interface_Flags {
         this.iterate_all_rotations = false;
         this.double_click = false;
         this.toggle_faces = false;
+        this.show_connectors = "";
     }
 }
 
@@ -174,17 +175,31 @@ function update_color_schema () {
 
 function update_connector_schema () {
     var index = (this.id.slice(10));
-    var new_src = require('./assets/'+index+'.png') ;
-    if (connector_schema_panel.style.visibility === "visible") {
-        if (new_src !== connector_schema_img.src) {
-            connector_schema_img.src = new_src;
-        } else {
+    if (interface_flags.show_connectors === index) {
+        interface_flags.show_connectors = "";
+        toggle_visibility(connector_schema_panel);
+    } else {
+        var new_src = require('./assets/'+index+'.png') ;
+        connector_schema_img.src = new_src;
+        if (interface_flags.show_connectors === "") {
             toggle_visibility(connector_schema_panel);
         }
-    } else {
-        connector_schema_img.src = new_src;
-        toggle_visibility(connector_schema_panel);
+        interface_flags.show_connectors = index;
+        
+
     }
+    interface_flags.update_flag = true;
+    // var new_src = require('./assets/'+index+'.png') ;
+    // if (connector_schema_panel.style.visibility === "visible") {
+    //     if (new_src !== connector_schema_img.src) {
+    //         connector_schema_img.src = new_src;
+    //     } else {
+    //         toggle_visibility(connector_schema_panel);
+    //     }
+    // } else {
+    //     connector_schema_img.src = new_src;
+    //     toggle_visibility(connector_schema_panel);
+    // }
 }
 
 function update_explanation() {
