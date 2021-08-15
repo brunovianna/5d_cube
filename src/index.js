@@ -254,7 +254,8 @@ color_faces["7"] = [0,1,2,3,4,5,6,7];
 color_faces["14"] = [0,1,2,3,4,5,6,7];
 
 const num_segments = 30;
-const jaggedness = 0.008;
+const jaggedness = 0;
+const cylinder_radius = 0.8;
 
 // const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
 // my_penteract.add_connector_2_faces(face_a,face_b,num_segments,0.02, 0.2) ;
@@ -324,7 +325,7 @@ for (var c of p_connectors) {
 
             var cylinder_height = point_a.distanceTo(point_b);
 
-            const g = new THREE.CylinderGeometry( 1, 1, cylinder_height, 6 );
+            const g = new THREE.CylinderGeometry( cylinder_radius, cylinder_radius, cylinder_height, 6 );
 
             cylinder_mesh = new THREE.Mesh( g, my_penteract.connector_materials[connector_index][point_index] );
             const cylinder = new THREE.Group();
@@ -466,7 +467,7 @@ function update_geometries() {
                 cylinder_height = point_a.distanceTo(point_b);
     
 
-                const new_cyl_g = new THREE.CylinderGeometry( 1, 1, cylinder_height, 6 );
+                const new_cyl_g = new THREE.CylinderGeometry( cylinder_radius, cylinder_radius, cylinder_height, 6 );
                 cylinders[cylinder_index].children[0].geometry = new_cyl_g;
 
                 cylinders[cylinder_index].position.set (point_a.x,point_a.y,point_a.z);
@@ -596,7 +597,7 @@ function animate() {
         }
     }
 
-
+    //raytracing/picking faces
     if (!last_pointer.equals (NAVIGATION.pointer)) {
 
         last_pointer.copy (NAVIGATION.pointer);
@@ -607,13 +608,23 @@ function animate() {
 
         if ( intersects.length > 0 ) {
 
-            if (intersects[0].object.material !== line_material) {
-                
-                if ( intersected != intersects[ 0 ].object ) {
+            //find nearest visible object
+            let interesting_object;
+            for (var o of intersects) {
+                if (o.object.material !== line_material)   {
+                    if (o.object.visible) {
+                        interesting_object = o;
+                        break;
+                    }
+                }
+            }
+
+            if (interesting_object) {    
+                if ( intersected != interesting_object.object ) {
 
                     if ( intersected ) intersected.material.color.set( 0xcccccc);
 
-                    intersected = intersects[ 0 ].object;
+                    intersected = interesting_object.object;
                     intersected.material.color.set ( 0xffffff);
 
                     var image_number = Number(intersected.name);
@@ -622,8 +633,8 @@ function animate() {
                     document.getElementById("card_title").innerHTML = DATA.cards[image_number].title;
                     document.getElementById("card_content").innerHTML = DATA.cards[image_number].text;
                 }
-
             }
+
 
         } else {
 
@@ -650,10 +661,10 @@ function animate() {
 //initial position
 NAVIGATION.r5d.v = -0.0;
 NAVIGATION.r5d.w = -180.0;
-NAVIGATION.r5d.x = -5.0;
+NAVIGATION.r5d.x = 5.0;
 NAVIGATION.r5d.y = -305.0;
 NAVIGATION.r5d.z = 65.0;
-NAVIGATION.r5d.scale = 0.88;
+NAVIGATION.r5d.scale = 0.92;
 update_geometries();
 
 animate();
