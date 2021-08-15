@@ -20,20 +20,6 @@ const my_penteract = new PENTERACT.Penteract(scaler);
 
 NAVIGATION.create_navigation();
 
-// const canvas_div = document.getElementById('canvas_div');
-// const canvas = document.getElementById('canvas');
-
-// canvas_div.style.position = "fixed";
-// canvas_div.style.width  = window.innerWidth;
-// canvas_div.style.height = window.innerHeight ;
-// canvas_div.style.pointerEvents = "none";
-
-// canvas.position = "fixed";
-// canvas.width  = window.innerWidth;
-// canvas.height = window.innerHeight;
-// canvas.pointerEvents = "none";
-
-
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -46,8 +32,6 @@ renderer_div.style.height = window.innerHeight ;
 
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer_div.appendChild( renderer.domElement );
-
-//document.body.appendChild( renderer.domElement );
 
 window.addEventListener('resize', function () {
     // canvas.width  = window.innerWidth; 
@@ -62,8 +46,6 @@ window.addEventListener('resize', function () {
 // NAVIGATION.draw_line( canvas.getContext('2d'), fromx,fromy,tox,toy,'yellow');
 // NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,286,338,'yellow');
 // NAVIGATION.draw_line( canvas.getContext('2d'), 30,632,150,100,'yellow');
-
-
 
 
 var loader = new THREE.TextureLoader();
@@ -108,38 +90,12 @@ for (var i=0;i<80;i++) {
 
 
 
-const cat_material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, opacity: 1, side:THREE.DoubleSide } );
- 
-
-
 //creating projected faces geometry
 
 var projected_faces_geometries  = [];
 var projected_faces_meshes  = [];
 
-
-const projected_uvs = [
-    0,0,
-    0,1,
-    1,1,
-    1,1,
-    1,0,
-    0,0
-];
-
-
-
-const projected_normals = [ //just to test
-    0,0,-1,
-    0,0,-1,
-    0,0,-1,
-    0,0,-1,
-    0,0,-1,
-    0,0,-1    
-];
-
 var images_index = 0;
-
 
 const positionNumComponents = 3;
 
@@ -175,18 +131,6 @@ for (let face_index = PENTERACT.penteract_faces.length -1; face_index>=0; face_i
         'position',
         new THREE.BufferAttribute(new Float32Array(positions), positionNumComponents));
 
-    // temp_geometry.computeVertexNormals(); // please compute from the face direction i hope this works
-
-    // temp_geometry.setAttribute(
-    //     'normal',
-    //     new THREE.BufferAttribute(new Float32Array(projected_normals), positionNumComponents));
-
-
-
-    const uvNumComponents = 2;
-    // temp_geometry.setAttribute(
-    //     'uv',
-    //     new THREE.BufferAttribute(new Float32Array(projected_uvs), uvNumComponents));
 
     projected_faces_geometries.push(temp_geometry);
 
@@ -219,14 +163,7 @@ for (var line_index=0; line_index< PENTERACT.penteract_lines.length; line_index+
     scene.add( line );
 }
 
-
-// scene.add(projected_faces_meshes[0]);
-
-// projected_faces_meshes[0].position.z = 0;
-
-
-// console.log(projected_faces_meshes[0]);
-
+//camera settings
 
 camera.position.z = 100;
 camera.position.x = -100;
@@ -234,11 +171,14 @@ camera.position.x = -100;
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.update();
 
+
+//raycastar to pick the faces
+
 let raycaster = new THREE.Raycaster();
 let last_pointer = new THREE.Vector2();
 let intersected;
 
-
+//for the top right menu
 const color_faces = {};
 color_faces ["1"] = [68,69,70,71,72,73,74,75,76,77,78,79];
 color_faces ["8"] = [68,69,70,71,72,73,74,75,76,77,78,79];
@@ -255,24 +195,17 @@ color_faces["13"] = [8,9,10,11,12,13,14,15,16,17,18,19];
 color_faces["7"] = [0,1,2,3,4,5,6,7];
 color_faces["14"] = [0,1,2,3,4,5,6,7];
 
+
+//creating the three connecting lines inside the cube (and the menu on the bottom right)
 const num_segments = 30;
 const jaggedness = 0;
 const cylinder_radius = 0.8;
-
-// const purple_line_material = new THREE.LineBasicMaterial( {color: 0x804F62} );
-// my_penteract.add_connector_2_faces(face_a,face_b,num_segments,0.02, 0.2) ;
-// my_penteract.add_connector_2_faces(0,10,num_segments,0.02,0.4) ;
-
-// my_penteract.add_connector_multi([0,75,22,40],3,0.2);
 
 
 var connector_faces = {}
 var connector_lists = {}
 
 //c cohesion
-
-
-
 connector_faces ["c"] =  [8,68,49,36,30,6,1,65];
 connector_lists["c"] = [0,6];
 my_penteract.add_connector_2_faces (8,68,num_segments,jaggedness,0); //hell to leviathan
@@ -357,18 +290,6 @@ for (var c of p_connectors) {
     connector_index++;
 }
 
-
-
-// const purple_mesh_material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-// for (var index =0;index<50;index++) {
-//     var temp_geometry = new THREE.SphereGeometry(5,8,8);
-//     face_line_geometry.push(temp_geometry);
-//     const sphere = new THREE.Sphere(purple_line_material, temp_geometry);
-//     scene.add( sphere );
-// }
-
-// const face_line = new THREE.Line( face_line_geometry, purple_line_material );
-// scene.add(face_line);
 
 function update_geometries() {
 
@@ -457,11 +378,6 @@ function update_geometries() {
         for (var point_index in c) {
             if (point_index < (c.length - 1))  { //last point doesn't get drawn, it is just a reference to point the last before
 
-                //var cylinder_index = parseFloat(index*connector_array[index].length) + parseFloat(point_index);
-
-
-
-                //cylinders[cylinder_index].children[0].geometry.dispose();
 
                 point_a.set(c[point_index][0],c[point_index][1],c[point_index][2]);
                 point_b.set(c[Number(point_index)+1][0],c[Number(point_index)+1][1],c[Number(point_index)+1][2]);
@@ -507,14 +423,12 @@ function update_geometries() {
             projected_faces_meshes[index].needsUpdate = true;
         }
 
-        //connectors
-
 
     } 
 
 }
 
-
+// when the space key is pressed
 function iterate_all_rotations() {
     if (NAVIGATION.r5d.z === 270) {
         NAVIGATION.r5d.z = 0;
@@ -648,12 +562,7 @@ function animate() {
 
         }
 
-
-
     }
-
-
-    
 
     controls.update();
     renderer.render( scene, camera );
