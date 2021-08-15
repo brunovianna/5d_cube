@@ -194,17 +194,7 @@ function update_connector_schema () {
 
     }
     interface_flags.update_flag = true;
-    // var new_src = require('./assets/'+index+'.png') ;
-    // if (connector_schema_panel.style.visibility === "visible") {
-    //     if (new_src !== connector_schema_img.src) {
-    //         connector_schema_img.src = new_src;
-    //     } else {
-    //         toggle_visibility(connector_schema_panel);
-    //     }
-    // } else {
-    //     connector_schema_img.src = new_src;
-    //     toggle_visibility(connector_schema_panel);
-    // }
+
 }
 
 function update_explanation() {
@@ -305,6 +295,7 @@ function create_navigation () {
 
     question_mark.onclick = function () {
         toggle_visibility(instructions_box);
+        instructions_box_content.style.height = "600px";
         instructions_box_content.innerHTML = DATA.complete_instructions_html;
     };
     instructions_box.onclick = function( ) {
