@@ -276,7 +276,7 @@ my_penteract.add_connector_2_faces (31,2,num_segments,jaggedness,0.2); // hauser
 
 //w will
 connector_faces["w"] = [47,7,22,38,16,67,74,4];
-connector_lists["w"] = [13,20];
+connector_lists["w"] = [13,19];
 my_penteract.add_connector_2_faces (47,7,num_segments,jaggedness,0.55); //patterns to pudridero
 my_penteract.add_connector_2_faces (7,22,num_segments,jaggedness,0.55); // pudridero to singing mass
 my_penteract.add_connector_2_faces (22,38,num_segments,jaggedness,0.55); // singing mass to cordiscerps
@@ -400,16 +400,38 @@ function update_geometries() {
     //update connectors
     const connector_array = my_penteract.get_projected_connectors();
 
+    //erase old cylinders
+    for (var c of cylinders) {
+        c.children[0].geometry.dispose();
+    }
+
+    
+   
+    var begin_connector;
+    var end_connector;
+
+    if (NAVIGATION.interface_flags.show_connectors==="") {
+        begin_connector = 0;
+        end_connector = connector_array.length -1;
+    } else {
+        begin_connector = connector_lists[NAVIGATION.interface_flags.show_connectors][0];
+        end_connector = connector_lists[NAVIGATION.interface_flags.show_connectors][1];
+    } 
+
     var cylinder_index = 0;
 
-    for (var index in connector_array) {
+    for (var index = 0; index < connector_array.length ; index++) {
         var c = connector_array[index];
+
+
         for (var point_index in c) {
             if (point_index < (c.length - 1))  { //last point doesn't get drawn, it is just a reference to point the last before
 
                 //var cylinder_index = parseFloat(index*connector_array[index].length) + parseFloat(point_index);
 
-                cylinders[cylinder_index].children[0].geometry.dispose();
+
+
+                //cylinders[cylinder_index].children[0].geometry.dispose();
 
                 point_a.set(c[point_index][0],c[point_index][1],c[point_index][2]);
                 point_b.set(c[Number(point_index)+1][0],c[Number(point_index)+1][1],c[Number(point_index)+1][2]);
@@ -426,7 +448,15 @@ function update_geometries() {
                 cylinders[cylinder_index].rotateZ(Math.PI/2);
                 cylinders[cylinder_index].translateY(cylinder_height/2);
 
+                if ((index >= begin_connector)&&(index<=end_connector)) {
+                    cylinders[cylinder_index].visible = true;
+                } else {
+                    cylinders[cylinder_index].visible = false;
+                }
+
                 cylinder_index++;
+
+
 
             }
         }
