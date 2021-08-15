@@ -1,23 +1,25 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
-  entry: './src/index.js', 
 
-  // plugins: [
 
-  //   new HtmlWebpackPlugin({
+  plugins: [
 
-  //     title: 'Penteract',
+    new HtmlWebpackPlugin({
 
-  //   }),
+      title: 'Penteract',
+      template: './src/index.html'
 
-  // ],
+    }),
+
+  ],
   output: {
-    filename: 'main.js',
+    filename: 'main.[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     clean: false,
   },
  
+
 };
