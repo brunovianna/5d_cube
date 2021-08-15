@@ -260,6 +260,15 @@ div.connector_panel {
     font-size: 20px;
 }
 
+div.connector_c {
+    color: yellow;
+}
+div.connector_t {
+    color: red;
+}
+div.connector_w {
+    color: blue;
+}
 
 div.connector_schema_panel {
     bottom: 150px;
