@@ -21,6 +21,7 @@ class Interface_Flags {
         this.double_click = false;
         this.toggle_faces = false;
         this.show_connectors = "";
+        this.color_faces = "";
     }
 }
 
@@ -164,13 +165,17 @@ function update_color_schema () {
     if (color_schema_panel.style.visibility === "visible") {
         if (new_src !== color_schema_img.src) {
             color_schema_img.src = new_src;
+            interface_flags.color_faces = String(index);
         } else {
             toggle_visibility(color_schema_panel);
+            interface_flags.color_faces = "";
         }
     } else {
         color_schema_img.src = new_src;
         toggle_visibility(color_schema_panel);
+        interface_flags.color_faces = String(index);
     }
+    interface_flags.update_flag = true;
 }
 
 function update_connector_schema () {

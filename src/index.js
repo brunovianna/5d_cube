@@ -237,6 +237,22 @@ let last_pointer = new THREE.Vector2();
 let intersected;
 
 
+const color_faces = {};
+color_faces ["1"] = [68,69,70,71,72,73,74,75,76,77,78,79];
+color_faces ["8"] = [68,69,70,71,72,73,74,75,76,77,78,79];
+color_faces["2"] = [32,33,34,35,36,37,38,39,40,41,42,43];
+color_faces["9"] = [32,33,34,35,36,37,38,39,40,41,42,43];
+color_faces["3"] = [56,57,58,59,60,61,62,63,64,65,66,67];
+color_faces["10"] = [56,57,58,59,60,61,62,63,64,65,66,67];
+color_faces["4"] = [44,45,46,47,48,49,50,51,52,53,54,55];
+color_faces["11"] = [44,45,46,47,48,49,50,51,52,53,54,55];
+color_faces["5"] = [20,21,22,23,24,25,26,27,28,29,30,31,32];
+color_faces["12"] = [20,21,22,23,24,25,26,27,28,29,30,31,32];
+color_faces["6"] = [8,9,10,11,12,13,14,15,16,17,18,19];
+color_faces["13"] = [8,9,10,11,12,13,14,15,16,17,18,19];
+color_faces["7"] = [0,1,2,3,4,5,6,7];
+color_faces["14"] = [0,1,2,3,4,5,6,7];
+
 const num_segments = 30;
 const jaggedness = 0.008;
 
@@ -380,8 +396,19 @@ function update_geometries() {
  
         projected_faces_meshes[face_index].geometry.attributes.position.array.set (positions);
 
+        if (NAVIGATION.interface_flags.color_faces !== "") {
+            if (color_faces[NAVIGATION.interface_flags.color_faces].includes(face_index)) {
+                projected_faces_meshes[face_index].visible = true;
+            } else {
+                projected_faces_meshes[face_index].visible = false;
+            }
+        } else {
+            projected_faces_meshes[face_index].visible = true;
+            
+        }
+
         projected_faces_meshes[face_index].geometry.attributes.position.needsUpdate = true;
- 
+        projected_faces_meshes[face_index].needsUpdate = true;
     }
 
 
@@ -480,12 +507,7 @@ function update_geometries() {
         //connectors
 
 
-    } else {
-        for (var f of projected_faces_meshes) {
-            f.visible = true;
-            f.needsUpdate = true;
-        }
-    }
+    } 
 
 }
 
