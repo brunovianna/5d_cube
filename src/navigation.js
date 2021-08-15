@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { ceilPowerOfTwo } from 'three/src/math/MathUtils';
 import * as DATA from './data.js'
 
 class Rotation5D {
@@ -29,6 +30,7 @@ let r5d = new Rotation5D(5);
 let interface_flags = new Interface_Flags();
 const pointer = new THREE.Vector2();
 let explanation_index = 0;
+let colon_index = 0;
 
 
 // var rotate_timer;
@@ -226,6 +228,33 @@ function update_explanation() {
     }
 }
 
+function rotate_colon () {
+    colon_panel_img.src = require ("./assets/colon_"+colon_index+".png");
+    if (colon_index===0) {
+        colon_panel.style.visibility = "visible"
+        colon_panel.style.top = "200px";
+        colon_panel.style.left = "300px";
+        colon_index++;
+    } else {
+        if (colon_index<6) {
+            colon_index++;
+            var t = Number (colon_panel.style.top.slice(0,3));
+            var l = Number (colon_panel.style.left.slice(0,3));
+            l +=100;
+            if (t===100) {
+                t = 200;
+            } else {
+                t = 80;
+            }
+            colon_panel.style.top = t+"px";
+            colon_panel.style.left = l+"px";
+        } else {
+            colon_index=0;
+            colon_panel.style.visibility = "hidden";
+        }
+    }
+}
+
 function create_navigation () {
 
     window.addEventListener("keydown", key_rotation);
@@ -292,15 +321,44 @@ function create_navigation () {
 
 
 
-
+    instructions_box_2.style.visibility = "hidden";
     question_mark.onclick = function () {
+        if (instructions_box.style.visibility!==instructions_box_2.style.visibility) {
+            instructions_box.style.visibility=instructions_box_2.style.visibility;
+        }
         toggle_visibility(instructions_box);
-        instructions_box_content.style.height = "600px";
-        instructions_box_content.innerHTML = DATA.complete_instructions_html;
+        toggle_visibility(instructions_box_2);
+        toggle_visibility(credits_box_panel);
+        
+        //instructions_box_content.style.height = "600px";
+        //instructions_box_content.innerHTML = DATA.complete_instructions_html;
     };
     instructions_box.onclick = function( ) {
         instructions_box.style.visibility="hidden"; 
+        instructions_box_2.style.visibility = "hidden";
+        credits_box_panel.style.visibility = "hidden";
     };
+    instructions_box_2.onclick = function( ) {
+        instructions_box.style.visibility="hidden"; 
+        instructions_box_2.style.visibility = "hidden";
+        credits_box_panel.style.visibility = "hidden";
+    };
+    credits_box_panel.onclick = function( ) {
+        instructions_box.style.visibility="hidden"; 
+        instructions_box_2.style.visibility = "hidden";
+        credits_box_panel.style.visibility = "hidden";
+    };
+
+    credits_box_img.src = require ("./assets/credits.png");
+    credits_box_panel.style.visibility = "hidden";
+
+    colon_panel.style.visibility = "hidden";
+    colon_sign.onclick = rotate_colon; 
+
+    colon_panel.onclick = function () {
+        colon_panel.style.visibility = "hidden";
+        colon_index =0;
+    }
 
     equal_panel.style.visibility="hidden";  
     equal_sign.onclick = function () {
@@ -344,6 +402,10 @@ function create_navigation () {
     connector_c.onclick = update_connector_schema; 
     connector_t.onclick = update_connector_schema; 
     connector_w.onclick = update_connector_schema; 
+    complete_schema_panel.style.visibility = "hidden";
+    complete_schema_img.src = require("./assets/complete_schema.png");
+    connector_h.onclick = function () { complete_schema_panel.style.visibility = "visible";}
+    complete_schema_panel.onclick = function () {complete_schema_panel.style.visibility = "hidden";}
 
     connector_schema_panel.onclick = function( ) {connector_schema_panel.style.visibility="hidden"; };
     connector_schema_panel.style.visibility = "hidden";

@@ -81,11 +81,27 @@ div.equal_panel {
     
 }
 
-img.equal_panel {
+/* img.equal_panel {
     margin: auto;
     display: block;
     width: 90%;
+} */
+
+
+div.colon_panel {
+    left: 10px;
+    top: 50px;
+    width: 700px;
+    right: 700px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+    
 }
+
+
 
 div.plus_panel {
     left: 200px;
@@ -204,11 +220,34 @@ div.instructions_box_content {
     font-family: gotham;
     font-weight: 400;
     font-size: 16px;
-    height: 225px;
-    overflow-y: auto;
-    overflow-x: hidden; 
+    height: fit-content;
     color:  #222222;
    /* border: 2px solid red; */
+}
+
+div.instructions_box_2 {
+    position: absolute;
+    top: 60px;
+    left: 750px;
+    width: 25%;
+    height: fit-content;
+    background-color: #cccccc;
+    padding: 10px;
+    font-family: gotham;
+    font-weight: 400;
+    font-size: 16px;
+    color:  #222222;
+    opacity: 0.9;
+   /* border: 2px solid red; */
+}
+
+div.credits_box_panel {
+    right: 20px;
+    bottom: 200px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 div.color_panel {
@@ -261,11 +300,11 @@ div.connector_panel {
     position: fixed;
     right: 25px;
     bottom: 25px;
-    width: 50px;
+    width: 70px;
     height: 40px;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     gap: 5px;
     color: gray;
     font-family: gotham;
@@ -295,10 +334,23 @@ div.connector_schema_panel {
     /* visibility: hidden; */
 }
 
-img.connector_schema_img {
+/* img.connector_schema_img {
     margin: auto;
     display: block;
     width: 90%;
+} */
+
+div.complete_schema_panel {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
 }
 
 div.explanation_box {
