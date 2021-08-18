@@ -1,4 +1,4 @@
-require("./index.css");
+require(/* webpackPreload: true */"./index.css");
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -10,7 +10,7 @@ import * as NAVIGATION from './navigation.js';
 
 import * as DATA from './data.js';
 
-import { Line } from 'three';
+
 
 var zoom = 200;
 

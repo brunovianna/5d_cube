@@ -601,13 +601,13 @@ var card_titles_texts = [
     cells in a single body."], //44
 
     ["Perichoresis","from the Greek peri, \"around\" and chōreō, \"to go, or come\"<br/>\
-    -The Perichorein is point where the universe began according to ancient Greeks. It \
+    -The Perichorein is the point where the universe began according to ancient Greeks. It \
     is a place where all things are present sharing the same space and time without \
     loosing its own characteristics. In medieval times the church used it to solve the \
-    conflict of “many souls vs one soul” (a clear influence of shamanism in christianity) \
-    and arrived to the holy trinity as the real perichoresis."], //45
-
-    ["5 dimensions","Five dimensions is difficult to visualise since each time a dimension is observed \
+    conflict of “many souls vs one soul” (a clear influence-interference of shamanism in christianity) \
+    and claimed the Holy Trinity as the real perichoresis."], //45
+    
+    ["5 dimensions","Tessera","Five dimensions are difficult to visualise since each time a dimension is observed \
     from another it implies a projection or necessary deformation toll to adjust to specific set of \
     conditions required. For example if we would like to imagine a 4d cube we have to imagine a 3d cube \
     with a \“smaller\” nested cube supported by each of its insides by other cubes, but all of them are \
@@ -619,23 +619,24 @@ var card_titles_texts = [
     A 5d cube is a 4d projected to another 4d cube supported by other 4d cube. Sometimes 5d is \
     introduced as “intensity” “concentration” or “density” since on higher dimensions space widens \
     inside objects, creating an apparent effect of folding in themselves."], //46
-
-    ["Mandelbroot set","It exhibits an elaborate and infinitely complicated boundary that reveals \
+    
+    ["Mandelbrot set","It exhibits an elaborate and infinitely complicated boundary that reveals \
     progressively ever-finer recursive detail at increasing magnifications, making the boundary of the \
     Mandelbrot set a fractal curve. The \"style\" of this repeating detail depends on the region of the \
     set being examined. Mandelbrot set images may be created by sampling the complex numbers and \
     testing, for each sample point c, whether the sequence \
     f c ( 0 ) , f c ( f c ( 0 ) ) , ,f_{c}(f_{c}(0))...  goes to infinity.<br/>\
-    The Mandelbrot set is self-similar under magnification in the neighborhood of the Misiurewicz \
+    The Mandelbrot set is self-similar under magnification in the neighbourhood of the Misiurewicz \
     points."], //47
-
+    
     ["Pattern","Flowers (a sunflower by example) distribute their seeds in the circumference of their surface \
     according to a fraction of turn that would maximize the efficiency of localization of spokes so to \
     achieve the higher number of seeds possible. Paradoxically the best configuration is a place \
-    where it is difficult to recognise spoke since two spokes are intertwined.<br/>\
+    where it is difficult to recognise spokes since they are intertwined, so on first place there is no recognisable configuration.<br/>\
     Irrational numbers are the best to achieve a good distribution since it spreads along the turn. 1-+\
-    √ 5 / 2 (1.61803398874989) is Golden ratio of such fractions."], //48
-
+    √ 5 / 2 (1.61803398874989) is Golden ratio of such fractions.<br/>\
+    How do flowers arrive to an irrational number? What is a pattern?"], //48
+    
     ["Helicoid","It is the only ruled minimal surface other than the plane.<br/>\
     Since it is considered that the planar range extends through negative and positive infinity, close \
     observation shows the appearance of two parallel or mirror planes in the sense that if the slope \
@@ -645,36 +646,41 @@ var card_titles_texts = [
     <br/>\
     It is a body that shifts axis through continue movement jumping from dancer to the partner and \
     vice versa. <br/>\
+    Dancing is a helicoid that shifts axis through continue movement jumping from partner to the partner and vice versa.<br/>\
     In each “pass” a doubt is embedded so each dancer falls in self consciousness only to lose it \
     immediately since the leading is carried by the other which is imprisoned by the dance."], //49
-
-    ["Hyperbolic Space","A homogeneous space that has a constant negative curvature, where in this case the \
+    
+    ["Hyperbolic Space","An homogeneous space that has a constant negative curvature, where in this case the \
     curvature is the sectional curvature. It is hyperbolic geometry in more than 2 dimensions, and is \
     distinguished from Euclidean spaces with zero curvature that define the Euclidean geometry, \
     and elliptic geometry that have a constant positive curvature."], //50
-
-    ["Internet mapping growth 2021",""], //51
-
+    
+    ["Internet mapping growth as a slime mold.",""], //51
+    
     ["Hyperbola","It is a type of smooth curve lying in a plane, defined by its geometric properties \
     or by equations for which it is the solution set. A hyperbola has two pieces, called connected \
-    components or branches, that are mirror images of each other and resemble two infinite bows."], //52
+    components or branches, that are mirror images of each other and resemble two infinite bows.They allow \
+    to bend and fold the planes and its projections."], //52
+    
+    ["Fold","Interdimensionality implies a folded horizon, the reflex of an element in such a bended horizon \
+    throw us to higher dimensions. A visibility plane can only fold to the beyond. Once the\
+     unit projects itself against its own image a double appears. This doppelgänger or bind opens the \
+     space to a next dimension. <br/>\
+    The crease implies duplicity. The method to narrate that crease is a map. A diagram is the \
+    instructions of a duplication process."], //53
+    
+    ["Bezoar","A Bezoar is often a mass trapped in the guts of whales and other large animals. \
+     It is believed to hold magical properties and can be the cure and antidote  to any poison. \
+     When found in sacrificial animals they are considered and omen and direct exchange with gods."], //54
 
-    ["Fold","Once the unit projects itself against its own image a double appears. \
-    This doppelgänger or bind opens the space to a next dimension."], //53
+    ["Metatorion","It is the mythical stone in Hagia Sophia where kings are crowned. Not only the stone\
+     gives power and contact with history by thaumaturgy but also believed to acquire a meta flesh quality \
+     through time since it is able to create body politic on its own."], //55
 
-    ["Bezoar","It is often a mass trapped in the guts of whales and other large animals which are \
-    believed to be the cure to any poison and have other magical properties. Found in sacrificial \
-    animals as direct exchange with gods."], //54
-
-    ["Metatorion","The stone Hagia Sophia where kings are crowned. Not only the stone gives power and \
-    contact with history by thaumaturgy but also acquires a meta flesh quality since it is able to \
-    create body politic on its own."], //55
-
-    ["Omphalos","Iy is the first stone of the universe which fall from Cronos belly in the fights \
-    against Zeus.In its fall it dragged the Milky Way creating the world to land in. As navel of the \
-    world they allow direct communication with gods through oracles and signs. It can be understood as \
-    the vanishing point of cosmic perspective."], //56
-
+    ["Omphalos","It is the first stone of the universe which falled from Cronos belly in combat\
+     against Zeus.While falling it dragged the Milky Way creating the cosmos and a place to land.\
+      As navel of the world, it allows direct communication with gods through oracles and signs. \
+      It can be understood as the vanishing point of cosmic perspective."], //56
 
     ["Myth","The myth is a form of pure attraction because it has no substance. The myth usually signals \
     towards the origins of something without solving any form, which means that it turns into pure \
@@ -686,57 +692,74 @@ var card_titles_texts = [
     images of pathos and produce a multitude of mythologies. It is through the reaction of our \
     psyche to this unfulfilled desire that variations of things appear. Tension works as a motor of \
     visualization."], //57
-
+    
     ["Daemon","Daimon \"provider, divider (of fortunes or destinies),\" from the root *da- \"to divide\".<br/>\
-    Daimons were possibly seen as the souls or tutelar sities of a collectivity.<br/>\
+    Daimons were possibly seen as the souls or tutelar figures of a collectivity.<br/>\
     <br/>\
-    Troy was impossible to defeat until its incarnated soul object was stolen. The Palladium was the \
-    non anthropomorphized wooden image of Pallas. It evolved through time into Athenea effigy \
-    and was saved by Diomedes only to morph into the daemons giving birth to Rome."], //58
+    Troy was impossible to defeat until its incarnated object soul, its “daimon” was stolen. \
+    The Palladium was the non anthropomorphized wooden image of Pallas. It evolved through time \
+    into Athenea effigy and was saved by Diomedes only to morph into the couple of daemons giving \
+    birth to Rome. The Trojan war is the story of how the daimons could scape the greek culture to \
+    start the Roman Empire."], //58
 
     ["Blood line","Before the modern construction of the individual the most important entity was \
     blood line. An intricate family agreements which allow the apparition of a collective body which \
     kept property, privileges and power. Will has no meaning beyond this frame work."], //59
 
-    ["Homme dos nassos.","The man has as many noses as the year has days, and loses one every day and \
-    can only be seen on December 31st."], //60
+    ["Home del Nassos.","The man has as many noses as the year has days, and loses one every day. He can \
+    only be seen in public on December 31st."], //60
 
-    ["Flygia","The Old Norse word Fylgja translates to “to accompany or help”, “to follow”, but also \
-    (and perhaps most notably) to \“lead or guide\”<br/>\
+    ["Flygia","The Old Norse word Fylgja translates to \“accompany or help\”, \“to follow\”, but also (and \
+        perhaps most notably) to “lead or guide”.”<br/>\
     The Fylgja, psychic Double with tutelary functions, is closely linked to destiny in the \
     Scandinavian tradition. <br/>\
-    \“I dreamed of the same woman as before, and it seemed to me... that she was putting my \
-    entrails back in place and I felt good about this interaction.\” <br/>\
-    The woman proceeds, therefore,  with the inverse operation to the one that she had \
-    performed in the first dream, and it saved An’s life.<br/>\
+    \“I dreamed of the same woman as before, and it seemed to me… that she was putting my entrails back \
+    in place and I felt good about this interaction.\” The woman proceeds, therefore, with the inverse \
+    operation to the one that she had performed in the first dream, and it saved An’s life.\
+    Fylgja then sometimes is seen as the protective matriarch of an entire family line, rather than just \
+    belonging to a single person. <br/>\
     She also talks about a Fylgja as sometimes being seen as the protective matriarch of an entire \
     family line, rather than just belonging to a single person."], //61
-
+    
     ["Pneuma","Antonio Canova, 1797, L’amour et Psyché debout.<br/>\
     <br/>\
-    When psyche and Eros gathered as lover they shared a butterfly (pneuma, breath or soul) as \
-    symbol of their union. Eros demanded Psyche the secrecy of the night so he could hide his \
-    divine nature but Psyche couldn’t full fill her fantasy without images. So she sneaked with an oil \
-    lamp, feeling a betrayal Eros fled and there is where the story of Psyche starts trying to recover \
-    her lover moved by the image-memory."], //62
+    When psyche and Eros gathered as lovers they shared a butterfly (pneuma: the breath and the soul) as\
+     symbol of their union. Eros demanded Psyche the secrecy of the night so he could hide his divine nature \
+     but Psyche couldn’t  full fill her fantasy without images. So she sneaked with an oil lamp, to collect \
+     an image. Feeling betrayed Eros fled and there is where the story of Psyche starts. All her life trying \
+     to recover her flesh lover with the only strength of that image-memory."], //62
 
-    ["Heroe Heracles","Heracles is the incarnation of the hero. A collection of deeds of the whole \
-    community gathered \
-    in the flesh of a meta human able to do anything opening the territory of the known world. But \
-    he is not unique, he has a twin brother Iphycles who later became a politician."], //63
+    ["Hero Heracles","Heracles is the incarnation of the hero. A collection of deeds of the whole community \
+    gathered in the flesh of a meta human able to do anything. Only him could open the territory of the \
+    unknown world, conquer, tame the beast, carry the world. But he is not unique, he has a twin brother \
+    Iphycles who later became a politician. The only one is a double."], //63
 
     ["Histoire du prince Apprius /Priapus","Adriani Imperatorie Concubinatus<br/>\
     <br/>\
-    Priapus was then cursed by giving to his member will on its own and never obey him. Men as \
-    descendance of this linage are imprisoned by desire of anther one."], //64
-
+    Priapus was then cursed by giving to his member a will on its own and never obey him. Men as\
+     descendance of this linage are imprisoned by desire of that other in time, in blood and\
+      in his body."], //64
+    
     ["Illustrated monkey","When the seller goes to sleep the monkeys steal his belongings \
     and some even start their own market.<br/>\
     Theory of the mind vs selfies.<br/>\
     <br/>\
     1597-1608. Le Mercier pillé par les singes, Pieter van der Borcht"], //65
 
-    ["Narcisse",""], //66
+    ["Narcisse","From the verb ναρκαω (narkao), to grow stiff or numb.<br/>\
+     It is a strange delusion that is keeping us apart. Whoever thou art, Come up! Deceive me not!\
+      Oh, whither when I fain pursue art thou? Ah, surely I am young and fair, the Nymphs have loved me; \
+      and when I behold thy smiles I cannot tell thee what sweet hopes arise. When I extend my loving arms\
+       to thee thine also are extended me--thy smiles return my own. When I was weeping, I have seen thy \
+       tears, and every sign I make thou cost return; and often thy sweet lips have seemed to move, that, \
+       peradventure words, which I have never heard, thou hast returned. No more my shade deceives me, I \
+       perceive 'Tis I in thee--I love myself--the flame arises in my breast and burns my heart--what shall\
+        I do? Shall I at once implore? Or should I linger till my love is sought? What is it I implore? The\
+         thing that I desire is mine--abundance makes me poor. Oh, I am tortured by a strange desire unknown \
+         to me before, for I would fain put off this mortal form; which only means I wish the object of my \
+         love away. Grief saps my strength, the sands of life are run, and in my early youth am I cut off;\
+          but death is not my bane--it ends my woe.--I would not death for this that is my love, as two united\
+           in a single soul would die as one."], //66
 
     ["Proportion man","Le proporzioni del corpo umano secondo Vitruvius<br/>\
     Leonardo Da Vinci<br/>\
@@ -747,54 +770,68 @@ var card_titles_texts = [
     the wrist to the tip of the middle finger is just the same; the head from the chin to the crown \
     is an eighth, and with the neck and shoulder from the top of the breast to the lowest roots of \
     the hair is a sixth; from the middle of the breast to the summit of the crown is a fourth."], //67
+
     ["Vanishing point","Les perspecteurs, Abraham bosse<br/>\
     From Maniere universelle de M.Desargue pour traiter la perspective 1648<br/>\
     Alberti bases his idea on how a single eye perceives an object. He says that there are three\
     important kinds of rays when painting an object: the \"extreme\" rays defined by the contour of the\
-    object, the \"median\" rays revealing the color and tones and the \"centric\" ray which is the ray\
+    object, the \"median\" rays revealing the colour and tones and the \"centric\" ray which is the ray\
     orthogonal to the picture plane and going into the eye. The first two rays form a cone which is\
     often called the visual cone.<br/>\
     <br/>\
-    The individual acquires the power to shape (deform) the real to fit his eye. The projection \
-    creates a new appropriation of the world. Paradoxically"], //68
+    The individual acquires the power to shape (deform) the real to fit his eye."], //68
 
     ["Tessellated leviathan","Leviathan of Leviathans"], //69
 
-    ["Kingdomes monster","IMAGES"], //70
+    ["Kingdomes monster","Uncloaked from Heaven:<br/>\
+    The Popith Conspirators, Malignat Plotters and cruel Irifh, in one Body to destroy\
+    Kingdome, Religioand Lawes: But under colour to defend them, efpecially , The Irifh who\
+    having deftroyed the Proteftants There, fly hither to defend the Proteftant Religion Here.<br/>\
+    O England looks upon this monftrous thing,<br/>\
+    That would our Kingdome unto ruine bring,<br/>\
+    ´Tis framed and compofed of three parts<br/>\
+    Which are all joyned both in heads and hearts:<br/>\
+    Doe not behold it with careleffe eye,<br/>\
+    This Monfter brings this Land to misfery:<br/>\
+    This monfter following its forefathers hate,<br/>\
+    Seeks to destroy the Kingdome and the state:<br/>\
+    While Church and Kingdome fhould oppreffed lie<br/>\
+    Subjected to their blinded Popery:<br/>\
+    Long time it walked muffled in a cloack<br/>\
+    Till Straffords head was cut off, then it broke<br/>\
+    Out of cloud, but heavens holy hands<br/>\
+    In a full figure as this Picture here<br/>\
+    Doth make it lively to your view appeare<br/>\
+    And in fit Emblems to your fight prefents<br/>\
+    His shape, his poftures, and his blacke intents<br/>\
+    So that if you behold it round about<br/>\
+    You fshall fee how this monfter is get out:"], //70
 
-    ["Government animal","Allegorie op de moeilijkheid van het besturen, 1578, \
+    ["O praefecturae difficile officium!","Allegorie op de moeilijkheid van het besturen, 1578, \
     Pieter van der Borcht <br/>\
     <br/>\
-    This represented the deeply divided Netherlands politically and religiously. This division made \
-    the country difficult to govern. In the background, various religious and secular leaders watch. \
-    <br/>\
-    O praefecturae difficile officium!, can be read at the bottom right. Then the wars of religion \
-    raged,"], //71
-
-    ["Leviathan","The frontispiece of Thomas Hobbes’s “Leviathan or The Matter, Forme and Power of a \
-    Commonwealth Ecclesiasticall and Civil uses a mass as constituting substance of the king’s \
-    body, portrayed in awe and fear. <br/>\
-    But his Body politic is a Body that cannot be seen or handled, consisting of Policy and \
+    This engraving represented a deeply divided Netherlands politically and religiously. This division made the country difficult to govern. In the background, various religious and secular leaders watch. Then the wars of religion raged."], //71
+    ["Leviathan","But his Body politic is a Body that cannot be seen or handled, consisting of Policy and \
     Government, and constituted for the Direction of the People, and the Management of the public \
     weal, and this Body is utterly void of Infancy, and old Age...<br/>\
-    Kantorowicz, E., The King’s Two Bodies"], //72
-
+    Kantorowicz, E., The King’s Two Bodies<br/>\
+The frontispiece of Thomas Hobbes’s “Leviathan or The Matter, Forme and Power of a \
+    Commonwealth Ecclesiasticall and Civil uses a mass as constituting substance of the king’s body glued together with awe and fear."], //72
     ["Sans-culotte Colossus","Le Peuple mangeur de rois : statue colossale proposée \
     par le journal des Révolutions de Paris, \
-    pour être placée sur les points les plus éminents de nos <br/>\
+    pour être placée sur les points les plus éminents de nos. <br/>\
     artist unknown, 1793"], //73
 
-    ["Trojan Horse","Anonyme <br/> \
+    ["Trojan Horse","The Trojan horse hides its secrets in full sight.<br/>\
+    Anonyme <br/> \
     1700 <br/> \
     Oil on Canvas, 77 x 94 cm <br/> \
     Statens Porträttgalleri <br/> \
-    Gripsholm Castle, Mariefred, Sweden <br/> \
-    <br/> \
-    The Trojan horse hides its secrets in full sight."], //74
+    Gripsholm Castle, Mariefred, Sweden."], //74
 
     ["Kings multiplied body","Legibus et armis \
     The world descends, to kifle their feet."], //75
-
+    
     ["The belly and the members","Aesop tells us about how a stomach refused to give \
     nourishment to the rest of the body.\
     \“For the body is not one member, but many. If the foot shall say, Because I am not the hand, I\
@@ -805,29 +842,35 @@ var card_titles_texts = [
     member, where were the body? But now are they many members, yet but one body. And the \
     eye cannot say unto the hand, I have no need of thee: nor again the head to the feet, \
     I have no need of you.\”"], //76
-
+    
     ["Multiple Laocoon","Laocoon initiates the modern man. The individual confronts \
     the whole society denying truth as \
-    social agreement. Eventually entire societies will incarnate Laocoon perspective. Body."], //77
+    social agreement. Eventually entire societies will incarnate Laocoon perspective and vision. \
+    The mass never allows itself to be photographed, since it only shows self-fragmentation. In order \
+    to fully grasp or understand it, we have to approach it in movement. There is no \“independent organ\” \
+    or even what we call \“the individual\”, only endless versions nourishing a body that lives through many \
+    generations distant in time but at once."], //77
 
-    ["One King","Gabrielis Rollenhagii <br> \
+    ["One King","\
     Felectoru emblematum </ br> \
     Sentiría secunda </ br> </ br> \
-    Concordia insuperabili </ br> \
-    Concordes superare potessi vis nulla, nel ulula </ br> \
-    Disrupt fiddle fondus amicitia</ br> \
-    The king in its own body rights is able to hold its attributes with his own hands."], //78
+    Concordia insuperabilis </ br> \
+    Concordes superare potessi vis nulla, nec ullus </ br> \
+    Disrumpet fidae foedus amicitie</ br> \
+    Where many-Forces joyned are Vnconquerable-pow'r, is there.<br/>\
+    Felectoru emblematum<br/>\
+    Sentiría secunda"], //78
 
-    ["Laocoon knee","By placing his knee over the sacrificial altar, he refuses to pay the infinite blood debt to gods. \
-    His energy turns internal and appears as the administration of ones own free will.He is punished \
-    by two diva sea dragons who ate his two sons. (some say they really represent his two eyes or \
-    even his own cancelled past and future)"], //79
-    
+    ["Laocoon knee","By placing his knee over the sacrificial altar, he refuses to pay the infinite blood \
+    debt to gods. His energy stops coming from divine grace, turns internal and reappears as the \
+    administration of his own free will.He is punished by two divine sea dragons who ate his two sons. \
+    (some say they that they are but a metaphor of his eyes or even his own cancelled past and future)."], //79
+
     ["Laocoon","(Laos-people/Koeo- to perceive or comprehend) <br> \
-    He was a well known thymbricus priest follower of Apollo on public service. The first modern \
-    man since he was able to recognise men behind the offerings of the gods and by doing so being \
-    alone for the first time. He realised that behind a divine apparatus a political one is always \
-    hiding."], //80
+    He was a well known thymbricus priest follower of Apollo and part of the public service. The first modern \
+    man since he was able to recognise men behind the offerings of the gods and by doing so refusing the will \
+    of gods over him for the first time. He realised that behind a divine apparatus a political one \
+    is always hiding."], //80
 
 ];
 

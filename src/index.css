@@ -37,7 +37,7 @@ div.rotate_5d {
     left: 15px;
     width: 120px;
     height: 300px;
-    position: absolute;
+    position: fixed;
     display: grid;
     justify-content: center;
     grid-template-columns: auto;
@@ -62,7 +62,7 @@ div.invisible {
 div.help_footer {
     bottom: 20px;
 	left: 20px;
-	position: absolute;
+	position: fixed;
 	color:  #f9c41e;
 	font-family: gotham;
     font-weight: 800;
@@ -70,46 +70,29 @@ div.help_footer {
 } 
 
 div.equal_panel {
-    left: 10px;
-    top: 10px;
-    bottom: 10px;
-    right: 10px;
+    top: 100px;
+    left: 100px;
     position: absolute;
     display: flex;
-    justify-content: center;
-    align-content: center;
+    justify-content:center;
+    justify-self: center;
+    align-content:center;
+    align-self: center;
     visibility: hidden;
-    
+
 }
 
-/* img.equal_panel {
-    margin: auto;
-    display: block;
-    width: 90%;
-} */
+img.equal_panel_img {
+    margin: 30%;
+    display: inside;
+    width: 50%;
+}
 
 
 div.colon_panel {
-    left: 10px;
-    top: 50px;
-    width: 700px;
-    right: 700px;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    visibility: hidden;
-    
-}
-
-
-
-div.plus_panel {
-    left: 200px;
-    top: 200px;
-    height: 50%;
-    width: 50%;
-    position: absolute;
+    left: 100px;
+    top: 60px;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -118,25 +101,55 @@ div.plus_panel {
 }
 
 div.minus_panel {
-    left: 300px;
-    top: 100px;
-    height: 50%;
-    width: 50%;
+    left: 100px;
+    top: 50px;
+
     position: absolute;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 30px;
     justify-content: center;
     align-content: center;
     visibility: hidden;
     
 }
 
+div.plus_panel {
+    left: 150px;
+    top: 60px;
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto auto ;
+    gap: 30px;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+    
+}
+
+
+
 div.ampersand_panel {
     left: 300px;
-    top: 100px;
-    height: 50%;
-    width: 50%;
+    top: 150px;
     position: absolute;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    gap: 30px;
+    justify-content: center;
+    align-content: center;
+    visibility: hidden;
+    
+}
+
+div.quotes_panel {
+    left: 300px;
+    top: 150px;
+
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
     justify-content: center;
     align-content: center;
     visibility: hidden;
@@ -243,8 +256,8 @@ div.instructions_box_2 {
 }
 
 div.credits_box_panel {
-    right: 20px;
-    bottom: 200px;
+    right: 200px;
+    bottom: 100px;
     position: absolute;
     display: flex;
     justify-content: center;

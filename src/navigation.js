@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { BufferGeometryLoader } from 'three';
 import { ceilPowerOfTwo } from 'three/src/math/MathUtils';
 import * as DATA from './data.js'
 
@@ -31,6 +32,7 @@ let interface_flags = new Interface_Flags();
 const pointer = new THREE.Vector2();
 let explanation_index = 0;
 let colon_index = 0;
+let plus_index = "0";
 
 
 // var rotate_timer;
@@ -143,8 +145,10 @@ function key_rotation(event) {
 
 function toggle_visibility (el) {
     if (el.style.visibility === 'hidden') {
+        el.style.z = 100;
         el.style.visibility = 'visible';
     } else {
+        el.style.z = 10;
         el.style.visibility = 'hidden';
     }
 }
@@ -228,31 +232,33 @@ function update_explanation() {
     }
 }
 
+
 function rotate_colon () {
     colon_panel_img.src = require ("./assets/colon_"+colon_index+".png");
     if (colon_index===0) {
         colon_panel.style.visibility = "visible"
-        colon_panel.style.top = "200px";
-        colon_panel.style.left = "300px";
         colon_index++;
     } else {
         if (colon_index<6) {
             colon_index++;
-            var t = Number (colon_panel.style.top.slice(0,3));
-            var l = Number (colon_panel.style.left.slice(0,3));
-            l +=100;
-            if (t===100) {
-                t = 200;
-            } else {
-                t = 80;
-            }
-            colon_panel.style.top = t+"px";
-            colon_panel.style.left = l+"px";
         } else {
             colon_index=0;
             colon_panel.style.visibility = "hidden";
+
         }
     }
+}
+
+function close_all_signs() {
+    instructions_box.style.visibility = "hidden";
+    instructions_box_2.style.visibility = "hidden";
+    credits_box_panel.style.visibility = "hidden";
+    colon_panel.style.visibility = "hidden";
+    equal_panel.style.visibility = "hidden";
+    minus_panel.style.visibility = "hidden";
+    plus_panel.style.visibility = "hidden";
+    ampersand_panel.style.visibility = "hidden";
+    quotes_panel.style.visibility = "hidden";
 }
 
 function create_navigation () {
@@ -323,6 +329,7 @@ function create_navigation () {
 
     instructions_box_2.style.visibility = "hidden";
     question_mark.onclick = function () {
+
         if (instructions_box.style.visibility!==instructions_box_2.style.visibility) {
             instructions_box.style.visibility=instructions_box_2.style.visibility;
         }
@@ -366,29 +373,60 @@ function create_navigation () {
         toggle_visibility(equal_panel);
     };
     equal_panel.onclick = function( ) {equal_panel.style.visibility="hidden"; };
-
-    plus_panel.style.visibility="hidden";  
-    plus_sign.onclick = function () {
-        plus_panel_img.src = require('./assets/sense_scale.png') ;
-        toggle_visibility(plus_panel);
-    };
-    plus_panel.onclick = function( ) {plus_panel.style.visibility="hidden"; };
-
+    
     minus_panel.style.visibility="hidden";  
+    minus_panel_img_1.src=require("./assets/text2a.png")
+    minus_panel_img_2.src=require("./assets/text2b.png")
+    minus_panel_img_3.src=require("./assets/text2c.png")
     minus_sign.onclick = function () {
-        minus_panel_img.src = require('./assets/scale.png') ;
         toggle_visibility(minus_panel);
         
     };
     minus_panel.onclick = function( ) {minus_panel.style.visibility="hidden"; };
 
+    plus_panel.style.visibility="hidden";  
+    plus_sign.onclick = function () {
+        switch (plus_index) {
+            case '0':
+                plus_panel.style.visibility="visible";
+                plus_panel_img_1.src=require("./assets/text3a.png");  
+                plus_panel_img_2.src=require("./assets/text3b.png");
+                plus_index='1';
+                break;
+            case '1':
+                plus_panel_img_1.src=require("./assets/text4a.png");  
+                plus_panel_img_2.src=require("./assets/text4b.png");
+                plus_index='2';
+                break;
+            case '2':
+                plus_panel.style.visibility="hidden";
+                plus_index='0';
+                break;
+    
+        }
+
+    };
+    plus_panel.onclick = function( ) {plus_panel.style.visibility="hidden"; };
+
+
+
     ampersand_panel.style.visibility="hidden";
+    ampersand_panel_img_1.src=require("./assets/text5a.png")
+    ampersand_panel_img_2.src=require("./assets/text5b.png")
+    ampersand_panel_img_3.src=require("./assets/iconological.png")
+
     ampersand.onclick = function () {
-        ampersand_panel_img.src = require('./assets/klein_bottle.png') ;
         toggle_visibility(ampersand_panel);
     };
     ampersand_panel.onclick = function( ) {ampersand_panel.style.visibility="hidden"; };
 
+    quotes_panel.style.visibility="hidden";
+    quotes_panel_img_1.src=require("./assets/text6.png")
+    quotes_panel_img_2.src=require("./assets/klein_bottle.png")
+    quotes.onclick = function () {
+        toggle_visibility(quotes_panel);
+    };
+    quotes_panel.onclick = function () {quotes_panel.style.visibility="hidden";}
 
 
     for (var index =1;index<15;index++) {
@@ -410,35 +448,6 @@ function create_navigation () {
     connector_schema_panel.onclick = function( ) {connector_schema_panel.style.visibility="hidden"; };
     connector_schema_panel.style.visibility = "hidden";
 
-    arrow_left.src = require('./assets/arrow_left.png') ;
-    arrow_right.src = require('./assets/arrow_right.png') ;
-    arrow_left.onclick = update_explanation;
-    arrow_right.onclick = update_explanation;
-    arrow_left.style.visibility = "hidden";
-    arrow_right.style.visibility = "hidden";
-    explanation_box.style.visibility = "hidden";
-
-    quotes.onclick = function () {
-        if (explanation_box.style.visibility==="hidden") {
-            explanation_box.style.visibility = "visible";
-            if (explanation_index===0) {
-                arrow_left.style.visibility = "hidden";
-                arrow_right.style.visibility = "visible";                
-            } else {
-                if (explanation_index===6){
-                    arrow_left.style.visibility = "visible";
-                    arrow_right.style.visibility = "hidden";                
-                }   else {
-                    arrow_left.style.visibility = "visible";
-                    arrow_right.style.visibility = "visible";
-                }
-            }
-        } else {
-            arrow_left.style.visibility = "hidden";
-            arrow_right.style.visibility = "hidden";                
-            explanation_box.style.visibility = "hidden";
-        }
-    };
 
 }
 

@@ -308,6 +308,16 @@ function rotate5dVW(angle, pt5d) {
 	return matmulvec(rotmat45, pt5d);
 }
 
+class Vector5 {
+    constructor(){
+        this.v = 0;
+        this.w = 0;
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+    }
+}
+
 class Penteract  {
     constructor (sc) {
         this.rotated_vertices = penteract_vertices.slice(); //thats how  you copy an array in js
@@ -566,7 +576,7 @@ class Penteract  {
         one_connector_materials.push(cylinder_material);
 
         var final_color = new THREE.Color();
-        final_color.setHSL(connector_hue,1,0.5);
+        final_color.setHSL(connector_hue,1.0,0.5);
 
         var step = 1/num_points;
         for (var index=1;index<num_points-1;index++) { 
